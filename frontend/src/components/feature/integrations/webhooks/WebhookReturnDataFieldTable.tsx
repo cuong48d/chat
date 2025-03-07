@@ -7,12 +7,12 @@ import { BiInfoCircle, BiMinusCircle } from "react-icons/bi";
 import { FieldsData, SampleData, } from "./utils";
 import { DoctypeFieldList } from './utils'
 import { DIALOG_CONTENT_CLASS } from "@/utils/layout/dialog";
-import { RavenWebhook } from "@/types/RavenIntegrations/RavenWebhook";
+import { ChatWebhook } from "@/types/ChatIntegrations/ChatWebhook";
 import { FiEye, FiPlus } from "react-icons/fi";
 import { HStack, Stack } from "@/components/layout/Stack";
 
 export const WebhookData = () => {
-    const { register, control, watch, setValue } = useFormContext<RavenWebhook>()
+    const { register, control, watch, setValue } = useFormContext<ChatWebhook>()
 
     const { fields, append, remove } = useFieldArray({
         name: 'webhook_data'
@@ -204,7 +204,7 @@ export const FieldInfoModal = ({ fieldIndex, triggerEvent, onClose }: { fieldInd
 
 export const PreviewModal = ({ onClose }: { onClose: () => void }) => {
 
-    const { watch } = useFormContext<RavenWebhook>()
+    const { watch } = useFormContext<ChatWebhook>()
 
     const webhookTrigger = watch('webhook_trigger')
 

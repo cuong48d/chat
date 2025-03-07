@@ -5,16 +5,16 @@ import { FaCircleDot, FaCircleMinus } from 'react-icons/fa6'
 import { BiSolidCircle } from 'react-icons/bi'
 import { DropdownMenu, Flex } from '@radix-ui/themes'
 import { GrPowerReset } from 'react-icons/gr'
-import useCurrentRavenUser from '@/hooks/useCurrentRavenUser'
+import useCurrentChatUser from '@/hooks/useCurrentChatUser'
 import { __ } from '@/utils/translations'
 import { getErrorMessage } from '@/components/layout/AlertBanner/ErrorBanner'
 
 export type AvailabilityStatus = 'Available' | 'Away' | 'Do not disturb' | 'Invisible' | ''
 
 export const SetUserAvailabilityMenu = () => {
-    const { myProfile, mutate } = useCurrentRavenUser()
+    const { myProfile, mutate } = useCurrentChatUser()
 
-    const { call } = useFrappePostCall('raven.api.raven_users.update_raven_user')
+    const { call } = useFrappePostCall('chat.api.chat_users.update_chat_user')
     const setAvailabilityStatus = (status: AvailabilityStatus) => {
         call({
             'availability_status': status

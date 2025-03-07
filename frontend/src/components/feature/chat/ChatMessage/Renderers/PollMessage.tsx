@@ -3,9 +3,9 @@ import { useEffect, useMemo, useState } from "react"
 import { UserFields } from "../../../../../utils/users/UserListProvider"
 import { PollMessage } from "../../../../../../../types/Messaging/Message"
 import { useFrappeDocumentEventListener, useFrappeGetCall, useFrappePostCall } from "frappe-react-sdk"
-import { RavenPoll } from "@/types/RavenMessaging/RavenPoll"
+import { ChatPoll } from "@/types/ChatMessaging/ChatPoll"
 import { ErrorBanner, getErrorMessage } from "@/components/layout/AlertBanner/ErrorBanner"
-import { RavenPollOption } from "@/types/RavenMessaging/RavenPollOption"
+import { ChatPollOption } from "@/types/ChatMessaging/ChatPollOption"
 
 import { ViewPollVotes } from "@/components/feature/polls/ViewPollVotes"
 import { toast } from "sonner"
@@ -16,21 +16,21 @@ type PollMessageBlockProps = BoxProps & {
 }
 
 export interface Poll {
-    'poll': RavenPoll,
+    'poll': ChatPoll,
     'current_user_votes': { 'option': string }[]
 }
 
 export const PollMessageBlock = ({ message, user, ...props }: PollMessageBlockProps) => {
 
     // fetch poll data using message_id
-    const { data, error, mutate } = useFrappeGetCall<{ message: Poll }>('raven.api.raven_poll.get_poll', {
+    const { data, error, mutate } = useFrappeGetCall<{ message: Poll }>('chat.api.chat_poll.get_poll', {
         'message_id': message.name,
     }, `poll_data_${message.poll_id}`, {
         revalidateOnFocus: false,
         revalidateOnReconnect: false
     })
 
-    useFrappeDocumentEventListener('Raven Poll', message.poll_id, () => {
+    useFrappeDocumentEventListener('Chat Poll', message.poll_id, () => {
         mutate()
     })
 
@@ -87,7 +87,7 @@ const PollResults = ({ data }: { data: Poll }) => {
     )
 }
 
-const PollOption = ({ data, option }: { data: Poll, option: RavenPollOption }) => {
+const PollOption = ({ data, option }: { data: Poll, option: ChatPollOption }) => {
 
     // State to track whether the animation should be triggered
     const [triggerAnimation, setTriggerAnimation] = useState<boolean>(false)
@@ -135,8 +135,8 @@ const PollOption = ({ data, option }: { data: Poll, option: RavenPollOption }) =
 
 const SingleChoicePoll = ({ data, messageID }: { data: Poll, messageID: string }) => {
 
-    const { call } = useFrappePostCall('raven.api.raven_poll.add_vote')
-    const onVoteSubmit = async (option: RavenPollOption) => {
+    const { call } = useFrappePostCall('chat.api.chat_poll.add_vote')
+    const onVoteSubmit = async (option: ChatPollOption) => {
         return call({
             'message_id': messageID,
             'option_id': option.name
@@ -177,7 +177,7 @@ const MultiChoicePoll = ({ data, messageID }: { data: Poll, messageID: string })
         }
     }
 
-    const { call } = useFrappePostCall('raven.api.raven_poll.add_vote')
+    const { call } = useFrappePostCall('chat.api.chat_poll.add_vote')
     const onVoteSubmit = async () => {
         if (!selectedOptions.length) {
             toast.error('Please select at least one option')

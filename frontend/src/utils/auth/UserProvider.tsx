@@ -24,14 +24,14 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
     const { logout, currentUser, updateCurrentUser, isLoading } = useFrappeAuth()
 
     const handleLogout = async () => {
-        localStorage.removeItem('ravenLastChannel')
-        localStorage.removeItem('ravenLastWorkspace')
+        localStorage.removeItem('chatLastChannel')
+        localStorage.removeItem('chatLastWorkspace')
         localStorage.removeItem('app-cache')
         return logout()
             .then(() => {
                 //Clear cache on logout
                 return mutate((key) => {
-                    if (key === 'raven.api.login.get_context') {
+                    if (key === 'chat.api.login.get_context') {
                         return false
                     }
                     return true

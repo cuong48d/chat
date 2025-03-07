@@ -2,7 +2,7 @@ import { ErrorText, HelperText, Label } from "@/components/common/Form"
 import { HStack, Stack } from "@/components/layout/Stack"
 import useDoctypeMeta from "@/hooks/useDoctypeMeta"
 import { DocField } from "@/types/Core/DocField"
-import { RavenAIFunctionParams } from "@/types/RavenAI/RavenAIFunctionParams"
+import { ChatAIFunctionParams } from "@/types/ChatAI/ChatAIFunctionParams"
 import { in_list } from "@/utils/validations"
 import { Badge, Box, Button, Callout, Checkbox, Dialog, Popover, ScrollArea, Select, Text, TextArea, TextField } from "@radix-ui/themes"
 import { FrappeConfig, FrappeContext, useFrappeGetCall, useSearch } from "frappe-react-sdk"
@@ -10,9 +10,9 @@ import { useContext, useMemo, useState } from "react"
 import { Controller, FormProvider, useController, useForm, useFormContext } from "react-hook-form"
 import { BiSearch } from "react-icons/bi"
 
-const DocTypeVariableForm = ({ doctype, onAdd, defaultValues }: { doctype: string, onAdd: (data: Partial<RavenAIFunctionParams>) => void, defaultValues?: Partial<RavenAIFunctionParams> }) => {
+const DocTypeVariableForm = ({ doctype, onAdd, defaultValues }: { doctype: string, onAdd: (data: Partial<ChatAIFunctionParams>) => void, defaultValues?: Partial<ChatAIFunctionParams> }) => {
 
-    const methods = useForm<RavenAIFunctionParams>({
+    const methods = useForm<ChatAIFunctionParams>({
         defaultValues: {
             ...defaultValues,
             child_table_name: defaultValues?.child_table_name ? defaultValues?.child_table_name : doctype
@@ -21,7 +21,7 @@ const DocTypeVariableForm = ({ doctype, onAdd, defaultValues }: { doctype: strin
 
     const { handleSubmit } = methods
 
-    const onSubmit = (data: RavenAIFunctionParams) => {
+    const onSubmit = (data: ChatAIFunctionParams) => {
         if (data.child_table_name === doctype) {
             onAdd({
                 ...data,
@@ -66,7 +66,7 @@ export default DocTypeVariableForm
 
 const TableSelectionField = ({ doctype }: { doctype: string }) => {
 
-    const { control, setValue } = useFormContext<RavenAIFunctionParams>()
+    const { control, setValue } = useFormContext<ChatAIFunctionParams>()
     const { doc: doctypeMeta } = useDoctypeMeta(doctype)
 
     const tableFields = useMemo(() => {
@@ -135,7 +135,7 @@ export const VALID_DOCTYPE_FIELD_TYPES: DocField['fieldtype'][] = [
 /** Component to select a field of a doctype and autofill the rest of the form. */
 const FieldSelectionField = ({ doctype }: { doctype: string }) => {
 
-    const { control, watch, setValue } = useFormContext<RavenAIFunctionParams>()
+    const { control, watch, setValue } = useFormContext<ChatAIFunctionParams>()
 
     const tableField = watch('child_table_name')
 
@@ -173,7 +173,7 @@ const FieldSelectionField = ({ doctype }: { doctype: string }) => {
 
         let description = field.label ?? field.fieldname ?? ''
         let options = ''
-        let type: RavenAIFunctionParams['type'] = 'string'
+        let type: ChatAIFunctionParams['type'] = 'string'
 
         if (field.fieldtype === 'Select') {
             // Need to set the options
@@ -261,7 +261,7 @@ export const DoctypeFieldSelect = ({ doctype, value, onFieldSelect }: { doctype:
 }
 
 const OtherFormFields = () => {
-    const { control, register, formState: { errors }, watch } = useFormContext<RavenAIFunctionParams>()
+    const { control, register, formState: { errors }, watch } = useFormContext<ChatAIFunctionParams>()
 
     const do_not_ask_ai = watch('do_not_ask_ai')
 
@@ -370,7 +370,7 @@ const OtherFormFields = () => {
 
 const OptionsField = ({ doctype }: { doctype: string }) => {
 
-    const { register, watch, formState: { errors } } = useFormContext<RavenAIFunctionParams>()
+    const { register, watch, formState: { errors } } = useFormContext<ChatAIFunctionParams>()
 
     const fieldname = watch('fieldname')
 
@@ -436,7 +436,7 @@ const OptionsAutoFill = ({ doctype, fieldname }: { doctype: string, fieldname: s
     }, [doctypeMeta, fieldname])
 
 
-    const { setValue } = useFormContext<RavenAIFunctionParams>()
+    const { setValue } = useFormContext<ChatAIFunctionParams>()
 
     const { db } = useContext(FrappeContext) as FrappeConfig
 
@@ -503,7 +503,7 @@ const QuickImportPopover = ({ doctype }: { doctype: string }) => {
 
     const { data } = useSearch(doctype, searchText, undefined, 15)
 
-    const { setValue, getValues } = useFormContext<RavenAIFunctionParams>()
+    const { setValue, getValues } = useFormContext<ChatAIFunctionParams>()
 
     const addToList = (value: string) => {
         const options = getValues('options') || ''

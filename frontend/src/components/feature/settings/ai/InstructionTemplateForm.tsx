@@ -1,7 +1,7 @@
 import { Stack } from '@/components/layout/Stack'
 import InstructionField from './InstructionField'
 import { useFormContext } from 'react-hook-form'
-import { RavenBotInstructionTemplate } from '@/types/RavenAI/RavenBotInstructionTemplate'
+import { ChatBotInstructionTemplate } from '@/types/ChatAI/ChatBotInstructionTemplate'
 import { Box, TextField } from '@radix-ui/themes'
 import { ErrorText, Label } from '@/components/common/Form'
 import AINotEnabledCallout from './AINotEnabledCallout'
@@ -12,7 +12,7 @@ type Props = {
 
 const InstructionTemplateForm = ({ isEdit }: Props) => {
 
-    const { register, formState: { errors } } = useFormContext<RavenBotInstructionTemplate>()
+    const { register, formState: { errors } } = useFormContext<ChatBotInstructionTemplate>()
     return (
         <Stack gap='4'>
             <AINotEnabledCallout />

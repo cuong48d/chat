@@ -10,7 +10,7 @@ export const PinnedMessageModalContent = ({ onClose }: { onClose: () => void }) 
 
     const { channelID } = useParams<{ channelID: string }>()
 
-    const { data, error } = useFrappeGetCall<{ message: Message[] }>("raven.api.raven_message.get_pinned_messages", { 'channel_id': channelID }, undefined, {
+    const { data, error } = useFrappeGetCall<{ message: Message[] }>("chat.api.chat_message.get_pinned_messages", { 'channel_id': channelID }, undefined, {
         revalidateOnFocus: false
     })
 

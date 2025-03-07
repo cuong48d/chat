@@ -1,12 +1,12 @@
 import { HStack } from "@/components/layout/Stack";
-import { RavenWebhook } from "@/types/RavenIntegrations/RavenWebhook";
+import { ChatWebhook } from "@/types/ChatIntegrations/ChatWebhook";
 import { Flex, Box, Heading, Table, TextField, IconButton, Button, Text } from "@radix-ui/themes";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { BiMinusCircle } from "react-icons/bi";
 import { FiPlus } from "react-icons/fi";
 
 export const WebhookHeaders = () => {
-    const { register } = useFormContext<RavenWebhook>()
+    const { register } = useFormContext<ChatWebhook>()
 
     const { fields, append, remove } = useFieldArray({
         name: 'webhook_headers'

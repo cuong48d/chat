@@ -14,41 +14,41 @@ export default defineConfig(({ command, mode }) => {
 			registerType: "autoUpdate",
 			strategies: "injectManifest",
 			injectRegister: null,
-			outDir: "../raven/public/raven",
+			outDir: "../chat/public/chat",
 			manifest: {
-				name: "Raven",
+				name: "Chat",
 				start_url: `/${env.VITE_BASE_NAME}`,
-				short_name: "Raven",
+				short_name: "Chat",
 				description: "Simple, work messaging tool.",
 				display: "standalone",
 				"icons": [
 					{
-						"src": "/assets/raven/manifest/android-chrome-192x192.png",
+						"src": "/assets/chat/manifest/android-chrome-192x192.png",
 						"sizes": "192x192",
 						"type": "image/png"
 					},
 					{
-						"src": "/assets/raven/manifest/android-chrome-512x512.png",
+						"src": "/assets/chat/manifest/android-chrome-512x512.png",
 						"sizes": "512x512",
 						"type": "image/png"
 					},
 					{
-						"src": "/assets/raven/manifest/apple-touch-icon.png",
+						"src": "/assets/chat/manifest/apple-touch-icon.png",
 						"sizes": "180x180",
 						"type": "image/png"
 					},
 					{
-						"src": "/assets/raven/manifest/favicon-16x16.png",
+						"src": "/assets/chat/manifest/favicon-16x16.png",
 						"sizes": "16x16",
 						"type": "image/png"
 					},
 					{
-						"src": "/assets/raven/manifest/favicon-32x32.png",
+						"src": "/assets/chat/manifest/favicon-32x32.png",
 						"sizes": "32x32",
 						"type": "image/png"
 					},
 					{
-						"src": "/assets/raven/manifest/favicon.ico",
+						"src": "/assets/chat/manifest/favicon.ico",
 						"sizes": "64x64 32x32 24x24 16x16",
 						"type": "image/x-icon"
 					}
@@ -65,7 +65,7 @@ export default defineConfig(({ command, mode }) => {
 			}
 		},
 		build: {
-			outDir: "../raven/public/raven",
+			outDir: "../chat/public/chat",
 			emptyOutDir: true,
 			target: "es2015",
 			rollupOptions: {

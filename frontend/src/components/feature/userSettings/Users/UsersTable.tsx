@@ -84,7 +84,7 @@ export const UsersTable = ({ data, selected, setSelected, defaultSelected }: Use
                             <Table.Cell>
                                 {user.role_profile_name ?
                                     <Box>
-                                        <Tooltip content={<span>A role profile has been assigned to this user.<br />If you want to add the user to Raven, please change their role profile.</span>}>
+                                        <Tooltip content={<span>A role profile has been assigned to this user.<br />If you want to add the user to Chat, please change their role profile.</span>}>
                                             <Badge color='red' variant="solid">
                                                 <FiAlertTriangle size='12' />
                                                 Role Profile Added</Badge>

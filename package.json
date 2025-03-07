@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "raven",
+  "name": "chat",
   "version": "2.1.4",
   "description": "Messaging Application",
   "workspaces": [
@@ -12,7 +12,7 @@
     "dev": "cd frontend && yarn dev",
     "build": "cd frontend && yarn build",
     "postinstall": "yarn install-web && yarn install-desk",
-    "install-desk": "cd raven && yarn install",
+    "install-desk": "cd chat && yarn install",
     "install-web": "cd frontend && yarn install"
   },
   "keywords": [],

@@ -33,7 +33,7 @@ const ForwardMessageModal = ({ onClose, message }: ForwardMessageModalProps) => 
 
     const { handleSubmit, reset, control } = methods
 
-    const { call, error, loading } = useFrappePostCall('raven.api.raven_message.forward_message')
+    const { call, error, loading } = useFrappePostCall('chat.api.chat_message.forward_message')
 
     const onSubmit = (data: ForwardMessageForm) => {
         if (data.selected_options && data.selected_options.length > 0) {

@@ -33,7 +33,7 @@ export const RenameChannelModalContent = ({ channelID, channelName, type, onClos
     const { updateDoc, loading: updatingDoc, error } = useFrappeUpdateDoc()
 
     const onSubmit = async (data: RenameChannelForm) => {
-        return updateDoc("Raven Channel", channelID ?? null, {
+        return updateDoc("Chat Channel", channelID ?? null, {
             channel_name: data.channel_name
         }).then(() => {
             toast.success("Channel name updated")

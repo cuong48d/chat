@@ -4,7 +4,7 @@ import { lazy, Suspense, useContext, useEffect } from 'react'
 import { Sidebar } from '../components/layout/Sidebar/Sidebar'
 import { ChannelListProvider } from '../utils/channel/ChannelListProvider'
 import { UserListProvider } from '@/utils/users/UserListProvider'
-import { hasRavenUserRole } from '@/utils/roles'
+import { hasChatUserRole } from '@/utils/roles'
 import { FullPageLoader } from '@/components/layout/Loaders/FullPageLoader'
 import CommandMenu from '@/components/feature/CommandMenu/CommandMenu'
 import { useFetchActiveUsersRealtime } from '@/hooks/fetchers/useFetchActiveUsers'
@@ -16,21 +16,21 @@ import { useFrappeEventListener, useSWRConfig } from 'frappe-react-sdk'
 import { useUnreadThreadsCountEventListener } from '@/hooks/useUnreadThreadsCount'
 import { UserContext } from '@/utils/auth/UserProvider'
 
-const AddRavenUsersPage = lazy(() => import('@/pages/AddRavenUsersPage'))
+const AddChatUsersPage = lazy(() => import('@/pages/AddChatUsersPage'))
 
 export const MainPage = () => {
 
-    const isRavenUser = hasRavenUserRole()
+    const isChatUser = hasChatUserRole()
 
-    if (isRavenUser) {
+    if (isChatUser) {
         return (
             <MainPageContent />
         )
     } else {
-        // If the user does not have the Raven User role, then show an error message if the user cannot add more people.
-        // Else, show the page to add people to Raven
+        // If the user does not have the Chat User role, then show an error message if the user cannot add more people.
+        // Else, show the page to add people to Chat
         return <Suspense fallback={<FullPageLoader />}>
-            <AddRavenUsersPage />
+            <AddChatUsersPage />
         </Suspense>
     }
 

@@ -40,20 +40,20 @@ const HelpAndSupport = () => {
                     <ul className="list-none">
                         <li>
                             <Link color='gray' underline="always" size='2' target="_blank"
-                                title="https://github.com/The-Commit-Company/raven"
-                                href="https://github.com/The-Commit-Company/raven">GitHub <FiExternalLink size='12' />
+                                title="https://github.com/The-Commit-Company/chat"
+                                href="https://github.com/The-Commit-Company/chat">GitHub <FiExternalLink size='12' />
                             </Link>
                         </li>
                         <li>
                             <Link color='gray' underline="always" size='2' target="_blank"
-                                title="https://community.ravenapp.cloud"
-                                href="https://community.ravenapp.cloud">Community <FiExternalLink size='12' />
+                                title="https://community.chatapp.cloud"
+                                href="https://community.chatapp.cloud">Community <FiExternalLink size='12' />
                             </Link>
                         </li>
                         <li>
                             <Link color='gray' underline="always" size='2' target="_blank"
-                                title="https://ravenchat.ai"
-                                href="https://ravenchat.ai">Website <FiExternalLink size='12' />
+                                title="https://chatchat.ai"
+                                href="https://chatchat.ai">Website <FiExternalLink size='12' />
                             </Link>
                         </li>
                         <li>
@@ -68,7 +68,7 @@ const HelpAndSupport = () => {
 
                     <Stack gap='0'>
                         {/* @ts-expect-error */}
-                        <Text size='3' color='gray'><Text size='5' className="cal-sans text-gray-12 dark:text-white">raven</Text> <Code size='2' variant="ghost">v{frappe?.boot.versions.raven}</Code></Text>
+                        <Text size='3' color='gray'><Text size='5' className="cal-sans text-gray-12 dark:text-white">chat</Text> <Code size='2' variant="ghost">v{frappe?.boot.versions.chat}</Code></Text>
                         <Text size='2' color='gray'>Crafted by The Commit Company</Text>
                     </Stack>
                 </Stack>

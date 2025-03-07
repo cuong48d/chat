@@ -15,7 +15,7 @@ export const showNotification = (payload: any) => {
         notificationOptions["icon"] = payload.data.notification_icon
     }
 
-    if (payload.data.raven_message_type === "Image") {
+    if (payload.data.chat_message_type === "Image") {
         // @ts-ignore
         notificationOptions["image"] = payload.data.content
     }
@@ -24,7 +24,7 @@ export const showNotification = (payload: any) => {
         // @ts-ignore
         notificationOptions["timestamp"] = payload.data.creation
     }
-    const url = `${payload.data.base_url}/raven/channel/${payload.data.channel_id}`
+    const url = `${payload.data.base_url}/chat/channel/${payload.data.channel_id}`
     if (isChrome()) {
         // @ts-ignore
         notificationOptions["data"] = {

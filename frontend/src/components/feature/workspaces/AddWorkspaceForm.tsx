@@ -3,7 +3,7 @@ import { Loader } from '@/components/common/Loader'
 import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import { Stack } from '@/components/layout/Stack'
 import { useIsDesktop } from '@/hooks/useMediaQuery'
-import { RavenWorkspace } from '@/types/Raven/RavenWorkspace'
+import { ChatWorkspace } from '@/types/Chat/ChatWorkspace'
 import { __ } from '@/utils/translations'
 import { Box, Button, Checkbox, Dialog, Flex, RadioGroup, Text, TextArea, TextField } from '@radix-ui/themes'
 import { useFrappeCreateDoc, useFrappeFileUpload, useFrappeUpdateDoc, useSWRConfig } from 'frappe-react-sdk'
@@ -17,7 +17,7 @@ const AddWorkspaceForm = ({ onClose }: { onClose: (workspaceID?: string) => void
 
     const { mutate } = useSWRConfig()
 
-    const methods = useForm<RavenWorkspace>({
+    const methods = useForm<ChatWorkspace>({
         defaultValues: {
             type: "Public"
         }
@@ -27,18 +27,18 @@ const AddWorkspaceForm = ({ onClose }: { onClose: (workspaceID?: string) => void
 
     const { register, handleSubmit, control, formState: { errors } } = methods
 
-    const { createDoc, loading: creatingDoc, error } = useFrappeCreateDoc<RavenWorkspace>()
+    const { createDoc, loading: creatingDoc, error } = useFrappeCreateDoc<ChatWorkspace>()
     const { updateDoc, loading: updatingDoc } = useFrappeUpdateDoc()
 
     const { upload, loading: uploadingFile, error: fileError } = useFrappeFileUpload()
 
-    const onSubmit = (data: RavenWorkspace) => {
+    const onSubmit = (data: ChatWorkspace) => {
 
-        createDoc("Raven Workspace", data)
+        createDoc("Chat Workspace", data)
             .then(res => {
                 if (image) {
                     return upload(image, {
-                        doctype: 'Raven Workspace',
+                        doctype: 'Chat Workspace',
                         docname: res.name,
                         fieldname: 'logo',
                         otherData: {
@@ -46,7 +46,7 @@ const AddWorkspaceForm = ({ onClose }: { onClose: (workspaceID?: string) => void
                         },
                         isPrivate: true,
                     }).then((fileRes) => {
-                        return updateDoc("Raven Workspace", res.name, {
+                        return updateDoc("Chat Workspace", res.name, {
                             logo: fileRes.file_url + "?fid=" + fileRes.name
                         })
                     })

@@ -6,8 +6,8 @@ import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
 import { HStack } from '@/components/layout/Stack'
-import { RavenBotInstructionTemplate } from '@/types/RavenAI/RavenBotInstructionTemplate'
-import { hasRavenAdminRole, isSystemManager } from '@/utils/roles'
+import { ChatBotInstructionTemplate } from '@/types/ChatAI/ChatBotInstructionTemplate'
+import { hasChatAdminRole, isSystemManager } from '@/utils/roles'
 import { Badge, Button, Code, Table, Text } from '@radix-ui/themes'
 import { useFrappeGetDocList } from 'frappe-react-sdk'
 import { BiFile } from 'react-icons/bi'
@@ -18,15 +18,15 @@ type Props = {}
 
 const InstructionTemplateList = (props: Props) => {
 
-    const isRavenAdmin = hasRavenAdminRole() || isSystemManager()
+    const isChatAdmin = hasChatAdminRole() || isSystemManager()
 
-    const { data, isLoading, error } = useFrappeGetDocList<RavenBotInstructionTemplate>("Raven Bot Instruction Template", {
+    const { data, isLoading, error } = useFrappeGetDocList<ChatBotInstructionTemplate>("Chat Bot Instruction Template", {
         fields: ["name", "template_name", "dynamic_instructions", "instruction"],
         orderBy: {
             field: "modified",
             order: "desc"
         }
-    }, isRavenAdmin ? undefined : null, {
+    }, isChatAdmin ? undefined : null, {
         errorRetryCount: 2
     })
 
@@ -36,7 +36,7 @@ const InstructionTemplateList = (props: Props) => {
                 <SettingsPageHeader
                     title='Instruction Templates'
                     description='Save commonly used instructions as templates for your bots.'
-                    actions={<Button asChild disabled={!isRavenAdmin}>
+                    actions={<Button asChild disabled={!isChatAdmin}>
                         <Link to='create'>Create</Link>
                     </Button>}
                 />
@@ -44,7 +44,7 @@ const InstructionTemplateList = (props: Props) => {
                 <ErrorBanner error={error} />
                 <AINotEnabledCallout />
                 {data && data.length > 0 && <InstructionTable data={data} />}
-                {(data?.length === 0 || !isRavenAdmin) && <EmptyState>
+                {(data?.length === 0 || !isChatAdmin) && <EmptyState>
                     <EmptyStateIcon>
                         <BiFile />
                     </EmptyStateIcon>
@@ -52,7 +52,7 @@ const InstructionTemplateList = (props: Props) => {
                     <EmptyStateDescription>
                         Most bots require the same kind of instructions to perform their tasks, like "format dates as DD-MM-YYYY" or "the current user is <Code color='gray'>{"{{user}}"}</Code>".<br />Save commonly used instructions as templates for your AI bots.
                     </EmptyStateDescription>
-                    {isRavenAdmin && <EmptyStateLinkAction to='create'>
+                    {isChatAdmin && <EmptyStateLinkAction to='create'>
                         Create your first template
                     </EmptyStateLinkAction>}
                 </EmptyState>}
@@ -61,7 +61,7 @@ const InstructionTemplateList = (props: Props) => {
     )
 }
 
-const InstructionTable = ({ data }: { data: RavenBotInstructionTemplate[] }) => {
+const InstructionTable = ({ data }: { data: ChatBotInstructionTemplate[] }) => {
     return (
         <Table.Root variant="surface" className='rounded-sm animate-fadein'>
             <Table.Header>

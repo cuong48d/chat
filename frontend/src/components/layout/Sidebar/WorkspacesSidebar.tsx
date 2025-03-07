@@ -66,8 +66,8 @@ const WorkspaceItem = ({ workspace }: { workspace: WorkspaceFields & { unread_co
 
     let logo = workspace.logo || ''
 
-    if (!logo && workspace.workspace_name === 'Raven') {
-        logo = '/assets/raven/raven-logo.png'
+    if (!logo && workspace.workspace_name === 'Chat') {
+        logo = '/assets/chat/chat-logo.png'
     }
 
     const location = useLocation()
@@ -75,8 +75,8 @@ const WorkspaceItem = ({ workspace }: { workspace: WorkspaceFields & { unread_co
     const path = isSelected ? location.pathname : `/${workspace.name}`
 
     const openWorkspace = () => {
-        localStorage.setItem('ravenLastWorkspace', workspace.name)
-        localStorage.removeItem('ravenLastChannel')
+        localStorage.setItem('chatLastWorkspace', workspace.name)
+        localStorage.removeItem('chatLastChannel')
     }
 
     return <HStack position='relative' align='center' className='group'>

@@ -1,14 +1,14 @@
 {
-  "name": "raven-ui",
+  "name": "chat-ui",
   "private": true,
   "license": "AGPL-3.0-only",
   "version": "2.1.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/assets/raven/raven/ && yarn copy-html-entry",
+    "build": "vite build --base=/assets/chat/chat/ && yarn copy-html-entry",
     "preview": "vite preview",
-    "copy-html-entry": "cp ../raven/public/raven/index.html ../raven/www/raven.html"
+    "copy-html-entry": "cp ../chat/public/chat/index.html ../chat/www/chat.html"
   },
   "dependencies": {
     "@emoji-mart/react": "^1.1.1",

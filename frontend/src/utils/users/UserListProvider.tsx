@@ -2,7 +2,7 @@ import { useFrappeDocTypeEventListener, useFrappeGetCall, useSWRConfig } from "f
 import { PropsWithChildren, createContext, useEffect, useMemo, useState } from "react";
 import { ErrorBanner } from "@/components/layout/AlertBanner/ErrorBanner";
 import { Box, Flex, Link, Text } from "@radix-ui/themes";
-import { RavenUser } from "@/types/Raven/RavenUser";
+import { ChatUser } from "@/types/Chat/ChatUser";
 import { Stack } from "@/components/layout/Stack";
 
 
@@ -11,13 +11,13 @@ export const UserListContext = createContext<{ users: UserFields[], enabledUsers
     enabledUsers: []
 })
 
-export type UserFields = Pick<RavenUser, 'name' | 'full_name' | 'user_image' | 'first_name' | 'enabled' | 'type' | 'availability_status' | 'custom_status'>
+export type UserFields = Pick<ChatUser, 'name' | 'full_name' | 'user_image' | 'first_name' | 'enabled' | 'type' | 'availability_status' | 'custom_status'>
 
 export const UserListProvider = ({ children }: PropsWithChildren) => {
 
 
     const { mutate: globalMutate } = useSWRConfig()
-    const { data, error: usersError, mutate, isLoading } = useFrappeGetCall<{ message: UserFields[] }>('raven.api.raven_users.get_list', undefined, 'raven.api.raven_users.get_list', {
+    const { data, error: usersError, mutate, isLoading } = useFrappeGetCall<{ message: UserFields[] }>('chat.api.chat_users.get_list', undefined, 'chat.api.chat_users.get_list', {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
@@ -41,7 +41,7 @@ export const UserListProvider = ({ children }: PropsWithChildren) => {
      * If a bulk import happens, this gets called multiple times potentially causing the server to go down.
      * Instead, throttle this - wait for all events to subside
      */
-    useFrappeDocTypeEventListener('Raven User', () => {
+    useFrappeDocTypeEventListener('Chat User', () => {
         setNewUpdatesAvailable((n) => n + 1)
     })
 
@@ -55,7 +55,7 @@ export const UserListProvider = ({ children }: PropsWithChildren) => {
     if (isLoading) {
         return <Flex justify='center' align='center' height='100vh' width='100vw' className='animate-fadein'>
             <Stack className='text-center' gap='1'>
-                <Text size='7' className='cal-sans tracking-normal'>raven</Text>
+                <Text size='7' className='cal-sans tracking-normal'>chat</Text>
                 <Text color='gray' weight='medium'>Setting up your workspace...</Text>
             </Stack>
         </Flex>
@@ -64,7 +64,7 @@ export const UserListProvider = ({ children }: PropsWithChildren) => {
         return <Flex align='center' justify='center' px='4' mx='auto' className="w-[50vw] h-screen">
             <ErrorBanner error={usersError}>
                 <Box py='2'>
-                    <Link href={'/app/raven-user'}>View Raven Users</Link>
+                    <Link href={'/app/chat-user'}>View Chat Users</Link>
                 </Box>
             </ErrorBanner>
         </Flex>

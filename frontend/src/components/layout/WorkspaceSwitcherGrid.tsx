@@ -71,7 +71,7 @@ const WorkspaceSwitcherGrid = () => {
 }
 
 const WorkspaceMemberCount = ({ workspace }: { workspace: string }) => {
-    const { data } = useFrappeGetDocCount('Raven Workspace Member', [['workspace', '=', workspace]], true)
+    const { data } = useFrappeGetDocCount('Chat Workspace Member', [['workspace', '=', workspace]], true)
 
     if (data === undefined) {
         return null
@@ -91,8 +91,8 @@ const WorkspaceMemberCount = ({ workspace }: { workspace: string }) => {
 const getLogo = (workspace: WorkspaceFields) => {
     let logo = workspace.logo || ''
 
-    if (!logo && workspace.workspace_name === 'Raven') {
-        logo = '/assets/raven/raven-logo.png'
+    if (!logo && workspace.workspace_name === 'Chat') {
+        logo = '/assets/chat/chat-logo.png'
     }
 
     return logo
@@ -102,8 +102,8 @@ const MyWorkspaceItem = ({ workspace }: { workspace: WorkspaceFields }) => {
     const logo = getLogo(workspace)
 
     const openWorkspace = () => {
-        localStorage.setItem('ravenLastWorkspace', workspace.name)
-        localStorage.removeItem('ravenLastChannel')
+        localStorage.setItem('chatLastWorkspace', workspace.name)
+        localStorage.removeItem('chatLastChannel')
     }
 
     return <Card asChild className='shadow-sm hover:scale-105 transition-all duration-200'>
@@ -132,7 +132,7 @@ const OtherWorkspaceItem = ({ workspace }: { workspace: WorkspaceFields }) => {
 
     const logo = getLogo(workspace)
 
-    const { call } = useFrappePostCall('raven.api.workspaces.join_workspace')
+    const { call } = useFrappePostCall('chat.api.workspaces.join_workspace')
 
     const { mutate } = useSWRConfig()
 

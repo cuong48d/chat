@@ -23,7 +23,7 @@ export const EditMessageModal = ({ onClose, message }: EditMessageModalProps) =>
     }, [reset])
 
     const onSubmit = async (html: string, json: any) => {
-        return updateDoc('Raven Message', message.name,
+        return updateDoc('Chat Message', message.name,
             { text: html, json }).then((d) => {
                 onClose(true)
                 toast.info("Message updated")

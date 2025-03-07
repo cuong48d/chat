@@ -2,7 +2,7 @@ import EmojiPicker from '@/components/common/EmojiPicker/EmojiPicker'
 import { ErrorText, Label } from '@/components/common/Form'
 import { Loader } from '@/components/common/Loader'
 import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
-import useCurrentRavenUser from '@/hooks/useCurrentRavenUser'
+import useCurrentChatUser from '@/hooks/useCurrentChatUser'
 import { useUserData } from '@/hooks/useUserData'
 import { __ } from '@/utils/translations'
 import { Button, Dialog, Flex, TextField, IconButton } from '@radix-ui/themes'
@@ -15,7 +15,7 @@ import { toast } from 'sonner'
 const SetCustomStatusContent = ({ onClose }: { onClose: VoidFunction }) => {
 
     const userData = useUserData()
-    const { myProfile, mutate } = useCurrentRavenUser()
+    const { myProfile, mutate } = useCurrentChatUser()
 
     const methods = useForm({
         defaultValues: {
@@ -24,7 +24,7 @@ const SetCustomStatusContent = ({ onClose }: { onClose: VoidFunction }) => {
     })
     const { register, handleSubmit, formState: { errors } } = methods
 
-    const { call, loading, error } = useFrappePostCall('raven.api.raven_users.update_raven_user')
+    const { call, loading, error } = useFrappePostCall('chat.api.chat_users.update_chat_user')
     const onSubmit = (data: { custom_status: string }) => {
         call({
             custom_status: data.custom_status

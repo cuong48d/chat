@@ -1,4 +1,4 @@
-import { RavenMessage } from '@/types/RavenMessaging/RavenMessage'
+import { ChatMessage } from '@/types/ChatMessaging/ChatMessage'
 import { __ } from '@/utils/translations'
 import { Box, IconButton, Popover, Text, Flex } from '@radix-ui/themes'
 import { FrappeConfig, FrappeContext, useFrappeEventListener, useFrappeGetCall } from 'frappe-react-sdk'
@@ -6,7 +6,7 @@ import { LuAtSign } from 'react-icons/lu'
 import parse from 'html-react-parser'
 import { getTimePassed } from '@/utils/dateConversions'
 import { HStack } from '../Stack'
-import { RavenChannel } from '@/types/RavenChannelManagement/RavenChannel'
+import { ChatChannel } from '@/types/ChatChannelManagement/ChatChannel'
 import { ChannelIcon } from '@/utils/layout/channelIcon'
 import { useGetUser } from '@/hooks/useGetUser'
 import { UserAvatar } from '@/components/common/UserAvatar'
@@ -18,12 +18,12 @@ import useSWRInfinite from 'swr/infinite'
 
 const MentionsButton = () => {
 
-    const { data: mentionsCount, mutate } = useFrappeGetCall<{ message: number }>('raven.api.mentions.get_unread_mention_count', undefined, undefined, {
+    const { data: mentionsCount, mutate } = useFrappeGetCall<{ message: number }>('chat.api.mentions.get_unread_mention_count', undefined, undefined, {
         revalidateOnFocus: true,
         focusThrottleInterval: 1000 * 60 * 5,
     })
 
-    useFrappeEventListener('raven_mention', () => {
+    useFrappeEventListener('chat_mention', () => {
         mutate()
     })
 
@@ -63,7 +63,7 @@ interface MentionObject {
     /** ID of the channel */
     channel_id: string
     /** Type of the channel */
-    channel_type: RavenChannel['type']
+    channel_type: ChatChannel['type']
     /** Name of the channel */
     channel_name: string
     /** Workspace name */
@@ -75,7 +75,7 @@ interface MentionObject {
     /** Date and time of the message */
     creation: string
     /** Type of the message */
-    message_type: RavenMessage['message_type']
+    message_type: ChatMessage['message_type']
     /** Owner of the message */
     owner: string
     /** Text of the message */
@@ -92,7 +92,7 @@ const MentionsList = () => {
         (pageIndex: number, previousPageData: { message: MentionObject[] } | null) => {
             if (previousPageData && !previousPageData.message.length) return null
             const start = pageIndex * PAGE_SIZE
-            return ['raven.api.mentions.get_mentions', {
+            return ['chat.api.mentions.get_mentions', {
                 limit: PAGE_SIZE,
                 start
             }] as const

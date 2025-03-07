@@ -1,10 +1,10 @@
 import { useFrappePostCall } from 'frappe-react-sdk'
 import { Message } from '../../../../../../types/Messaging/Message'
-import { RavenMessage } from '@/types/RavenMessaging/RavenMessage'
+import { ChatMessage } from '@/types/ChatMessaging/ChatMessage'
 
-export const useSendMessage = (channelID: string, uploadFiles: (selectedMessage?: Message | null) => Promise<RavenMessage[]>, onMessageSent: (messages: RavenMessage[]) => void, selectedMessage?: Message | null) => {
+export const useSendMessage = (channelID: string, uploadFiles: (selectedMessage?: Message | null) => Promise<ChatMessage[]>, onMessageSent: (messages: ChatMessage[]) => void, selectedMessage?: Message | null) => {
 
-    const { call, loading } = useFrappePostCall<{ message: RavenMessage }>('raven.api.raven_message.send_message')
+    const { call, loading } = useFrappePostCall<{ message: ChatMessage }>('chat.api.chat_message.send_message')
 
     const sendMessage = async (content: string, json?: any): Promise<void> => {
 

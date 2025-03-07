@@ -54,8 +54,8 @@ const useChatStream = (channelID: string, scrollRef: MutableRefObject<HTMLDivEle
         }
     }, [highlightedMessage])
 
-    const { call: fetchOlderMessages, loading: loadingOlderMessages } = useFrappePostCall('raven.api.chat_stream.get_older_messages')
-    const { call: fetchNewerMessages, loading: loadingNewerMessages } = useFrappePostCall('raven.api.chat_stream.get_newer_messages')
+    const { call: fetchOlderMessages, loading: loadingOlderMessages } = useFrappePostCall('chat.api.chat_stream.get_older_messages')
+    const { call: fetchNewerMessages, loading: loadingNewerMessages } = useFrappePostCall('chat.api.chat_stream.get_newer_messages')
 
     /**
      * Ref that is updated when no new messages are available
@@ -137,7 +137,7 @@ const useChatStream = (channelID: string, scrollRef: MutableRefObject<HTMLDivEle
     }
 
 
-    const { data, isLoading, error, mutate } = useFrappeGetCall<GetMessagesResponse>('raven.api.chat_stream.get_messages', {
+    const { data, isLoading, error, mutate } = useFrappeGetCall<GetMessagesResponse>('chat.api.chat_stream.get_messages', {
         'channel_id': channelID,
         'base_message': selected_message ? selected_message : undefined
     }, { path: `get_messages_for_channel_${channelID}`, baseMessage: selected_message ? selected_message : undefined }, {
@@ -174,7 +174,7 @@ const useChatStream = (channelID: string, scrollRef: MutableRefObject<HTMLDivEle
 
     /** If the user has already loaded all the latest messages and exits the channel, we update the timestamp of last visit  */
 
-    const { call: trackVisit } = useFrappePostCall('raven.api.raven_channel_member.track_visit')
+    const { call: trackVisit } = useFrappePostCall('chat.api.chat_channel_member.track_visit')
     /**
      * Track visit when unmounting if new messages were loaded.
      * We are using a ref since the hook is not re-executed when the data is updated
@@ -195,7 +195,7 @@ const useChatStream = (channelID: string, scrollRef: MutableRefObject<HTMLDivEle
      * We use the mutate method to update the messages array when messages are received, updated, deleted, etc.
      * Even if the user scrolls up and loads older messages, the hook is mutated by concatenating the older messages to the existing messages array
      *
-     * Since we are using Web Socket events, this saves multiple round-trips to the server to fetch messages (pre Raven v1.5)
+     * Since we are using Web Socket events, this saves multiple round-trips to the server to fetch messages (pre Chat v1.5)
      *
      * When the page changes and the user comes back to the chat, the messages are fetched again and hence the messages array is updated with only new messages
      *
@@ -210,7 +210,7 @@ const useChatStream = (channelID: string, scrollRef: MutableRefObject<HTMLDivEle
      * Refer: https://swr.vercel.app/docs/mutation
      */
 
-    useFrappeDocumentEventListener('Raven Channel', channelID ?? '', () => { })
+    useFrappeDocumentEventListener('Chat Channel', channelID ?? '', () => { })
 
     // If there are new messages in the channel, update the messages
     useFrappeEventListener('message_created', (event) => {

@@ -5,7 +5,7 @@ import { TableLoader } from "@/components/layout/Loaders/TableLoader"
 import PageContainer from "@/components/layout/Settings/PageContainer"
 import SettingsContentContainer from "@/components/layout/Settings/SettingsContentContainer"
 import SettingsPageHeader from "@/components/layout/Settings/SettingsPageHeader"
-import { RavenWebhook } from "@/types/RavenIntegrations/RavenWebhook"
+import { ChatWebhook } from "@/types/ChatIntegrations/ChatWebhook"
 import { isSystemManager } from "@/utils/roles"
 import { Flex, Button } from "@radix-ui/themes"
 import { useFrappeDocTypeEventListener, useFrappeGetDocList } from "frappe-react-sdk"
@@ -14,15 +14,15 @@ import { Link } from "react-router-dom"
 
 const WebhookList = () => {
 
-    const isRavenAdmin = isSystemManager()
+    const isChatAdmin = isSystemManager()
 
-    const { data, error, isLoading, mutate } = useFrappeGetDocList<RavenWebhook>('Raven Webhook', {
+    const { data, error, isLoading, mutate } = useFrappeGetDocList<ChatWebhook>('Chat Webhook', {
         fields: ['name', 'request_url', 'enabled', 'owner', 'creation']
-    }, isRavenAdmin ? undefined : null, {
+    }, isChatAdmin ? undefined : null, {
         errorRetryCount: 2
     })
 
-    useFrappeDocTypeEventListener('Raven Webhook', () => {
+    useFrappeDocTypeEventListener('Chat Webhook', () => {
         mutate()
     })
 
@@ -32,7 +32,7 @@ const WebhookList = () => {
                 <SettingsPageHeader
                     title='Webhooks'
                     description='Fire webhooks on specific events like when a message is sent or channel is created.'
-                    actions={<Button asChild disabled={!isRavenAdmin}>
+                    actions={<Button asChild disabled={!isChatAdmin}>
                         <Link to='create'>Create</Link>
                     </Button>}
                 />
@@ -43,7 +43,7 @@ const WebhookList = () => {
                         <WebhookItem key={index} webhook={webhook} mutate={mutate} />
                     ))}
                 </Flex>}
-                {(data?.length === 0 || !isRavenAdmin) && <EmptyState>
+                {(data?.length === 0 || !isChatAdmin) && <EmptyState>
                     <EmptyStateIcon>
                         <LuWebhook />
                     </EmptyStateIcon>
@@ -51,7 +51,7 @@ const WebhookList = () => {
                     <EmptyStateDescription>
                         Webhooks allow you to receive HTTP requests whenever a specific event occurs - like when a message is sent or a channel is created.
                     </EmptyStateDescription>
-                    {isRavenAdmin && <EmptyStateLinkAction to='create'>
+                    {isChatAdmin && <EmptyStateLinkAction to='create'>
                         Create your first webhook
                     </EmptyStateLinkAction>}
                 </EmptyState>}

@@ -10,12 +10,12 @@ import FrappePushNotification from "../public/frappe-push-notification";
 
 const registerServiceWorker = () => {
   // @ts-ignore
-  window.frappePushNotification = new FrappePushNotification("raven")
+  window.frappePushNotification = new FrappePushNotification("chat")
 
   if ("serviceWorker" in navigator) {
     // @ts-ignore
     window.frappePushNotification
-      .appendConfigToServiceWorkerURL("/assets/raven/raven/sw.js")
+      .appendConfigToServiceWorkerURL("/assets/chat/chat/sw.js")
       .then((url: string) => {
         navigator.serviceWorker
           .register(url, {
@@ -37,7 +37,7 @@ const registerServiceWorker = () => {
 }
 
 if (import.meta.env.DEV) {
-  fetch('/api/method/raven.www.raven.get_context_for_dev', {
+  fetch('/api/method/chat.www.chat.get_context_for_dev', {
     method: 'POST',
   })
     .then(response => response.json())

@@ -1,7 +1,7 @@
 import { ErrorText, HelperText, Label } from '@/components/common/Form'
 import LinkFormField from '@/components/common/LinkField/LinkFormField'
 import { HStack, Stack } from '@/components/layout/Stack'
-import { RavenMessageAction } from '@/types/RavenIntegrations/RavenMessageAction'
+import { ChatMessageAction } from '@/types/ChatIntegrations/ChatMessageAction'
 import { Box, Checkbox, Grid, Select, Text, TextArea, TextField } from '@radix-ui/themes'
 import { Tabs } from '@radix-ui/themes'
 import { ChangeEvent } from 'react'
@@ -39,7 +39,7 @@ export default MessageActionForm
 
 
 const GeneralTab = () => {
-    const { register, control, formState: { errors }, setValue, watch } = useFormContext<RavenMessageAction>()
+    const { register, control, formState: { errors }, setValue, watch } = useFormContext<ChatMessageAction>()
 
     const action = watch('action')
 

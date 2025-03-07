@@ -42,7 +42,7 @@ const SocketIOHealth = () => {
     return (
         <Stack>
             <Heading as='h3' size='3' className="not-cal font-semibold">Realtime Connection Test</Heading>
-            <Text size='2' color='gray'>If messages on Raven do not appear in realtime, you can inspect your network connection here.</Text>
+            <Text size='2' color='gray'>If messages on Chat do not appear in realtime, you can inspect your network connection here.</Text>
             {!loading && socketPingTest === 'Fail' && <ErrorCallout
                 message="Realtime connections are not working on your site. Messages won't be refreshed in real-time."
             />}

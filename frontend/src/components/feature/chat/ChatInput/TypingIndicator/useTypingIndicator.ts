@@ -14,15 +14,15 @@ const useTypingIndicator = (channel: string) => {
 
     useEffect(() => {
         if (socket) {
-            socket.emit('raven_channel_get_typers', channel)
+            socket.emit('chat_channel_get_typers', channel)
 
             socket.io.on("reconnect", () => {
-                socket.emit('raven_channel_get_typers', channel)
+                socket.emit('chat_channel_get_typers', channel)
             })
         }
     }, [channel])
 
-    useFrappeEventListener('raven_channel_typers', (data: TypingEventData) => {
+    useFrappeEventListener('chat_channel_typers', (data: TypingEventData) => {
         if (data.channel === channel) {
             setTypingUsers(data.users)
         }
@@ -40,13 +40,13 @@ export const useTyping = (channel: string) => {
 
     /** Function to emit typing event to the server */
     const emitStartTyping = useCallback(() => {
-        socket?.emit('raven_channel_typing', channel)
+        socket?.emit('chat_channel_typing', channel)
     }, [channel])
 
 
     /** Function to emit typing stopped event to the server */
     const emitStopTyping = useCallback(() => {
-        socket?.emit('raven_channel_typing_stopped', channel)
+        socket?.emit('chat_channel_typing_stopped', channel)
     }, [channel])
 
     const onUserType = useCallback(() => {

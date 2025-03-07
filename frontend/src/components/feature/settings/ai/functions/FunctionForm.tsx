@@ -1,6 +1,6 @@
 import { Label, ErrorText, HelperText } from '@/components/common/Form'
 import { Stack, HStack } from '@/components/layout/Stack'
-import { RavenAIFunction } from '@/types/RavenAI/RavenAIFunction'
+import { ChatAIFunction } from '@/types/ChatAI/ChatAIFunction'
 import { Box, Checkbox, Text, TextField, Select, TextArea, Tabs, Grid } from '@radix-ui/themes'
 import { Controller, useFormContext } from 'react-hook-form'
 import { FUNCTION_TYPES } from './FunctionConstants'
@@ -19,7 +19,7 @@ const ICON_PROPS = {
 
 const FunctionForm = ({ isEdit }: { isEdit?: boolean }) => {
 
-    const { watch } = useFormContext<RavenAIFunction>()
+    const { watch } = useFormContext<ChatAIFunction>()
     const type = watch('type')
 
     return (
@@ -44,7 +44,7 @@ const FunctionForm = ({ isEdit }: { isEdit?: boolean }) => {
 
 const GeneralFunctionDetails = ({ isEdit }: { isEdit?: boolean }) => {
 
-    const { register, control, formState: { errors }, setValue } = useFormContext<RavenAIFunction>()
+    const { register, control, formState: { errors }, setValue } = useFormContext<ChatAIFunction>()
 
     const onFunctionChange = (event: ChangeEvent<HTMLSelectElement>) => {
 
@@ -168,7 +168,7 @@ const VariableSection = () => {
 }
 const FunctionHelperText = () => {
 
-    const { watch } = useFormContext<RavenAIFunction>()
+    const { watch } = useFormContext<ChatAIFunction>()
     const type = watch('type')
 
     const functionDef = FUNCTION_TYPES.find(f => f.value === type)
@@ -182,7 +182,7 @@ const FunctionHelperText = () => {
 }
 
 const PassParamsAsJSON = () => {
-    const { watch, control } = useFormContext<RavenAIFunction>()
+    const { watch, control } = useFormContext<ChatAIFunction>()
     const type = watch('type')
 
     if (type !== 'Custom Function') {
@@ -212,7 +212,7 @@ const PassParamsAsJSON = () => {
 }
 
 const RequiresWritePermissions = () => {
-    const { watch, control } = useFormContext<RavenAIFunction>()
+    const { watch, control } = useFormContext<ChatAIFunction>()
     const type = watch('type')
 
     return <Stack maxWidth={'480px'}>
@@ -240,7 +240,7 @@ const RequiresWritePermissions = () => {
 
 const CustomFunction = () => {
 
-    const { register, watch, formState: { errors } } = useFormContext<RavenAIFunction>()
+    const { register, watch, formState: { errors } } = useFormContext<ChatAIFunction>()
 
     const type = watch('type')
 
@@ -274,7 +274,7 @@ const CustomFunction = () => {
 
 const ReferenceDoctypeField = () => {
 
-    const { watch, formState: { errors }, setValue, getValues } = useFormContext<RavenAIFunction>()
+    const { watch, formState: { errors }, setValue, getValues } = useFormContext<ChatAIFunction>()
 
     const type = watch('type')
 

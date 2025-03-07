@@ -19,7 +19,7 @@ import TypingIndicator from "../../chat/ChatInput/TypingIndicator/TypingIndicato
 import { Stack } from "@/components/layout/Stack"
 import { useSWRConfig } from "frappe-react-sdk"
 import { GetMessagesResponse } from "../../chat/ChatStream/useChatStream"
-import { RavenMessage } from "@/types/RavenMessaging/RavenMessage"
+import { ChatMessage } from "@/types/ChatMessaging/ChatMessage"
 import { useIsMobile } from "@/hooks/useMediaQuery"
 
 export const ThreadMessages = ({ threadMessage }: { threadMessage: Message }) => {
@@ -46,7 +46,7 @@ export const ThreadMessages = ({ threadMessage }: { threadMessage: Message }) =>
 
     const { mutate } = useSWRConfig()
 
-    const onMessageSendCompleted = (messages: RavenMessage[]) => {
+    const onMessageSendCompleted = (messages: ChatMessage[]) => {
         mutate({ path: `get_messages_for_channel_${threadID}` }, (data?: GetMessagesResponse) => {
             if (data && data?.message.has_new_messages) {
                 return data

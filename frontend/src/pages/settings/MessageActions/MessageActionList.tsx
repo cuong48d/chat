@@ -5,8 +5,8 @@ import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
 import { HStack } from '@/components/layout/Stack'
-import { RavenMessageAction } from '@/types/RavenIntegrations/RavenMessageAction'
-import { hasRavenAdminRole, isSystemManager } from '@/utils/roles'
+import { ChatMessageAction } from '@/types/ChatIntegrations/ChatMessageAction'
+import { hasChatAdminRole, isSystemManager } from '@/utils/roles'
 import { Badge, Button, Strong, Table } from '@radix-ui/themes'
 import { useFrappeGetDocList } from 'frappe-react-sdk'
 import { BiBoltCircle } from 'react-icons/bi'
@@ -14,9 +14,9 @@ import { Link } from 'react-router-dom'
 
 const MessageActionList = () => {
 
-    const isRavenAdmin = hasRavenAdminRole() || isSystemManager()
+    const isChatAdmin = hasChatAdminRole() || isSystemManager()
 
-    const { data, isLoading, error } = useFrappeGetDocList<RavenMessageAction>("Raven Message Action", {
+    const { data, isLoading, error } = useFrappeGetDocList<ChatMessageAction>("Chat Message Action", {
         fields: ["name", "enabled", "action_name", "action"],
         orderBy: {
             field: "modified",
@@ -32,7 +32,7 @@ const MessageActionList = () => {
                 <SettingsPageHeader
                     title='Message Actions'
                     description='Use these to add custom actions - like creating an issue/task from a message.'
-                    actions={<Button asChild disabled={!isRavenAdmin}>
+                    actions={<Button asChild disabled={!isChatAdmin}>
                         <Link to='create'>Create</Link>
                     </Button>}
                 />
@@ -49,7 +49,7 @@ const MessageActionList = () => {
                         <br /><br />
                         Access them by right clicking any message and selecting <Strong>Actions</Strong>.
                     </EmptyStateDescription>
-                    {isRavenAdmin && <EmptyStateLinkAction to='create'>
+                    {isChatAdmin && <EmptyStateLinkAction to='create'>
                         Create your first action
                     </EmptyStateLinkAction>}
                 </EmptyState>}
@@ -58,7 +58,7 @@ const MessageActionList = () => {
     )
 }
 
-const MessageActionsTable = ({ actions }: { actions: RavenMessageAction[] }) => {
+const MessageActionsTable = ({ actions }: { actions: ChatMessageAction[] }) => {
     return (
         <Table.Root variant="surface" className='rounded-sm animate-fadein'>
             <Table.Header>

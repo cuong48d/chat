@@ -7,7 +7,7 @@ import SettingsContentContainer from '@/components/layout/Settings/SettingsConte
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
 import { HStack, Stack } from '@/components/layout/Stack'
 import useFetchWorkspaces, { WorkspaceFields } from '@/hooks/fetchers/useFetchWorkspaces'
-import { hasRavenAdminRole } from '@/utils/roles'
+import { hasChatAdminRole } from '@/utils/roles'
 import { Badge, Button, Dialog, Table, Text } from '@radix-ui/themes'
 import { useBoolean } from '@/hooks/useBoolean'
 import { DIALOG_CONTENT_CLASS } from '@/utils/layout/dialog'
@@ -87,7 +87,7 @@ const MyWorkspacesTable = ({ workspaces }: { workspaces: WorkspaceFields[] }) =>
 
 const AddWorkspaceButton = () => {
 
-    const isRavenAdmin = hasRavenAdminRole()
+    const isChatAdmin = hasChatAdminRole()
 
     const [isOpen, { off }, setValue] = useBoolean()
 
@@ -102,7 +102,7 @@ const AddWorkspaceButton = () => {
 
     return <Dialog.Root open={isOpen} onOpenChange={setValue}>
         <Dialog.Trigger>
-            <Button disabled={!isRavenAdmin}>Create</Button>
+            <Button disabled={!isChatAdmin}>Create</Button>
         </Dialog.Trigger>
         <Dialog.Content className={DIALOG_CONTENT_CLASS}>
             <Dialog.Title>Create Workspace</Dialog.Title>

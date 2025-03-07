@@ -90,7 +90,7 @@ const DocTypePreviewEditor = ({ doctype, docname, eligibleFields, previewFields,
 
     const { mutate } = useSWRConfig()
 
-    const { call, loading, error } = useFrappePostCall('raven.api.document_link.update_preview_fields')
+    const { call, loading, error } = useFrappePostCall('chat.api.document_link.update_preview_fields')
 
     const handleUpdate = () => {
         call({ doctype, fields: selectedFields })
@@ -98,7 +98,7 @@ const DocTypePreviewEditor = ({ doctype, docname, eligibleFields, previewFields,
                 toast.success('Fields updated')
                 setHasChanged(false)
                 mutateMeta()
-                mutate(`raven.api.document_link.get_preview_data?doctype=${encodeURIComponent(doctype)}&docname=${encodeURIComponent(docname)}`)
+                mutate(`chat.api.document_link.get_preview_data?doctype=${encodeURIComponent(doctype)}&docname=${encodeURIComponent(docname)}`)
             })
             .catch(error => {
                 toast.error(getErrorMessage(error))

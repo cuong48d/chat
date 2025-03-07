@@ -44,7 +44,7 @@ const ViewFilesContent = () => {
     const { channelID } = useParams<{ channelID: string }>()
     const [fileType, setFileType] = useState<string | undefined>()
 
-    const { data: count, error: countError } = useFrappeGetCall<{ message: number }>("raven.api.raven_message.get_count_for_pagination_of_files", {
+    const { data: count, error: countError } = useFrappeGetCall<{ message: number }>("chat.api.chat_message.get_count_for_pagination_of_files", {
         "channel_id": channelID,
         "file_name": debouncedText,
         "file_type": fileType === 'any' ? undefined : fileType
@@ -52,7 +52,7 @@ const ViewFilesContent = () => {
 
     const { start, selectedPageLength, setPageLength, nextPage, previousPage } = usePagination(10, count?.message ?? 0)
 
-    const { data, error, isLoading } = useFrappeGetCall<{ message: FileInChannel[] }>("raven.api.raven_message.get_all_files_shared_in_channel", {
+    const { data, error, isLoading } = useFrappeGetCall<{ message: FileInChannel[] }>("chat.api.chat_message.get_all_files_shared_in_channel", {
         "channel_id": channelID,
         "file_name": debouncedText,
         "file_type": fileType === 'any' ? undefined : fileType,

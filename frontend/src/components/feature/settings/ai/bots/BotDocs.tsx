@@ -1,12 +1,12 @@
 import CodeBlock from '@/components/layout/CodeBlock'
 import { Stack } from '@/components/layout/Stack'
-import { RavenBot } from '@/types/RavenBot/RavenBot'
+import { ChatBot } from '@/types/ChatBot/ChatBot'
 import { Code, Heading, Text } from '@radix-ui/themes'
 import { useFormContext } from 'react-hook-form'
 
 const BotDocs = () => {
 
-    const { getValues } = useFormContext<RavenBot>()
+    const { getValues } = useFormContext<ChatBot>()
 
     const bot_id = getValues('name')
 
@@ -21,7 +21,7 @@ const BotDocs = () => {
     }
 
     const codeSamples = {
-        sendMessage: `${botVarName} = frappe.get_doc("Raven Bot", "${bot_id}")
+        sendMessage: `${botVarName} = frappe.get_doc("Chat Bot", "${bot_id}")
 
 # Send a message to a channel. Text can be in HTML format.
 ${botVarName}.send_message(channel_id="channel-name", text="This is a test message.")`,

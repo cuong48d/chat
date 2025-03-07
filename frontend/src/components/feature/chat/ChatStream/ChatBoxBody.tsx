@@ -20,7 +20,7 @@ import { HStack, Stack } from "@/components/layout/Stack"
 import TypingIndicator from "../ChatInput/TypingIndicator/TypingIndicator"
 import { useTyping } from "../ChatInput/TypingIndicator/useTypingIndicator"
 import { Label } from "@/components/common/Form"
-import { RavenMessage } from "@/types/RavenMessaging/RavenMessage"
+import { ChatMessage } from "@/types/ChatMessaging/ChatMessage"
 import { useSWRConfig } from "frappe-react-sdk"
 import { GetMessagesResponse } from "./useChatStream"
 import { useIsMobile } from "@/hooks/useMediaQuery"
@@ -29,8 +29,8 @@ const COOL_PLACEHOLDERS = [
     "Delivering messages atop dragons 🐉 is available on a chargeable basis.",
     "Note 🚨: Service beyond the wall is currently disrupted due to bad weather.",
     "Pigeons just have better brand recognition tbh 🤷🏻",
-    "Ravens double up as spies. Eyes everywhere 👀",
-    "Ravens do not 'slack' off. See what we did there? 😉",
+    "Chats double up as spies. Eyes everywhere 👀",
+    "Chats do not 'slack' off. See what we did there? 😉",
     "Were you expecting a funny placeholder? 😂",
     "Want to know who writes these placeholders? 🤔. No one.",
     "Type a message..."
@@ -61,7 +61,7 @@ export const ChatBoxBody = ({ channelData }: ChatBoxBodyProps) => {
 
     const scrollRef = useRef<HTMLDivElement>(null)
 
-    const onMessageSendCompleted = (messages: RavenMessage[]) => {
+    const onMessageSendCompleted = (messages: ChatMessage[]) => {
         // Update the messages in the cache
 
         mutate({ path: `get_messages_for_channel_${channelData.name}` }, (data?: GetMessagesResponse) => {

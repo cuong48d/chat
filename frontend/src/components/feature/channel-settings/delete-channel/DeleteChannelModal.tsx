@@ -28,17 +28,17 @@ export const DeleteChannelModal = ({ onClose, onCloseParent, isDrawer, channelDa
 
     const navigate = useNavigate()
 
-    const lastWorkspace = localStorage.getItem('ravenLastWorkspace')
+    const lastWorkspace = localStorage.getItem('chatLastWorkspace')
 
     const onSubmit = () => {
         if (channelData?.name) {
-            deleteDoc('Raven Channel', channelData.name)
+            deleteDoc('Chat Channel', channelData.name)
                 .then(() => {
                     // Mutate the channel members cache
                     mutate(["channel_members", channelData.name], undefined, { revalidate: false })
                     onClose()
                     onCloseParent()
-                    localStorage.removeItem('ravenLastChannel')
+                    localStorage.removeItem('chatLastChannel')
                     if (lastWorkspace) {
                         navigate(`/${lastWorkspace}`)
                     } else {

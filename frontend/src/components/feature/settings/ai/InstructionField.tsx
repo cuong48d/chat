@@ -1,7 +1,7 @@
 import { ErrorText, HelperText, Label } from '@/components/common/Form'
 import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import { HStack, Stack } from '@/components/layout/Stack'
-import { RavenBotInstructionTemplate } from '@/types/RavenAI/RavenBotInstructionTemplate'
+import { ChatBotInstructionTemplate } from '@/types/ChatAI/ChatBotInstructionTemplate'
 import { Badge, Box, Button, Checkbox, Code, Flex, Popover, RadioCards, SegmentedControl, Separator, Table, Text, TextArea, TextAreaProps, Tooltip } from '@radix-ui/themes'
 import { useFrappeGetCall, useFrappeGetDocList } from 'frappe-react-sdk'
 import { useState } from 'react'
@@ -247,7 +247,7 @@ const InstructionPreview = () => {
 
     const instruction = watch('instruction')
 
-    const { data } = useFrappeGetCall('raven.api.ai_features.get_instruction_preview', {
+    const { data } = useFrappeGetCall('chat.api.ai_features.get_instruction_preview', {
         instruction
     })
 
@@ -300,7 +300,7 @@ const ImportTemplate = () => {
 
     const isDynamic = watch('dynamic_instructions')
 
-    const { data, error } = useFrappeGetDocList<RavenBotInstructionTemplate>("Raven Bot Instruction Template", {
+    const { data, error } = useFrappeGetDocList<ChatBotInstructionTemplate>("Chat Bot Instruction Template", {
         fields: ["template_name", "dynamic_instructions", "instruction"],
         // If status, do not show dynamic templates
         filters: isDynamic ? undefined : [["dynamic_instructions", "=", 0]]

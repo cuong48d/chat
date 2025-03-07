@@ -1,5 +1,5 @@
 import { HStack, Stack } from '@/components/layout/Stack'
-import { RavenBot } from '@/types/RavenBot/RavenBot'
+import { ChatBot } from '@/types/ChatBot/ChatBot'
 import { Badge, Box, Button, Card, IconButton, Link, Popover, Text } from '@radix-ui/themes'
 import React, { useContext } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
@@ -12,7 +12,7 @@ type Props = {}
 
 const BotFunctionsForm = (props: Props) => {
 
-    const { control } = useFormContext<RavenBot>()
+    const { control } = useFormContext<ChatBot>()
 
     const { fields, append, remove } = useFieldArray({
         control,
@@ -26,7 +26,7 @@ const BotFunctionsForm = (props: Props) => {
     const onSelect = () => {
         if (aiFunction) {
             call.get('frappe.client.get_value', {
-                doctype: 'Raven AI Function',
+                doctype: 'Chat AI Function',
                 filters: { name: aiFunction },
                 fieldname: ['type', 'description']
             }).then((res) => {
@@ -57,7 +57,7 @@ const BotFunctionsForm = (props: Props) => {
                         <Popover.Content width="380px" className='relative overflow-visible'>
                             <Stack>
                                 <LinkField
-                                    doctype='Raven AI Function'
+                                    doctype='Chat AI Function'
                                     value={aiFunction}
                                     filters={[['name', 'not in', fields.map(field => field.function) ?? []] as any]}
                                     dropdownClass='sm:w-[350px]'

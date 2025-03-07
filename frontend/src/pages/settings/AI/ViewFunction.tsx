@@ -5,7 +5,7 @@ import { FullPageLoader } from "@/components/layout/Loaders/FullPageLoader"
 import PageContainer from "@/components/layout/Settings/PageContainer"
 import SettingsContentContainer from "@/components/layout/Settings/SettingsContentContainer"
 import SettingsPageHeader from "@/components/layout/Settings/SettingsPageHeader"
-import { RavenAIFunction } from "@/types/RavenAI/RavenAIFunction"
+import { ChatAIFunction } from "@/types/ChatAI/ChatAIFunction"
 import { isEmpty } from "@/utils/validations"
 import { Button } from "@radix-ui/themes"
 import { SWRResponse, useFrappeGetDoc, useFrappeUpdateDoc } from "frappe-react-sdk"
@@ -20,7 +20,7 @@ const ViewFunction = (props: Props) => {
 
     const { ID } = useParams<{ ID: string }>()
 
-    const { data, isLoading, error, mutate } = useFrappeGetDoc<RavenAIFunction>("Raven AI Function", ID)
+    const { data, isLoading, error, mutate } = useFrappeGetDoc<ChatAIFunction>("Chat AI Function", ID)
 
     return (
         <PageContainer>
@@ -31,11 +31,11 @@ const ViewFunction = (props: Props) => {
     )
 }
 
-const ViewFunctionContent = ({ data, mutate }: { data: RavenAIFunction, mutate: SWRResponse['mutate'] }) => {
+const ViewFunctionContent = ({ data, mutate }: { data: ChatAIFunction, mutate: SWRResponse['mutate'] }) => {
 
-    const { updateDoc, loading, error } = useFrappeUpdateDoc<RavenAIFunction>()
+    const { updateDoc, loading, error } = useFrappeUpdateDoc<ChatAIFunction>()
 
-    const methods = useForm<RavenAIFunction>({
+    const methods = useForm<ChatAIFunction>({
         disabled: loading,
         defaultValues: data
     })
@@ -43,8 +43,8 @@ const ViewFunctionContent = ({ data, mutate }: { data: RavenAIFunction, mutate: 
     const { formState: { dirtyFields } } = methods
 
     const isDirty = !isEmpty(dirtyFields)
-    const onSubmit = (data: RavenAIFunction) => {
-        updateDoc("Raven AI Function", data.name, data)
+    const onSubmit = (data: ChatAIFunction) => {
+        updateDoc("Chat AI Function", data.name, data)
             .then((doc) => {
                 toast.success("Saved")
                 methods.reset(doc)

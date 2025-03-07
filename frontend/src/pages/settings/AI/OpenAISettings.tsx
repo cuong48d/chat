@@ -3,9 +3,9 @@ import { Loader } from '@/components/common/Loader'
 import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
-import useRavenSettings from '@/hooks/fetchers/useRavenSettings'
-import { RavenSettings } from '@/types/Raven/RavenSettings'
-import { hasRavenAdminRole, isSystemManager } from '@/utils/roles'
+import useChatSettings from '@/hooks/fetchers/useChatSettings'
+import { ChatSettings } from '@/types/Chat/ChatSettings'
+import { hasChatAdminRole, isSystemManager } from '@/utils/roles'
 import { Box, Button, Checkbox, Flex, Separator, Text, TextField } from '@radix-ui/themes'
 import { useFrappeGetCall, useFrappeUpdateDoc } from 'frappe-react-sdk'
 import { useEffect } from 'react'
@@ -14,27 +14,27 @@ import { toast } from 'sonner'
 
 const OpenAISettings = () => {
 
-    const isRavenAdmin = hasRavenAdminRole() || isSystemManager()
+    const isChatAdmin = hasChatAdminRole() || isSystemManager()
 
-    const { ravenSettings, mutate } = useRavenSettings()
+    const { chatSettings, mutate } = useChatSettings()
 
-    const methods = useForm<RavenSettings>({
-        disabled: !isRavenAdmin
+    const methods = useForm<ChatSettings>({
+        disabled: !isChatAdmin
     })
 
     const { handleSubmit, control, watch, reset, register, formState: { errors } } = methods
 
     useEffect(() => {
-        if (ravenSettings) {
-            reset(ravenSettings)
+        if (chatSettings) {
+            reset(chatSettings)
         }
-    }, [ravenSettings])
+    }, [chatSettings])
 
-    const { updateDoc, loading: updatingDoc } = useFrappeUpdateDoc<RavenSettings>()
+    const { updateDoc, loading: updatingDoc } = useFrappeUpdateDoc<ChatSettings>()
 
-    const onSubmit = (data: RavenSettings) => {
-        toast.promise(updateDoc('Raven Settings', null, {
-            ...(ravenSettings ?? {}),
+    const onSubmit = (data: ChatSettings) => {
+        toast.promise(updateDoc('Chat Settings', null, {
+            ...(chatSettings ?? {}),
             ...data
         }).then(res => {
             mutate(res, {
@@ -65,7 +65,7 @@ const OpenAISettings = () => {
 
     const isAIEnabled = watch('enable_ai_integration')
 
-    const { data: openaiVersion } = useFrappeGetCall<{ message: string }>('raven.api.ai_features.get_open_ai_version')
+    const { data: openaiVersion } = useFrappeGetCall<{ message: string }>('chat.api.ai_features.get_open_ai_version')
 
     return (
         <PageContainer>
@@ -74,8 +74,8 @@ const OpenAISettings = () => {
                     <SettingsContentContainer>
                         <SettingsPageHeader
                             title='OpenAI Settings'
-                            description='Set your OpenAI API Key to use AI features in Raven.'
-                            actions={<Button type='submit' disabled={updatingDoc || !isRavenAdmin}>
+                            description='Set your OpenAI API Key to use AI features in Chat.'
+                            actions={<Button type='submit' disabled={updatingDoc || !isChatAdmin}>
                                 {updatingDoc && <Loader className="text-white" />}
                                 {updatingDoc ? "Saving" : "Save"}
                             </Button>}
@@ -86,7 +86,7 @@ const OpenAISettings = () => {
                                 <Flex gap="2">
                                     <Controller
                                         control={control}
-                                        defaultValue={ravenSettings?.enable_ai_integration}
+                                        defaultValue={chatSettings?.enable_ai_integration}
                                         name='enable_ai_integration'
                                         render={({ field }) => (
                                             <Checkbox

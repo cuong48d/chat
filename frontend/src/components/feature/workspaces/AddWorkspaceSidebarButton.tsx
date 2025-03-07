@@ -2,7 +2,7 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerTitle, DrawerTrigger } 
 import { Stack } from '@/components/layout/Stack'
 import { useIsDesktop } from '@/hooks/useMediaQuery'
 import { DIALOG_CONTENT_CLASS } from '@/utils/layout/dialog'
-import { hasRavenAdminRole } from '@/utils/roles'
+import { hasChatAdminRole } from '@/utils/roles'
 import { Dialog, IconButton, Tooltip } from '@radix-ui/themes'
 import { FiPlus } from 'react-icons/fi'
 import AddWorkspaceForm from './AddWorkspaceForm'
@@ -13,9 +13,9 @@ type Props = {}
 
 const AddWorkspaceSidebarButton = (props: Props) => {
 
-    const isRavenAdmin = hasRavenAdminRole()
+    const isChatAdmin = hasChatAdminRole()
 
-    if (!isRavenAdmin) {
+    if (!isChatAdmin) {
         return null
     }
 

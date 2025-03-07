@@ -1,6 +1,6 @@
 import { Loader } from "@/components/common/Loader"
 import { ErrorBanner } from "@/components/layout/AlertBanner/ErrorBanner"
-import { RavenWebhook } from "@/types/RavenIntegrations/RavenWebhook"
+import { ChatWebhook } from "@/types/ChatIntegrations/ChatWebhook"
 import { DateMonthYear } from "@/utils/dateConversions"
 import { DIALOG_CONTENT_CLASS } from "@/utils/layout/dialog"
 import { Flex, Badge, IconButton, AlertDialog, Text, Button } from "@radix-ui/themes"
@@ -12,7 +12,7 @@ import { toast } from "sonner"
 import { useFrappeDeleteDoc } from "frappe-react-sdk"
 import { AiOutlineEdit } from "react-icons/ai"
 
-export const WebhookItem = ({ webhook, mutate }: { webhook: RavenWebhook, mutate: () => void }) => {
+export const WebhookItem = ({ webhook, mutate }: { webhook: ChatWebhook, mutate: () => void }) => {
 
     const navigate = useNavigate()
 
@@ -67,7 +67,7 @@ export const WebhookItem = ({ webhook, mutate }: { webhook: RavenWebhook, mutate
                             </IconButton>
                         </AlertDialog.Trigger>
                         <AlertDialog.Content className={DIALOG_CONTENT_CLASS}>
-                            <AlertContent doctype="Raven Webhook" docname={webhook.name} onClose={onClose} onUpdate={mutate} />
+                            <AlertContent doctype="Chat Webhook" docname={webhook.name} onClose={onClose} onUpdate={mutate} />
                         </AlertDialog.Content>
                     </AlertDialog.Root>
                 </Flex>
@@ -80,7 +80,7 @@ const DeleteWebhookAlertContent = ({ webhhookID, onClose, mutate }: { webhhookID
     const { deleteDoc, error, loading } = useFrappeDeleteDoc()
 
     const onDelete = () => {
-        deleteDoc('Raven Webhook', webhhookID).then(() => {
+        deleteDoc('Chat Webhook', webhhookID).then(() => {
             mutate()
             onClose()
             toast.error('Webhook deleted.')

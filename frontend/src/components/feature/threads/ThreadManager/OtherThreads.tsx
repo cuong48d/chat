@@ -29,7 +29,7 @@ const OtherThreads = (props: Props) => {
             <div className="h-[calc(100vh-10rem)] overflow-y-auto">
                 <ThreadsList
                     content={debouncedSearch}
-                    endpoint='raven.api.threads.get_other_threads'
+                    endpoint='chat.api.threads.get_other_threads'
                     channel={channel}
                 />
             </div>

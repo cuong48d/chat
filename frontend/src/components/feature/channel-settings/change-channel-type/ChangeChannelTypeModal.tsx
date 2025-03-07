@@ -17,7 +17,7 @@ export const ChangeChannelTypeModal = ({ onClose, channelData, newChannelType }:
     const { updateDoc, loading: updatingDoc, error } = useFrappeUpdateDoc()
 
     const changeChannelType = (newChannelType: 'Public' | 'Private' | 'Open') => {
-        updateDoc("Raven Channel", channelData?.name ?? null, {
+        updateDoc("Chat Channel", channelData?.name ?? null, {
             type: newChannelType
         }).then(() => {
             mutate(["channel_members", channelData.name])

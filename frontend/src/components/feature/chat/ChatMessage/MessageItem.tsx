@@ -380,7 +380,7 @@ const StartDMButton = ({ userID }: { userID: string }) => {
 
     const onClick = () => {
         if (userID) {
-            call.post('raven.api.raven_channel.create_direct_message_channel', {
+            call.post('chat.api.chat_channel.create_direct_message_channel', {
                 user_id: userID
             }).then((res) => {
                 navigate(`/${workspaceID}/${res?.message}`)

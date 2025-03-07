@@ -72,7 +72,7 @@ export const MessageSearch = ({ onToggleMyChannels, isOnlyInMyChannels, onToggle
         return (debouncedText.length > 2 || isChannelFilterApplied || isUserFilterApplied || isDateFilterApplied || isOnlyInMyChannels === true)
     }, [debouncedText, channelFilter, userFilter, isOnlyInMyChannels, dateFilter])
 
-    const { data, error, isLoading } = useFrappeGetCall<{ message: Message[] }>("raven.api.search.get_search_result", {
+    const { data, error, isLoading } = useFrappeGetCall<{ message: Message[] }>("chat.api.search.get_search_result", {
         filter_type: 'Message',
         search_text: debouncedText,
         from_user: userFilter === 'any' ? undefined : userFilter,

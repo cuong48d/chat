@@ -13,7 +13,7 @@ const SavedMessages = () => {
 
     const navigate = useNavigate()
 
-    const { data, error } = useFrappeGetCall<{ message: (Message & { workspace?: string })[] }>("raven.api.raven_message.get_saved_messages", undefined, undefined, {
+    const { data, error } = useFrappeGetCall<{ message: (Message & { workspace?: string })[] }>("chat.api.chat_message.get_saved_messages", undefined, undefined, {
         revalidateOnFocus: false
     })
 

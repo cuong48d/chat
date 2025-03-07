@@ -1,7 +1,7 @@
 import { ContextMenu, Flex, Text } from '@radix-ui/themes'
 import { BiBoltCircle } from 'react-icons/bi'
 import { useFrappeGetDocList } from 'frappe-react-sdk'
-import { RavenMessageAction } from '@/types/RavenIntegrations/RavenMessageAction'
+import { ChatMessageAction } from '@/types/ChatIntegrations/ChatMessageAction'
 import { useSetAtom } from 'jotai'
 import { messageActionAtom } from '@/components/feature/message-actions/MessageActionController'
 
@@ -34,7 +34,7 @@ export default MessageActionSubMenu
 
 const MessageActionSubMenuContent = (props: Props) => {
 
-    const { data } = useFrappeGetDocList<RavenMessageAction>("Raven Message Action", {
+    const { data } = useFrappeGetDocList<ChatMessageAction>("Chat Message Action", {
         fields: ['name', 'action_name'],
         filters: [
             ['enabled', '=', 1]

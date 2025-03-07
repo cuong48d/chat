@@ -73,7 +73,7 @@ const usePostMessageReaction = () => {
         return mutate({ path: `get_messages_for_channel_${message.channel_id}` }, async (data?: GetMessagesResponse) => {
 
             // Make the request
-            return call.post('raven.api.reactions.react', {
+            return call.post('chat.api.reactions.react', {
                 message_id: message.name,
                 reaction: emoji,
                 is_custom,

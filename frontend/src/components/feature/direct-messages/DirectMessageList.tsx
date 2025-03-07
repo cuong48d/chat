@@ -120,7 +120,7 @@ const ExtraUsersItemList = () => {
     const { dm_channels, mutate } = useContext(ChannelListContext) as ChannelListContextType
 
     const { enabledUsers } = useContext(UserListContext)
-    const { call } = useFrappePostCall<{ message: string }>("raven.api.raven_channel.create_direct_message_channel")
+    const { call } = useFrappePostCall<{ message: string }>("chat.api.chat_channel.create_direct_message_channel")
 
     const navigate = useNavigate()
 

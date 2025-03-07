@@ -1,5 +1,5 @@
 import { Label, HelperText, ErrorText } from "@/components/common/Form"
-import { RavenSchedulerEvent } from "@/types/RavenIntegrations/RavenSchedulerEvent"
+import { ChatSchedulerEvent } from "@/types/ChatIntegrations/ChatSchedulerEvent"
 import { ChannelListContext, ChannelListContextType } from "@/utils/channel/ChannelListProvider"
 import { Flex, Box, TextField, Select, Grid, TextArea } from "@radix-ui/themes"
 import { useContext } from "react"
@@ -9,7 +9,7 @@ import { useFrappeGetDocList } from "frappe-react-sdk"
 import { Stack } from "@/components/layout/Stack"
 import ServerScriptNotEnabledCallout from "./ServerScriptNotEnabledForm"
 
-export interface SchedulerEventForm extends RavenSchedulerEvent {
+export interface SchedulerEventForm extends ChatSchedulerEvent {
     hour: string
     minute: string
     date: string
@@ -27,7 +27,7 @@ export const SchedulerEventsForm = ({ edit = false }: Props) => {
 
     const { channels } = useContext(ChannelListContext) as ChannelListContextType
 
-    const { data: bots } = useFrappeGetDocList('Raven Bot', {
+    const { data: bots } = useFrappeGetDocList('Chat Bot', {
         fields: ['name'],
     })
 

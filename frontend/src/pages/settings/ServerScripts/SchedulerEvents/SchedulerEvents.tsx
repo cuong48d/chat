@@ -1,5 +1,5 @@
 import { ErrorBanner } from "@/components/layout/AlertBanner/ErrorBanner"
-import { RavenSchedulerEvent } from "@/types/RavenIntegrations/RavenSchedulerEvent"
+import { ChatSchedulerEvent } from "@/types/ChatIntegrations/ChatSchedulerEvent"
 import { Button } from "@radix-ui/themes"
 import { useFrappeDocTypeEventListener, useFrappeGetDocList } from "frappe-react-sdk"
 import { Link } from "react-router-dom"
@@ -15,19 +15,19 @@ import { LuCalendarClock } from "react-icons/lu"
 
 const SchedulerEvents = () => {
 
-    const isRavenAdmin = isSystemManager()
+    const isChatAdmin = isSystemManager()
 
-    const { data, error, isLoading, mutate } = useFrappeGetDocList<RavenSchedulerEvent>('Raven Scheduler Event', {
+    const { data, error, isLoading, mutate } = useFrappeGetDocList<ChatSchedulerEvent>('Chat Scheduler Event', {
         fields: ['name', 'disabled', 'event_frequency', 'creation', 'owner'],
         orderBy: {
             field: 'modified',
             order: 'desc'
         }
-    }, isRavenAdmin ? undefined : null, {
+    }, isChatAdmin ? undefined : null, {
         errorRetryCount: 2
     })
 
-    useFrappeDocTypeEventListener('Raven Scheduler Event', () => {
+    useFrappeDocTypeEventListener('Chat Scheduler Event', () => {
         mutate()
     })
 
@@ -37,7 +37,7 @@ const SchedulerEvents = () => {
                 <SettingsPageHeader
                     title='Scheduled Messages'
                     description='You can create a scheduled message & a bot will send it to you at the specified time.'
-                    actions={<Button asChild disabled={!isRavenAdmin}>
+                    actions={<Button asChild disabled={!isChatAdmin}>
                         <Link to='create'>Create</Link>
                     </Button>}
                 />
@@ -45,7 +45,7 @@ const SchedulerEvents = () => {
                 <ErrorBanner error={error} />
                 <ServerScriptNotEnabledCallout />
                 {data && data.length > 0 && <List data={data} />}
-                {(data?.length === 0 || !isRavenAdmin) && <EmptyState>
+                {(data?.length === 0 || !isChatAdmin) && <EmptyState>
                     <EmptyStateIcon>
                         <LuCalendarClock />
                     </EmptyStateIcon>
@@ -53,7 +53,7 @@ const SchedulerEvents = () => {
                     <EmptyStateDescription>
                         Schedule messages to be sent to you at a specific date and time.<br />These support the CRON syntax.
                     </EmptyStateDescription>
-                    {isRavenAdmin && <EmptyStateLinkAction to='create'>
+                    {isChatAdmin && <EmptyStateLinkAction to='create'>
                         Schedule a reminder
                     </EmptyStateLinkAction>}
                 </EmptyState>}

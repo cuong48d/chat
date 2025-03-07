@@ -29,14 +29,14 @@ try {
             notificationOptions["icon"] = payload.data.notification_icon
         }
 
-        if (payload.data.raven_message_type === "Image") {
+        if (payload.data.chat_message_type === "Image") {
             notificationOptions["image"] = payload.data.content
         }
 
         if (payload.data.creation) {
             notificationOptions["timestamp"] = payload.data.creation
         }
-        const url = `${payload.data.base_url}/raven/channel/${payload.data.channel_id}`
+        const url = `${payload.data.base_url}/chat/channel/${payload.data.channel_id}`
         if (isChrome()) {
             notificationOptions["data"] = {
                 url: url,

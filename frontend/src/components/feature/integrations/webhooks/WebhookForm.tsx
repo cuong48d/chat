@@ -5,7 +5,7 @@ import { ErrorText, HelperText, Label } from '@/components/common/Form';
 import { WebhookData } from './WebhookReturnDataFieldTable';
 import { WebhookHeaders } from './WebhookHeaders';
 import { TriggerEvents } from './utils';
-import { RavenWebhook } from '@/types/RavenIntegrations/RavenWebhook';
+import { ChatWebhook } from '@/types/ChatIntegrations/ChatWebhook';
 import { UserFields, UserListContext } from '@/utils/users/UserListProvider';
 import { ChannelListContext, ChannelListContextType, ChannelListItem, } from '@/utils/channel/ChannelListProvider';
 import { UserAvatar } from '@/components/common/UserAvatar';
@@ -23,7 +23,7 @@ const ICON_PROPS = {
 }
 
 export const WebhookForm = ({ isEdit = false }: { isEdit?: boolean }) => {
-    const { register, formState: { errors }, control, setValue, watch } = useFormContext<RavenWebhook>()
+    const { register, formState: { errors }, control, setValue, watch } = useFormContext<ChatWebhook>()
 
 
 
@@ -55,7 +55,7 @@ export const WebhookForm = ({ isEdit = false }: { isEdit?: boolean }) => {
 
 const GeneralWebhookForm = ({ isEdit = false }: { isEdit?: boolean }) => {
 
-    const { register, formState: { errors }, control, setValue, watch } = useFormContext<RavenWebhook>()
+    const { register, formState: { errors }, control, setValue, watch } = useFormContext<ChatWebhook>()
 
     const security = watch('enable_security')
 
@@ -159,7 +159,7 @@ const GeneralWebhookForm = ({ isEdit = false }: { isEdit?: boolean }) => {
                 </Flex>
             </Text>
             <HelperText size='2'>
-                To optionally add security to your webhook requests and ensure that the webhook is being sent from Raven, you can set up a "Webhook Secret" along with the request. Do not share the secret publicly.
+                To optionally add security to your webhook requests and ensure that the webhook is being sent from Chat, you can set up a "Webhook Secret" along with the request. Do not share the secret publicly.
                 <br /><br />
                 If enabled, an additional header (X-Frappe-Webhook-Signature) will be added to the request before it's sent out, with its value being generated from the secret as a base64-encoded HMAC-SHA256 hash of the payload.
             </HelperText>
@@ -181,7 +181,7 @@ const GeneralWebhookForm = ({ isEdit = false }: { isEdit?: boolean }) => {
 }
 
 const ConditionWebhookForm = () => {
-    const { watch, formState: { errors }, control, setValue, register } = useFormContext<RavenWebhook>()
+    const { watch, formState: { errors }, control, setValue, register } = useFormContext<ChatWebhook>()
 
     const needCondition = watch('trigger_webhook_on_condition')
 

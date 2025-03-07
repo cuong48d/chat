@@ -33,7 +33,7 @@ const CreateSchedulerEvent = () => {
         if (data.event_frequency === 'Cron') {
             cron_expression = `${data.minute} ${data.hour} ${data.date} ${data.month} ${data.day}`
         }
-        createDoc('Raven Scheduler Event', {
+        createDoc('Chat Scheduler Event', {
             event_name: data.event_name,
             disabled: 0,
             send_to: data.send_to,

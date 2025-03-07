@@ -15,8 +15,8 @@ export const DoctypeLinkRenderer = ({ doctype, docname }: { doctype: string, doc
     const { data, error, isLoading, mutate } = useDoctypePreview(doctype, docname)
 
     const route = useMemo(() => {
-        if (data && data.raven_document_link) {
-            return data.raven_document_link
+        if (data && data.chat_document_link) {
+            return data.chat_document_link
         }
         const lowerCaseDoctype = doctype.toLowerCase().split(' ').join('-')
         return `${window.location.origin}/app/${lowerCaseDoctype}/${docname}`
@@ -48,7 +48,7 @@ const DoctypeCard = ({ data, doctype, route, docname, mutate }: {
 
     // utility func to remove known preview fields in order to map rest of them
     const removePreviewFields = (data: Record<string, any>) => {
-        const fieldsToRemove = ['preview_image', 'preview_title', 'id', 'raven_document_link']
+        const fieldsToRemove = ['preview_image', 'preview_title', 'id', 'chat_document_link']
         return Object.keys(data).reduce((acc, key) => {
             if (!fieldsToRemove.includes(key)) {
                 acc[key as keyof typeof data] = data[key]

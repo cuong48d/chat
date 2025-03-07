@@ -1,6 +1,6 @@
 import { useIsDesktop } from "@/hooks/useMediaQuery"
 import { useTheme } from "@/ThemeProvider"
-import { RavenCustomEmoji } from "@/types/RavenMessaging/RavenCustomEmoji"
+import { ChatCustomEmoji } from "@/types/ChatMessaging/ChatCustomEmoji"
 import Picker from '@emoji-mart/react'
 import { useFrappeGetDocList } from "frappe-react-sdk"
 import { useMemo, useState } from "react"
@@ -21,7 +21,7 @@ const EmojiPicker = ({ onSelect, allowCustomEmojis = true }: { onSelect: (emoji:
 
     const isDesktop = useIsDesktop()
 
-    const { data, mutate } = useFrappeGetDocList<RavenCustomEmoji>("Raven Custom Emoji", {
+    const { data, mutate } = useFrappeGetDocList<ChatCustomEmoji>("Chat Custom Emoji", {
         fields: ["name", "image", "keywords"],
         limit: 1000
     }, allowCustomEmojis ? `custom-emojis` : null, {

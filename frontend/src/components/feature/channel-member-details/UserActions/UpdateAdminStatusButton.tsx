@@ -15,7 +15,7 @@ export const UpdateAdminStatusButton = ({ user, channelID, updateMembers }: Upda
     const { updateDoc, loading: updatingMember, reset } = useFrappeUpdateDoc()
 
     const { data: member } = useFrappeGetCall<{ message: { name: string } }>('frappe.client.get_value', {
-        doctype: "Raven Channel Member",
+        doctype: "Chat Channel Member",
         filters: JSON.stringify({ channel_id: channelID, user_id: user.name }),
         fieldname: JSON.stringify(["name"])
     }, undefined, {
@@ -23,7 +23,7 @@ export const UpdateAdminStatusButton = ({ user, channelID, updateMembers }: Upda
     })
 
     const updateAdminStatus = async (admin: 1 | 0) => {
-        return updateDoc('Raven Channel Member', member?.message.name ?? '', {
+        return updateDoc('Chat Channel Member', member?.message.name ?? '', {
             is_admin: admin
         }).then(() => {
             toast.success('Member has been made an admin')

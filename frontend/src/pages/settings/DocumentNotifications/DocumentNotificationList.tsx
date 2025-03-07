@@ -5,8 +5,8 @@ import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
 import { HStack } from '@/components/layout/Stack'
-import { RavenDocumentNotification } from '@/types/RavenIntegrations/RavenDocumentNotification'
-import { hasRavenAdminRole, isSystemManager } from '@/utils/roles'
+import { ChatDocumentNotification } from '@/types/ChatIntegrations/ChatDocumentNotification'
+import { hasChatAdminRole, isSystemManager } from '@/utils/roles'
 import { Badge, Button, Checkbox, Table, Text } from '@radix-ui/themes'
 import { useFrappeGetDocList } from 'frappe-react-sdk'
 import { LuBellDot } from 'react-icons/lu'
@@ -14,15 +14,15 @@ import { Link } from 'react-router-dom'
 
 const DocumentNotificationList = () => {
 
-    const isRavenAdmin = hasRavenAdminRole() || isSystemManager()
+    const isChatAdmin = hasChatAdminRole() || isSystemManager()
 
-    const { data, isLoading, error } = useFrappeGetDocList<RavenDocumentNotification>("Raven Document Notification", {
+    const { data, isLoading, error } = useFrappeGetDocList<ChatDocumentNotification>("Chat Document Notification", {
         fields: ["name", "document_type", "send_alert_on", "enabled"],
         orderBy: {
             field: "modified",
             order: "desc"
         }
-    }, isRavenAdmin ? undefined : null, {
+    }, isChatAdmin ? undefined : null, {
         errorRetryCount: 2
     })
 
@@ -32,14 +32,14 @@ const DocumentNotificationList = () => {
                 <SettingsPageHeader
                     title='Document Notifications'
                     description='Configure alerts to be sent to users or channels when documents are updated in the system.'
-                    actions={<Button asChild disabled={!isRavenAdmin}>
+                    actions={<Button asChild disabled={!isChatAdmin}>
                         <Link to='create'>Create</Link>
                     </Button>}
                 />
                 {isLoading && !error && <TableLoader columns={4} />}
                 <ErrorBanner error={error} />
                 {data && data.length > 0 && <DocumentNotificationTable notifications={data} />}
-                {(data?.length === 0 || !isRavenAdmin) && <EmptyState>
+                {(data?.length === 0 || !isChatAdmin) && <EmptyState>
                     <EmptyStateIcon>
                         <LuBellDot />
                     </EmptyStateIcon>
@@ -47,7 +47,7 @@ const DocumentNotificationList = () => {
                     <EmptyStateDescription>
                         Send messages to channels or users based on document activity in your ERP system. Keep your team informed about important changes in real-time with rich document previews.
                     </EmptyStateDescription>
-                    {isRavenAdmin && <EmptyStateLinkAction to='create'>
+                    {isChatAdmin && <EmptyStateLinkAction to='create'>
                         Create your first notification
                     </EmptyStateLinkAction>}
                 </EmptyState>}
@@ -56,9 +56,9 @@ const DocumentNotificationList = () => {
     )
 }
 
-const DocumentNotificationTable = ({ notifications }: { notifications: RavenDocumentNotification[] }) => {
+const DocumentNotificationTable = ({ notifications }: { notifications: ChatDocumentNotification[] }) => {
 
-    const getBadgeColor = (send_alert_on: RavenDocumentNotification['send_alert_on']) => {
+    const getBadgeColor = (send_alert_on: ChatDocumentNotification['send_alert_on']) => {
         if (send_alert_on === 'New Document') {
             return 'green'
         }

@@ -1,13 +1,13 @@
 
 
-function raven_handlers(socket) {
+function chat_handlers(socket) {
 
     socket.on("fire", () => {
         socket.emit("ice");
     });
 
-    socket.on("raven_channel_get_typers", function (channel) {
-        socket.has_permission("Raven Channel", channel).then(() => {
+    socket.on("chat_channel_get_typers", function (channel) {
+        socket.has_permission("Chat Channel", channel).then(() => {
             // Show who's typing in the channel - only send this to the user who requested it
             // User emits this event when they open the channel
             notify_typing({ socket, channel, toUser: true });
@@ -15,7 +15,7 @@ function raven_handlers(socket) {
         });
     });
 
-    socket.on("raven_channel_typing", function (channel) {
+    socket.on("chat_channel_typing", function (channel) {
 
         // Join the typing room and notify users in the channel room that the user is typing
         socket.join(channel_typing_room(channel));
@@ -24,7 +24,7 @@ function raven_handlers(socket) {
 
     })
 
-    socket.on("raven_channel_typing_stopped", function (channel) {
+    socket.on("chat_channel_typing_stopped", function (channel) {
 
 
         // Leave the typing room and notify users in the channel room that the user has stopped typing
@@ -55,17 +55,17 @@ function notify_typing(args) {
         }
     });
 
-    const channel_room = args.toUser ? user_room(args.socket.user) : open_doc_room("Raven Channel", channel);
+    const channel_room = args.toUser ? user_room(args.socket.user) : open_doc_room("Chat Channel", channel);
 
     // notify
-    socket.nsp.to(channel_room).emit("raven_channel_typers", {
+    socket.nsp.to(channel_room).emit("chat_channel_typers", {
         channel,
         users: Array.from(new Set(users)),
     });
 }
 
-const channel_typing_room = (channel) => "raven_channel_typing:" + channel;
+const channel_typing_room = (channel) => "chat_channel_typing:" + channel;
 const open_doc_room = (doctype, docname) => "open_doc:" + doctype + "/" + docname;
 const user_room = (user) => "user:" + user;
 
-module.exports = raven_handlers
+module.exports = chat_handlers

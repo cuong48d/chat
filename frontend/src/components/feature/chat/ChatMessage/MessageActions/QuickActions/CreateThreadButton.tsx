@@ -10,7 +10,7 @@ const useCreateThread = (messageID: string) => {
 
     const { workspaceID } = useParams()
 
-    const { call } = useFrappePostCall('raven.api.threads.create_thread')
+    const { call } = useFrappePostCall('chat.api.threads.create_thread')
     const handleCreateThread = () => {
         call({ 'message_id': messageID }).then((res) => {
             toast.success('Thread created successfully!')

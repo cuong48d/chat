@@ -1,5 +1,5 @@
 import { HStack, Stack } from '@/components/layout/Stack'
-import { RavenAIFunction } from '@/types/RavenAI/RavenAIFunction'
+import { ChatAIFunction } from '@/types/ChatAI/ChatAIFunction'
 import { DIALOG_CONTENT_CLASS } from '@/utils/layout/dialog'
 import { Badge, Box, Button, ButtonProps, Dialog, IconButton, Separator, Switch, Text, TextArea, VisuallyHidden } from '@radix-ui/themes'
 import { useState } from 'react'
@@ -21,7 +21,7 @@ type Props = {}
  */
 const VariableBuilder = (props: Props) => {
 
-    const { control, getValues, setValue, watch } = useFormContext<RavenAIFunction>()
+    const { control, getValues, setValue, watch } = useFormContext<ChatAIFunction>()
 
     const type = watch('type')
 

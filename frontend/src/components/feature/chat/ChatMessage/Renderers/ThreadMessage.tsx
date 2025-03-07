@@ -25,7 +25,7 @@ export const ThreadMessage = ({ thread }: { thread: Message }) => {
 
 export const ThreadReplyCount = ({ thread }: { thread: Message }) => {
 
-    const { data } = useFrappeGetCall<{ message: number }>("raven.api.threads.get_number_of_replies", {
+    const { data } = useFrappeGetCall<{ message: number }>("chat.api.threads.get_number_of_replies", {
         thread_id: thread.name
     }, ["thread_reply_count", thread.name], {
         revalidateOnFocus: false,

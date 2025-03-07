@@ -11,70 +11,70 @@ export const TriggerEvents: TriggerEventField[] = [
     {
         key: 'message_sent',
         label: 'Message Sent',
-        doctype: 'Raven Message',
+        doctype: 'Chat Message',
         event: 'after_insert',
         trigger_on: ['Channel', 'User', 'Channel Type']
     },
     {
         key: 'message_edited',
         label: 'Message Edited',
-        doctype: 'Raven Message',
+        doctype: 'Chat Message',
         event: 'on_update',
         trigger_on: ['Channel', 'User', 'Channel Type']
     },
     {
         key: 'message_deleted',
         label: 'Message Deleted',
-        doctype: 'Raven Message',
+        doctype: 'Chat Message',
         event: 'on_trash',
         trigger_on: ['Channel', 'User', 'Channel Type']
     },
     {
         key: 'emoji_reaction',
         label: 'Message Reacted On',
-        doctype: 'Raven Message Reaction',
+        doctype: 'Chat Message Reaction',
         event: 'after_insert',
         trigger_on: ['Channel', 'User', 'Channel Type']
     },
     {
         key: 'channel_created',
         label: 'Channel Created',
-        doctype: 'Raven Channel',
+        doctype: 'Chat Channel',
         event: 'after_insert',
         trigger_on: ['User', 'Channel_Type']
     },
     {
         key: 'channel_deleted',
         label: 'Channel Deleted',
-        doctype: 'Raven Channel',
+        doctype: 'Chat Channel',
         event: 'on_trash',
         trigger_on: ['User', 'Channel_Type']
     },
     {
         key: 'channel_member_added',
         label: 'Channel Member Added',
-        doctype: 'Raven Channel Member',
+        doctype: 'Chat Channel Member',
         event: 'after_insert',
         trigger_on: ['Channel', 'User', 'Channel Type']
     },
     {
         key: 'channel_member_deleted',
         label: 'Channel Member Deleted',
-        doctype: 'Raven Channel Member',
+        doctype: 'Chat Channel Member',
         event: 'on_trash',
         trigger_on: ['Channel', 'User', 'Channel Type']
     },
     {
-        key: 'raven_user_added',
+        key: 'chat_user_added',
         label: 'User Added',
-        doctype: 'Raven User',
+        doctype: 'Chat User',
         event: 'after_insert',
         trigger_on: ['User']
     },
     {
-        key: 'raven_user_deleted',
+        key: 'chat_user_deleted',
         label: 'User Deleted',
-        doctype: 'Raven User',
+        doctype: 'Chat User',
         event: 'on_trash',
         trigger_on: ['User']
     }
@@ -126,12 +126,12 @@ const commonFields = [
 ]
 
 export const DoctypeFieldList: {
-    doctype: 'Raven Message' | 'Raven Channel' | 'Raven Channel Member' | 'Raven User' | 'Raven Message Reaction',
+    doctype: 'Chat Message' | 'Chat Channel' | 'Chat Channel Member' | 'Chat User' | 'Chat Message Reaction',
     events: string[]
     fields: FieldsData[]
 }[] = [
         {
-            doctype: 'Raven Message',
+            doctype: 'Chat Message',
             events: ['Message Sent', 'Message Edited', 'Message Deleted'],
             fields: [
                 {
@@ -227,7 +227,7 @@ export const DoctypeFieldList: {
             ]
         },
         {
-            doctype: 'Raven Channel',
+            doctype: 'Chat Channel',
             events: ['Channel Created', 'Channel Deleted'],
             fields: [
                 {
@@ -277,7 +277,7 @@ export const DoctypeFieldList: {
             ]
         },
         {
-            'doctype': 'Raven Channel Member',
+            'doctype': 'Chat Channel Member',
             events: ['Channel Member Added', 'Channel Member Deleted'],
             fields: [
                 {
@@ -312,7 +312,7 @@ export const DoctypeFieldList: {
             ]
         },
         {
-            doctype: 'Raven User',
+            doctype: 'Chat User',
             events: ['User Added', 'User Deleted'],
             fields: [
                 {
@@ -354,7 +354,7 @@ export const DoctypeFieldList: {
             ]
         },
         {
-            doctype: 'Raven Message Reaction',
+            doctype: 'Chat Message Reaction',
             events: ['Message Reacted On'],
             fields: [
                 {
@@ -571,7 +571,7 @@ export const SampleData = [
                     },
                     {
                         field: 'file',
-                        value: 'https://ravenapp.info/_astro/app-screenshot.e5f6e34e.png'
+                        value: 'https://chatapp.info/_astro/app-screenshot.e5f6e34e.png'
                     },
                     {
                         field: 'message_reactions',
@@ -656,7 +656,7 @@ export const SampleData = [
                     },
                     {
                         field: 'file',
-                        value: 'https://ravenapp.info/_astro/app-screenshot.e5f6e34e.png'
+                        value: 'https://chatapp.info/_astro/app-screenshot.e5f6e34e.png'
                     },
                     {
                         field: 'json',
@@ -736,7 +736,7 @@ export const SampleData = [
                     },
                     {
                         field: 'file',
-                        value: 'https://ravenapp.info/_astro/app-screenshot.e5f6e34e.png'
+                        value: 'https://chatapp.info/_astro/app-screenshot.e5f6e34e.png'
                     },
                     {
                         field: 'json',
@@ -816,7 +816,7 @@ export const SampleData = [
                     },
                     {
                         field: 'file',
-                        value: 'https://ravenapp.info/_astro/app-screenshot.e5f6e34e.png'
+                        value: 'https://chatapp.info/_astro/app-screenshot.e5f6e34e.png'
                     },
                     {
                         field: 'json',
@@ -896,7 +896,7 @@ export const SampleData = [
                     },
                     {
                         field: 'file',
-                        value: 'https://ravenapp.info/_astro/app-screenshot.e5f6e34e.png'
+                        value: 'https://chatapp.info/_astro/app-screenshot.e5f6e34e.png'
                     },
                     {
                         field: 'json',

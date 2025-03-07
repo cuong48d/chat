@@ -11,7 +11,7 @@ type Props = {
 
 const LeaveWorkspaceButton = ({ workspace }: Props) => {
 
-    const { call } = useFrappePostCall('raven.api.workspaces.leave_workspace')
+    const { call } = useFrappePostCall('chat.api.workspaces.leave_workspace')
 
     const { mutate } = useSWRConfig()
 

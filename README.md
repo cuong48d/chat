@@ -1,42 +1,42 @@
 <p align="center">
-  <a href="https://github.com/The-Commit-Company/Raven">
-  <img src="raven_logo.png" alt="Raven logo" height="100" />
+  <a href="https://github.com/The-Commit-Company/Chat">
+  <img src="chat_logo.png" alt="Chat logo" height="100" />
      </a>
 
-   <h3 align="center">Raven</h3>
+   <h3 align="center">Chat</h3>
   <p align="center">Simple, open source team messaging platform
      <br />
     <br />
-    <a href="https://frappecloud.com/marketplace/apps/raven"><strong>Install on Frappe Cloud»</strong></a>
+    <a href="https://frappecloud.com/marketplace/apps/chat"><strong>Install on Frappe Cloud»</strong></a>
     <br />
     <br />
-    <a href="https://thecommit.company/products/raven"><strong>Learn More »</strong></a>
+    <a href="https://thecommit.company/products/chat"><strong>Learn More »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/The-Commit-Company/Raven/issues">Issues</a>
+    <a href="https://github.com/The-Commit-Company/Chat/issues">Issues</a>
     ·
-    <a href="https://community.ravenapp.cloud">Community</a>
+    <a href="https://community.chatapp.cloud">Community</a>
      ·
     <a href="https://github.com/sponsors/The-Commit-Company?frequency=one-time">Sponsor Us!</a>
   </p>
 </p>
 <p align="center">
-  <a href="https://github.com/The-Commit-Company/Raven/blob/main/LICENSE">
+  <a href="https://github.com/The-Commit-Company/Chat/blob/main/LICENSE">
     <img alt="license" src="https://img.shields.io/badge/license-AGPLv3-blue">
   </a>
-     <a href="https://github.com/The-Commit-Company/Raven/stargazers"><img src="https://img.shields.io/github/stars/The-Commit-Company/Raven" alt="Github Stars"></a>
-     <a href="https://github.com/The-Commit-Company/Raven/pulse"><img src="https://img.shields.io/github/commit-activity/m/The-Commit-Company/Raven" alt="Commits-per-month"></a>
+     <a href="https://github.com/The-Commit-Company/Chat/stargazers"><img src="https://img.shields.io/github/stars/The-Commit-Company/Chat" alt="Github Stars"></a>
+     <a href="https://github.com/The-Commit-Company/Chat/pulse"><img src="https://img.shields.io/github/commit-activity/m/The-Commit-Company/Chat" alt="Commits-per-month"></a>
 </p>
 
 <br>
 
-Raven is a simple work messaging tool that is built using [Frappe](https://frappeframework.com) and can be installed on any new or existing Frappe site (e.g. in addition to [ERPNext](https://erpnext.com/) or [FrappeHR](https://frappehr.com/)). It is designed to help teams collaborate and communicate with each other and get work done. Teams can create their own channels (publically viewable or private) and send messages, emojis, files and images. 
+Chat is a simple work messaging tool that is built using [Frappe](https://frappeframework.com) and can be installed on any new or existing Frappe site (e.g. in addition to [ERPNext](https://erpnext.com/) or [FrappeHR](https://frappehr.com/)). It is designed to help teams collaborate and communicate with each other and get work done. Teams can create their own channels (publically viewable or private) and send messages, emojis, files and images. 
 
 <hr>
 
 ## Motivation
 
-Raven was born out of a need to have a simple work communication tool that could replace Slack for us at The Commit Company. Most work communication tools in the market had the following problems:
+Chat was born out of a need to have a simple work communication tool that could replace Slack for us at The Commit Company. Most work communication tools in the market had the following problems:
 
 1. They include many features like video calling, audio sharing on top of work messaging which are not required for small teams. However, these features are expensive to build and run. 
 2. Hence, they require payments for every user every month - regardless of how much time a user uses the tool or how many messages they send. This meant that we would have to pay for "mostly inactive" users as well.
@@ -53,13 +53,13 @@ Raven was born out of a need to have a simple work communication tool that could
 5. React to messages with emojis 🎉
 6. Preview image/PDF files 📁
 7. Comprehensive search 🔍 functionality for all your messages, files, channels and users
-8. Don't strain your eyes 👀 - Raven supports dark mode 🌙
+8. Don't strain your eyes 👀 - Chat supports dark mode 🌙
 
 <hr>
 
 ## Built with
 
-Raven is built using the [Frappe Framework](https://frappeframework.com) - an open-source full stack development framework. 
+Chat is built using the [Frappe Framework](https://frappeframework.com) - an open-source full stack development framework. 
 
 These are some of the tools it's built on:
 - [Python](https://www.python.org)
@@ -81,7 +81,7 @@ The frontend is built using React and the following tools:
     <figure>
         <img width="1402" src="screenshots/private-channel.png" alt="Private Channel" />
          <figcaption align="center">
-            <b>Private channels in Raven</b>
+            <b>Private channels in Chat</b>
         </figcaption>
     </figure>
 </p>
@@ -121,7 +121,7 @@ The frontend is built using React and the following tools:
   </figure>
   
   <figure>
-      <img width="1402" src="screenshots/channel-light.png" alt="Raven is also available in light mode" />
+      <img width="1402" src="screenshots/channel-light.png" alt="Chat is also available in light mode" />
       <figcaption align="center"><b>Light mode</b></figcaption>
   </figure>
   
@@ -131,19 +131,19 @@ The frontend is built using React and the following tools:
 
 ## Installation
 
-Since Raven is a Frappe app, it can be installed via [frappe-bench](https://frappeframework.com/docs/v14/user/en/bench) on your local machine or on your production site.
+Since Chat is a Frappe app, it can be installed via [frappe-bench](https://frappeframework.com/docs/v14/user/en/bench) on your local machine or on your production site.
 
 Once you have [setup your bench](https://frappeframework.com/docs/v14/user/en/installation) and your [site](https://frappeframework.com/docs/v14/user/en/tutorial/install-and-setup-bench), you can install the app via the following commands:
 
 ```bash
-bench get-app https://github.com/The-Commit-Company/raven.git
+bench get-app https://github.com/The-Commit-Company/chat.git
 ```
 
 ```bash
-bench --site <yoursite.name> install-app raven
+bench --site <yoursite.name> install-app chat
 ```
 
-Post this, you can access Raven on your Frappe site at the `/raven` endpoint (e.g. https://yoursite.com/raven). 
+Post this, you can access Chat on your Frappe site at the `/chat` endpoint (e.g. https://yoursite.com/chat). 
 
 ### Local development setup
 
@@ -154,7 +154,7 @@ You also need to disable CSRF (add `ignore_csrf: 1` in your `site_config.json`) 
 You can start the React live web server by:
 
 ```bash
-cd frappe-bench/apps/raven
+cd frappe-bench/apps/chat
 yarn dev
 ```
 
@@ -168,13 +168,13 @@ Your local dev server would be running at `http://localhost:8080`.
 
 ## Contributors
 
-<a href="https://github.com/The-Commit-Company/Raven/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=The-Commit-Company/Raven" />
+<a href="https://github.com/The-Commit-Company/Chat/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=The-Commit-Company/Chat" />
 </a>
 
 
 ## Reporting Bugs
-If you find any bugs, feel free to report them here on [GitHub Issues](https://github.com/The-Commit-Company/Raven/issues). Make sure you share enough information (app screenshots, browser console screenshots, stack traces, etc) for project maintainers to replicate your bug.
+If you find any bugs, feel free to report them here on [GitHub Issues](https://github.com/The-Commit-Company/Chat/issues). Make sure you share enough information (app screenshots, browser console screenshots, stack traces, etc) for project maintainers to replicate your bug.
 
 
 <hr>

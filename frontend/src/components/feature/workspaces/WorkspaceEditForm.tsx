@@ -1,6 +1,6 @@
 import { ErrorText, HelperText, Label } from '@/components/common/Form'
 import { HStack, Stack } from '@/components/layout/Stack'
-import { RavenWorkspace } from '@/types/Raven/RavenWorkspace'
+import { ChatWorkspace } from '@/types/Chat/ChatWorkspace'
 import { __ } from '@/utils/translations'
 import { Box, Card, Checkbox, Flex, RadioGroup, Text, TextArea } from '@radix-ui/themes'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -8,7 +8,7 @@ import { WorkspaceLogoField } from './WorkspaceLogoField'
 
 const WorkspaceEditForm = () => {
 
-    const { register, formState: { errors }, control } = useFormContext<RavenWorkspace>()
+    const { register, formState: { errors }, control } = useFormContext<ChatWorkspace>()
     return (
         <Card className="p-0 align-middle justify-center">
             <Stack>

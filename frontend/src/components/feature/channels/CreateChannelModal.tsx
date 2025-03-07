@@ -70,7 +70,7 @@ const CreateChannelContent = ({ isOpen, setIsOpen }: { setIsOpen: (v: boolean) =
 
     const { workspaceID } = useParams()
 
-    const { data: canCreateChannel } = useFrappeGetCall<{ message: boolean }>('raven.api.workspaces.can_create_channel', { workspace: workspaceID }, workspaceID ? undefined : null)
+    const { data: canCreateChannel } = useFrappeGetCall<{ message: boolean }>('chat.api.workspaces.can_create_channel', { workspace: workspaceID }, workspaceID ? undefined : null)
 
     const { mutate } = useSWRConfig()
     let navigate = useNavigate()
@@ -106,7 +106,7 @@ const CreateChannelContent = ({ isOpen, setIsOpen }: { setIsOpen: (v: boolean) =
 
 
     const onSubmit = (data: ChannelCreationForm) => {
-        createDoc('Raven Channel', {
+        createDoc('Chat Channel', {
             ...data,
             workspace: workspaceID
         }).then(result => {

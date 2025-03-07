@@ -1,7 +1,7 @@
 import { CustomFile } from '@/components/feature/file-upload/FileDrop'
 import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import { Stack } from '@/components/layout/Stack'
-import { RavenCustomEmoji } from '@/types/RavenMessaging/RavenCustomEmoji'
+import { ChatCustomEmoji } from '@/types/ChatMessaging/ChatCustomEmoji'
 import { Box, Button, Dialog, Flex, TextField, VisuallyHidden } from '@radix-ui/themes'
 import { FrappeConfig, FrappeContext, useFrappeCreateDoc, useFrappeFileUpload } from 'frappe-react-sdk'
 import { ErrorText, HelperText } from '../Form'
@@ -40,7 +40,7 @@ const AddEmojiForm = ({ onClose }: { onClose: (refresh?: boolean) => void }) => 
 
     const [image, setImage] = useState<CustomFile | undefined>(undefined)
 
-    const { register, handleSubmit, formState: { errors }, setValue, setError, setFocus } = useForm<RavenCustomEmoji>({
+    const { register, handleSubmit, formState: { errors }, setValue, setError, setFocus } = useForm<ChatCustomEmoji>({
         defaultValues: {
             emoji_name: "",
             keywords: ""
@@ -48,10 +48,10 @@ const AddEmojiForm = ({ onClose }: { onClose: (refresh?: boolean) => void }) => 
         mode: 'onBlur'
     })
 
-    const { createDoc, loading, error } = useFrappeCreateDoc<RavenCustomEmoji>()
+    const { createDoc, loading, error } = useFrappeCreateDoc<ChatCustomEmoji>()
     const { upload, loading: uploading, error: uploadError } = useFrappeFileUpload()
 
-    const onSubmit = async (data: RavenCustomEmoji) => {
+    const onSubmit = async (data: ChatCustomEmoji) => {
         if (!image) return
 
         const exists = await checkIfEmojiNameExists(data.emoji_name)
@@ -61,11 +61,11 @@ const AddEmojiForm = ({ onClose }: { onClose: (refresh?: boolean) => void }) => 
         }
 
         upload(image, {
-            doctype: "Raven Custom Emoji",
+            doctype: "Chat Custom Emoji",
             docname: data.emoji_name,
             fieldname: "emoji_image",
         }).then((file) => {
-            return createDoc('Raven Custom Emoji', {
+            return createDoc('Chat Custom Emoji', {
                 ...data,
                 image: file.file_url
             })
@@ -89,7 +89,7 @@ const AddEmojiForm = ({ onClose }: { onClose: (refresh?: boolean) => void }) => 
 
     const checkIfEmojiNameExists = async (name: string) => {
         const emoji = await call.get('frappe.client.get_count', {
-            doctype: 'Raven Custom Emoji',
+            doctype: 'Chat Custom Emoji',
             filters: {
                 emoji_name: name
             }

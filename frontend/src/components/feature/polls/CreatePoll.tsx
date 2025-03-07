@@ -1,6 +1,6 @@
 import { ErrorText, Label } from "@/components/common/Form"
 import { ErrorBanner, getErrorMessage } from "@/components/layout/AlertBanner/ErrorBanner"
-import { RavenPoll } from "@/types/RavenMessaging/RavenPoll"
+import { ChatPoll } from "@/types/ChatMessaging/ChatPoll"
 import { Button, Checkbox, Dialog, Flex, IconButton, TextArea, TextField, Text, Box } from "@radix-ui/themes"
 import { useFrappePostCall } from "frappe-react-sdk"
 import { Controller, FormProvider, useFieldArray, useForm } from "react-hook-form"
@@ -10,7 +10,7 @@ import { toast } from "sonner"
 
 const CreatePollContent = ({ channelID, setIsOpen }: { channelID: string, setIsOpen: (open: boolean) => void }) => {
 
-    const methods = useForm<RavenPoll>({
+    const methods = useForm<ChatPoll>({
         // Initialize the form with 2 option fields by default
         defaultValues: {
             options: [{
@@ -74,9 +74,9 @@ const CreatePollContent = ({ channelID, setIsOpen }: { channelID: string, setIsO
         reset()
     }
 
-    const { call: createPoll, error } = useFrappePostCall('raven.api.raven_poll.create_poll')
+    const { call: createPoll, error } = useFrappePostCall('chat.api.chat_poll.create_poll')
 
-    const onSubmit = async (data: RavenPoll) => {
+    const onSubmit = async (data: ChatPoll) => {
         return createPoll({
             ...data,
             "channel_id": channelID

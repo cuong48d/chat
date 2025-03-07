@@ -6,8 +6,8 @@ import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
 import { HStack, Stack } from '@/components/layout/Stack'
-import { RavenBot } from '@/types/RavenBot/RavenBot'
-import { hasRavenAdminRole, isSystemManager } from '@/utils/roles'
+import { ChatBot } from '@/types/ChatBot/ChatBot'
+import { hasChatAdminRole, isSystemManager } from '@/utils/roles'
 import { Badge, Button, HoverCard, Table, Text } from '@radix-ui/themes'
 import { useFrappeGetDocList } from 'frappe-react-sdk'
 import { BiBot, BiSolidCheckCircle, BiSolidXCircle } from 'react-icons/bi'
@@ -18,15 +18,15 @@ type Props = {}
 
 const BotList = (props: Props) => {
 
-    const isRavenAdmin = hasRavenAdminRole() || isSystemManager()
+    const isChatAdmin = hasChatAdminRole() || isSystemManager()
 
-    const { data, isLoading, error } = useFrappeGetDocList<RavenBot>("Raven Bot", {
+    const { data, isLoading, error } = useFrappeGetDocList<ChatBot>("Chat Bot", {
         fields: ["name", "bot_name", "is_ai_bot", "description", "image", "enable_file_search", "dynamic_instructions", "instruction", "allow_bot_to_write_documents", "enable_code_interpreter"],
         orderBy: {
             field: "modified",
             order: "desc"
         }
-    }, isRavenAdmin ? undefined : null, {
+    }, isChatAdmin ? undefined : null, {
         errorRetryCount: 2
     })
 
@@ -36,7 +36,7 @@ const BotList = (props: Props) => {
                 <SettingsPageHeader
                     title='Agents'
                     description='Use agents to send reminders, run AI assistants, and more.'
-                    actions={<Button asChild disabled={!isRavenAdmin} title={!isRavenAdmin ? "You don't have permissions to create agents." : "Create a new agents."}>
+                    actions={<Button asChild disabled={!isChatAdmin} title={!isChatAdmin ? "You don't have permissions to create agents." : "Create a new agents."}>
                         <Link to='create'>Create</Link>
                     </Button>}
                 />
@@ -44,13 +44,13 @@ const BotList = (props: Props) => {
                 <ErrorBanner error={error} />
                 {data && data.length > 0 && <BotTable bots={data} />}
 
-                {(data?.length === 0 || !isRavenAdmin) && <EmptyState>
+                {(data?.length === 0 || !isChatAdmin) && <EmptyState>
                     <EmptyStateIcon>
                         <BiBot />
                     </EmptyStateIcon>
                     <EmptyStateTitle>Get started with agents</EmptyStateTitle>
-                    <EmptyStateDescription>Create agents to run automations on Raven.<br />Send reminders, document notifications and run AI assistants.</EmptyStateDescription>
-                    {isRavenAdmin && <EmptyStateLinkAction to='create'>
+                    <EmptyStateDescription>Create agents to run automations on Chat.<br />Send reminders, document notifications and run AI assistants.</EmptyStateDescription>
+                    {isChatAdmin && <EmptyStateLinkAction to='create'>
                         Create your first agent
                     </EmptyStateLinkAction>}
                 </EmptyState>}
@@ -59,7 +59,7 @@ const BotList = (props: Props) => {
     )
 }
 
-const BotTable = ({ bots }: { bots: RavenBot[] }) => {
+const BotTable = ({ bots }: { bots: ChatBot[] }) => {
     return (
         <Table.Root variant="surface" className='rounded-sm animate-fadein'>
             <Table.Header>

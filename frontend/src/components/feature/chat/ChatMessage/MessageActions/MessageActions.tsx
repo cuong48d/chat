@@ -164,8 +164,8 @@ const SaveMessageAction = ({ message }: { message: Message }) => {
     const { call } = useContext(FrappeContext) as FrappeConfig
 
     const handleLike = () => {
-        call.post('raven.api.raven_message.save_message', {
-            // doctype: 'Raven Message',
+        call.post('chat.api.chat_message.save_message', {
+            // doctype: 'Chat Message',
             message_id: message.name,
             add: isSaved ? 'No' : 'Yes'
         }).then(() => {
@@ -201,7 +201,7 @@ const PinMessageAction = ({ message }: { message: Message }) => {
     const { call } = useContext(FrappeContext) as FrappeConfig
 
     const handlePin = () => {
-        call.post('raven.api.raven_channel.toggle_pin_message', {
+        call.post('chat.api.chat_channel.toggle_pin_message', {
             channel_id: message.channel_id,
             message_id: message.name,
         }).then(() => {

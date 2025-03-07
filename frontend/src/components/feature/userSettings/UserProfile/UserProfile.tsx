@@ -7,7 +7,7 @@ import { FormProvider, useForm } from "react-hook-form"
 import { toast } from 'sonner'
 import { ImageUploader } from "../UploadImage/ImageUploader"
 import { getStatusText } from "../AvailabilityStatus/SetUserAvailabilityMenu"
-import useCurrentRavenUser from "@/hooks/useCurrentRavenUser"
+import useCurrentChatUser from "@/hooks/useCurrentChatUser"
 import { useState } from "react"
 import { GrPowerReset } from "react-icons/gr"
 import { BiSmile } from "react-icons/bi"
@@ -18,7 +18,7 @@ import SettingsPageHeader from "@/components/layout/Settings/SettingsPageHeader"
 import SettingsContentContainer from "@/components/layout/Settings/SettingsContentContainer"
 import { __ } from "@/utils/translations"
 import { Stack } from "@/components/layout/Stack"
-import { RavenUser } from "@/types/Raven/RavenUser"
+import { ChatUser } from "@/types/Chat/ChatUser"
 
 type UserProfileType = {
     full_name?: string,
@@ -29,7 +29,7 @@ type UserProfileType = {
 
 const UserProfile = () => {
 
-    const { myProfile, mutate, } = useCurrentRavenUser()
+    const { myProfile, mutate, } = useCurrentChatUser()
 
     if (myProfile) return <UserProfileForm myProfile={myProfile} />
 
@@ -37,9 +37,9 @@ const UserProfile = () => {
 
 }
 
-const UserProfileForm = ({ myProfile }: { myProfile: RavenUser }) => {
+const UserProfileForm = ({ myProfile }: { myProfile: ChatUser }) => {
 
-    const { mutate } = useCurrentRavenUser()
+    const { mutate } = useCurrentChatUser()
     const methods = useForm<UserProfileType>({
         defaultValues: {
             full_name: myProfile?.full_name ?? '',
@@ -54,7 +54,7 @@ const UserProfileForm = ({ myProfile }: { myProfile: RavenUser }) => {
     const [availabilityStatus, setAvailabilityStatus] = useState(myProfile?.availability_status ?? '')
 
     const onSubmit = (data: UserProfileType) => {
-        updateDoc("Raven User", myProfile?.name ?? null, {
+        updateDoc("Chat User", myProfile?.name ?? null, {
             full_name: data.full_name,
             availability_status: availabilityStatus,
             custom_status: data.custom_status
@@ -80,7 +80,7 @@ const UserProfileForm = ({ myProfile }: { myProfile: RavenUser }) => {
                     <SettingsContentContainer>
                         <SettingsPageHeader
                             title={__('Profile')}
-                            description={__('Manage your Raven profile')}
+                            description={__('Manage your Chat profile')}
                             actions={<Button type='submit' disabled={updatingDoc}>
                                 {updatingDoc && <Loader />}
                                 {updatingDoc ? __("Saving") : __("Save")}

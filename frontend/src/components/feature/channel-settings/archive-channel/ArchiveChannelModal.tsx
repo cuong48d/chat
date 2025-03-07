@@ -20,7 +20,7 @@ export const ArchiveChannelModal = ({ onClose, onCloseViewDetails, channelData, 
     const navigate = useNavigate()
 
     const archiveChannel = () => {
-        updateDoc('Raven Channel', channelData?.name ?? '', {
+        updateDoc('Chat Channel', channelData?.name ?? '', {
             is_archived: 1
         }).then(() => {
             onClose()

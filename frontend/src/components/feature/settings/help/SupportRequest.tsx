@@ -80,7 +80,7 @@ const SupportRequestForm = ({ onClose }: SupportRequestFormProps) => {
 
     const requestType = watch("ticket_type")
 
-    const { call, error, loading } = useFrappePostCall('raven.api.support_request.submit_support_request')
+    const { call, error, loading } = useFrappePostCall('chat.api.support_request.submit_support_request')
 
     const onSubmit = (data: SupportRequestFormFields) => {
         call({

@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 import { AlertDialog, Button, Flex, Text } from '@radix-ui/themes'
 import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import { Loader } from '@/components/common/Loader'
-import useCurrentRavenUser from '@/hooks/useCurrentRavenUser'
+import useCurrentChatUser from '@/hooks/useCurrentChatUser'
 import { __ } from '@/utils/translations'
 
 interface DeleteImageModalProps {
@@ -12,8 +12,8 @@ interface DeleteImageModalProps {
 
 export const DeleteImageModal = ({ onClose }: DeleteImageModalProps) => {
 
-    const { call, loading, error } = useFrappePostCall('raven.api.raven_users.update_raven_user')
-    const { mutate } = useCurrentRavenUser()
+    const { call, loading, error } = useFrappePostCall('chat.api.chat_users.update_chat_user')
+    const { mutate } = useCurrentChatUser()
 
     const removeImage = () => {
         call({

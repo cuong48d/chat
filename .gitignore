@@ -7,9 +7,9 @@ node_modules
 
 dist/
 mobile/dev-dist
-raven/public/raven
-raven/public/node_modules
-raven/www/raven.html
+chat/public/chat
+chat/public/node_modules
+chat/www/chat.html
 *.env
 
 apps/mobile/ios

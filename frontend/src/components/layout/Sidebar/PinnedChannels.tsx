@@ -3,7 +3,7 @@ import { useContext, useMemo } from 'react'
 import { SidebarGroup, SidebarGroupItem, SidebarGroupLabel, SidebarGroupList } from './SidebarComp'
 import { Box } from '@radix-ui/themes'
 import { ChannelItemElement } from '@/components/feature/channels/ChannelList'
-import useCurrentRavenUser from '@/hooks/useCurrentRavenUser'
+import useCurrentChatUser from '@/hooks/useCurrentChatUser'
 import { __ } from '@/utils/translations'
 import { useParams } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ const PinnedChannels = ({ unread_count }: { unread_count?: UnreadCountData }) =>
 
     const { workspaceID } = useParams()
 
-    const { myProfile } = useCurrentRavenUser()
+    const { myProfile } = useCurrentChatUser()
 
     const pinnedChannels = useMemo(() => {
         if (myProfile) {

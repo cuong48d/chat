@@ -7,7 +7,7 @@ import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
 import { HStack } from '@/components/layout/Stack'
-import { RavenCustomEmoji } from '@/types/RavenMessaging/RavenCustomEmoji'
+import { ChatCustomEmoji } from '@/types/ChatMessaging/ChatCustomEmoji'
 import { getDateObject } from '@/utils/dateConversions/utils'
 import { Button, Table, Text, Link } from '@radix-ui/themes'
 import { useFrappeGetDocList, useSWRConfig } from 'frappe-react-sdk'
@@ -18,7 +18,7 @@ const CustomEmojiList = () => {
 
     const { mutate: globalMutate } = useSWRConfig()
 
-    const { data, isLoading, error, mutate } = useFrappeGetDocList<RavenCustomEmoji>("Raven Custom Emoji", {
+    const { data, isLoading, error, mutate } = useFrappeGetDocList<ChatCustomEmoji>("Chat Custom Emoji", {
         fields: ["name", "emoji_name", "image", "keywords", "owner", "creation"],
         orderBy: {
             field: "modified",
@@ -76,7 +76,7 @@ const CustomEmojiList = () => {
     )
 }
 
-const CustomEmojisTable = ({ emojis, onDelete }: { emojis: RavenCustomEmoji[], onDelete: () => void }) => {
+const CustomEmojisTable = ({ emojis, onDelete }: { emojis: ChatCustomEmoji[], onDelete: () => void }) => {
     return (
         <Table.Root variant="surface" className='rounded-sm animate-fadein'>
             <Table.Header>

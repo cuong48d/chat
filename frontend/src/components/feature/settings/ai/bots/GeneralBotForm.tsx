@@ -1,15 +1,15 @@
 import { Label, ErrorText, HelperText } from '@/components/common/Form'
 import { Stack, HStack } from '@/components/layout/Stack'
-import useRavenSettings from '@/hooks/fetchers/useRavenSettings'
-import { RavenBot } from '@/types/RavenBot/RavenBot'
+import useChatSettings from '@/hooks/fetchers/useChatSettings'
+import { ChatBot } from '@/types/ChatBot/ChatBot'
 import { Box, TextArea, Checkbox, Text, TextField } from '@radix-ui/themes'
 import { Controller, useFormContext } from 'react-hook-form'
 import AINotEnabledCallout from '../AINotEnabledCallout'
 
 const GeneralBotForm = () => {
-    const { register, control, formState: { errors } } = useFormContext<RavenBot>()
+    const { register, control, formState: { errors } } = useFormContext<ChatBot>()
 
-    const { ravenSettings } = useRavenSettings()
+    const { chatSettings } = useChatSettings()
 
     return (
         <Stack gap='4'>
@@ -52,7 +52,7 @@ const GeneralBotForm = () => {
                     <HStack>
                         <Controller
                             control={control}
-                            disabled={!ravenSettings?.enable_ai_integration}
+                            disabled={!chatSettings?.enable_ai_integration}
                             name='is_ai_bot'
                             render={({ field }) => (
                                 <Checkbox

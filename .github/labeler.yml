@@ -2,6 +2,6 @@
 "UI":
   - "frontend/src/**/*.{ts,tsx,css}"
 
-# Add 'backend' label to all PRs that touch json / py files in the 'raven' directory.
+# Add 'backend' label to all PRs that touch json / py files in the 'chat' directory.
 "backend":
-  - "raven/**/*.{json,py}"
+  - "chat/**/*.{json,py}"

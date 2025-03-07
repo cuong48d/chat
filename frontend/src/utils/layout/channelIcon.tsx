@@ -1,8 +1,8 @@
 import { BiGlobe, BiHash, BiLockAlt } from 'react-icons/bi';
-import { RavenChannel } from "../../../../types/RavenChannelManagement/RavenChannel";
+import { ChatChannel } from "../../../../types/ChatChannelManagement/ChatChannel";
 import { IconBaseProps } from 'react-icons';
 
-export const getChannelIcon = (type: RavenChannel['type']) => {
+export const getChannelIcon = (type: ChatChannel['type']) => {
 
     switch (type) {
         case 'Private': return BiLockAlt
@@ -12,7 +12,7 @@ export const getChannelIcon = (type: RavenChannel['type']) => {
 }
 
 interface ChannelIconProps extends IconBaseProps {
-    type: RavenChannel['type']
+    type: ChatChannel['type']
 }
 
 export const ChannelIcon = ({ type, ...props }: ChannelIconProps) => {

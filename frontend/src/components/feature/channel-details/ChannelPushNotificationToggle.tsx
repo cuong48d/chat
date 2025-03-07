@@ -18,7 +18,7 @@ const ChannelPushNotificationToggle = ({ channelID, channelMember }: Props) => {
 
     const isPushAvailable = useIsPushNotificationEnabled()
 
-    const { call } = useFrappePostCall('raven.api.notification.toggle_push_notification_for_channel')
+    const { call } = useFrappePostCall('chat.api.notification.toggle_push_notification_for_channel')
 
     const onToggle = () => {
         if (channelMember) {

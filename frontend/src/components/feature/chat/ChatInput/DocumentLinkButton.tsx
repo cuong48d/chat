@@ -10,7 +10,7 @@ import clsx from 'clsx'
 import { useFrappeCreateDoc } from 'frappe-react-sdk'
 import { Loader } from '@/components/common/Loader'
 import { DoctypeLinkRenderer } from '../ChatMessage/Renderers/DoctypeLinkRenderer'
-import { RavenMessage } from '@/types/RavenMessaging/RavenMessage'
+import { ChatMessage } from '@/types/ChatMessaging/ChatMessage'
 import { Stack } from '@/components/layout/Stack'
 import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import useRecentlyUsedDocType from '@/hooks/useRecentlyUsedDocType'
@@ -49,7 +49,7 @@ interface DocumentLinkFormData {
 
 const DocumentLinkForm = ({ channelID, onClose }: { channelID: string, onClose: () => void }) => {
 
-    const { loading, error, createDoc } = useFrappeCreateDoc<RavenMessage>()
+    const { loading, error, createDoc } = useFrappeCreateDoc<ChatMessage>()
 
     const methods = useForm<DocumentLinkFormData>()
 
@@ -69,12 +69,12 @@ const DocumentLinkForm = ({ channelID, onClose }: { channelID: string, onClose: 
 
         addRecentlyUsedDocType(data.doctype)
 
-        createDoc('Raven Message', {
+        createDoc('Chat Message', {
             message_type: 'Text',
             channel_id: channelID,
             link_doctype: data.doctype,
             link_document: data.docname
-        } as RavenMessage)
+        } as ChatMessage)
             .then(() => {
                 handleClose()
             })

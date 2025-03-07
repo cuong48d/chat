@@ -1,0 +1,12 @@
+[pre_model_sync]
+
+[post_model_sync]
+chat.patches.v1_2.create_chat_users
+chat.patches.v1_3.create_chat_message_indexes #23
+chat.patches.v1_3.update_all_messages_to_include_message_content #2
+chat.patches.v1_3.update_all_messages_to_include_replied_message_content #2
+chat.patches.v1_6.create_chat_channel_member_index
+chat.patches.v1_6.migrate_older_chat_users #2
+chat.patches.v2_0.migrate_existing_dm_threads
+chat.patches.v2_0.create_default_workspace
+chat.patches.v2_0.create_default_company_workspace_mapping

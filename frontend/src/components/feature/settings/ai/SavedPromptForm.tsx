@@ -1,14 +1,14 @@
 import { ErrorText, HelperText, Label } from '@/components/common/Form'
 import LinkFormField from '@/components/common/LinkField/LinkFormField'
 import { HStack, Stack } from '@/components/layout/Stack'
-import { RavenBotAIPrompt } from '@/types/RavenAI/RavenBotAIPrompt'
+import { ChatBotAIPrompt } from '@/types/ChatAI/ChatBotAIPrompt'
 import { Box, Checkbox, Text, TextArea } from '@radix-ui/themes'
 import { Controller, useFormContext } from 'react-hook-form'
 import AINotEnabledCallout from './AINotEnabledCallout'
 
 const SavedPromptForm = () => {
 
-    const { register, control, formState: { errors } } = useFormContext<RavenBotAIPrompt>()
+    const { register, control, formState: { errors } } = useFormContext<ChatBotAIPrompt>()
 
     return (
         <Stack gap='4'>
@@ -47,21 +47,21 @@ const SavedPromptForm = () => {
                     </HStack>
                 </Text>
                 <HelperText>
-                    If checked, this prompt will be available to all users on Raven
+                    If checked, this prompt will be available to all users on Chat
                 </HelperText>
             </Stack>
             <Stack maxWidth={'480px'}>
                 <LinkFormField
-                    name='raven_bot'
+                    name='chat_bot'
                     dropdownClass='max-w-[480px]'
                     label='Agent'
                     filters={[["is_ai_bot", "=", 1]]}
-                    doctype="Raven Bot"
+                    doctype="Chat Bot"
                 />
                 <HelperText>
                     If added, this prompt will only be shown when interacting with the agent
                 </HelperText>
-                <ErrorText>{errors.raven_bot?.message}</ErrorText>
+                <ErrorText>{errors.chat_bot?.message}</ErrorText>
             </Stack>
         </Stack>
     )

@@ -22,11 +22,11 @@ const ErrorPage = () => {
         if (isMobile) {
             navigate('/')
         } else {
-            const lastWorkspace = localStorage.getItem('ravenLastWorkspace')
-            const ravenLastChannel = localStorage.getItem('ravenLastChannel')
+            const lastWorkspace = localStorage.getItem('chatLastWorkspace')
+            const chatLastChannel = localStorage.getItem('chatLastChannel')
 
-            if (lastWorkspace && ravenLastChannel) {
-                navigate(`/${lastWorkspace}/${ravenLastChannel}`)
+            if (lastWorkspace && chatLastChannel) {
+                navigate(`/${lastWorkspace}/${chatLastChannel}`)
             } else if (lastWorkspace) {
                 navigate(`/${lastWorkspace}`)
             } else {
@@ -42,7 +42,7 @@ const ErrorPage = () => {
                     "A new update is available." :
                     "There was an unexpected error."}
                 </Heading>
-                <Text>If you face this error again, please report it either on <Link target='_blank' href='https://github.com/frappe/raven/issues'>GitHub</Link> or <Link target='_blank' href='https://support.ravenchat.ai/'> our support portal</Link>.</Text>
+                <Text>If you face this error again, please report it either on <Link target='_blank' href='https://github.com/frappe/chat/issues'>GitHub</Link> or <Link target='_blank' href='https://support.chatchat.ai/'> our support portal</Link>.</Text>
 
                 {!errorDueToUpdate && <details>
                     <summary><Text size='2'>Show error details</Text></summary>

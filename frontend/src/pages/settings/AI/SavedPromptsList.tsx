@@ -6,9 +6,9 @@ import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
 import { HStack, Stack } from '@/components/layout/Stack'
-import { RavenBotAIPrompt } from '@/types/RavenAI/RavenBotAIPrompt'
+import { ChatBotAIPrompt } from '@/types/ChatAI/ChatBotAIPrompt'
 import { getKeyboardMetaKeyString } from '@/utils/layout/keyboardKey'
-import { hasRavenAdminRole, isSystemManager } from '@/utils/roles'
+import { hasChatAdminRole, isSystemManager } from '@/utils/roles'
 import { Badge, Button, Checkbox, Kbd, Table, Text } from '@radix-ui/themes'
 import { useFrappeGetDocList } from 'frappe-react-sdk'
 import { BiSolidMagicWand } from 'react-icons/bi'
@@ -18,15 +18,15 @@ type Props = {}
 
 const SavedPromptList = (props: Props) => {
 
-    const isRavenAdmin = hasRavenAdminRole() || isSystemManager()
+    const isChatAdmin = hasChatAdminRole() || isSystemManager()
 
-    const { data, isLoading, error } = useFrappeGetDocList<RavenBotAIPrompt>("Raven Bot AI Prompt", {
-        fields: ["name", "prompt", "raven_bot", "is_global"],
+    const { data, isLoading, error } = useFrappeGetDocList<ChatBotAIPrompt>("Chat Bot AI Prompt", {
+        fields: ["name", "prompt", "chat_bot", "is_global"],
         orderBy: {
             field: "modified",
             order: "desc"
         }
-    }, isRavenAdmin ? undefined : null, {
+    }, isChatAdmin ? undefined : null, {
         errorRetryCount: 2
     })
 
@@ -36,7 +36,7 @@ const SavedPromptList = (props: Props) => {
                 <SettingsPageHeader
                     title='Saved Commands'
                     description='Save commonly used commands and prompts for your AI bots and access them via "/" in chat.'
-                    actions={<Button asChild disabled={!isRavenAdmin}>
+                    actions={<Button asChild disabled={!isChatAdmin}>
                         <Link to='create'>Create</Link>
                     </Button>}
                 />
@@ -44,7 +44,7 @@ const SavedPromptList = (props: Props) => {
                 <ErrorBanner error={error} />
                 <AINotEnabledCallout />
                 {data && data.length > 0 && <SavedPromptTable data={data} />}
-                {(data?.length === 0 || !isRavenAdmin) && <EmptyState>
+                {(data?.length === 0 || !isChatAdmin) && <EmptyState>
                     <EmptyStateIcon>
                         <BiSolidMagicWand />
                     </EmptyStateIcon>
@@ -52,7 +52,7 @@ const SavedPromptList = (props: Props) => {
                     <EmptyStateDescription>
                         Often we ask our AI assistants for the same thing.<br />Save commonly used commands here and insert them in your message by either clicking the <BiSolidMagicWand /> button or using <Kbd>{getKeyboardMetaKeyString()} + ⇧ + K</Kbd>.
                     </EmptyStateDescription>
-                    {isRavenAdmin && <EmptyStateLinkAction to='create'>
+                    {isChatAdmin && <EmptyStateLinkAction to='create'>
                         Create your first command
                     </EmptyStateLinkAction>}
                 </EmptyState>}
@@ -61,7 +61,7 @@ const SavedPromptList = (props: Props) => {
     )
 }
 
-const SavedPromptTable = ({ data }: { data: RavenBotAIPrompt[] }) => {
+const SavedPromptTable = ({ data }: { data: ChatBotAIPrompt[] }) => {
     return (
         <Table.Root variant="surface" className='rounded-sm animate-fadein'>
             <Table.Header>
@@ -83,7 +83,7 @@ const SavedPromptTable = ({ data }: { data: RavenBotAIPrompt[] }) => {
                             </HStack>
                         </Table.Cell>
                         <Table.Cell maxWidth={"100px"}>
-                            <Text>{d.raven_bot}</Text>
+                            <Text>{d.chat_bot}</Text>
                         </Table.Cell>
 
                         <Table.Cell maxWidth={"50px"}>

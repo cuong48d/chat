@@ -1,5 +1,5 @@
 import { AlertContent } from "@/components/feature/settings/common/DeleteAlert"
-import { RavenSchedulerEvent } from "@/types/RavenIntegrations/RavenSchedulerEvent"
+import { ChatSchedulerEvent } from "@/types/ChatIntegrations/ChatSchedulerEvent"
 import { DateMonthYear } from "@/utils/dateConversions"
 import { DIALOG_CONTENT_CLASS } from "@/utils/layout/dialog"
 import { Flex, Badge, IconButton, AlertDialog, Text } from "@radix-ui/themes"
@@ -8,7 +8,7 @@ import { BiTrash } from "react-icons/bi"
 import { AiOutlineEdit } from "react-icons/ai"
 import { Link, useNavigate } from "react-router-dom"
 
-export const List = ({ data }: { data: RavenSchedulerEvent[] }) => {
+export const List = ({ data }: { data: ChatSchedulerEvent[] }) => {
 
     return (
         <Flex direction='column' gap='4' width='100%' className="animate-fadein">
@@ -20,7 +20,7 @@ export const List = ({ data }: { data: RavenSchedulerEvent[] }) => {
 }
 
 
-const ScheduledMessageItem = ({ item }: { item: RavenSchedulerEvent }) => {
+const ScheduledMessageItem = ({ item }: { item: ChatSchedulerEvent }) => {
 
     const [open, setOpen] = useState(false)
     const onClose = () => {
@@ -75,7 +75,7 @@ const ScheduledMessageItem = ({ item }: { item: RavenSchedulerEvent }) => {
                             </IconButton>
                         </AlertDialog.Trigger>
                         <AlertDialog.Content className={DIALOG_CONTENT_CLASS}>
-                            <AlertContent doctype="Raven Scheduler Event" docname={item.name} onClose={onClose} />
+                            <AlertContent doctype="Chat Scheduler Event" docname={item.name} onClose={onClose} />
                         </AlertDialog.Content>
                     </AlertDialog.Root>
                 </Flex>

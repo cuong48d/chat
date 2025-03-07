@@ -6,7 +6,7 @@ import PageContainer from "@/components/layout/Settings/PageContainer"
 import SettingsContentContainer from "@/components/layout/Settings/SettingsContentContainer"
 import SettingsPageHeader from "@/components/layout/Settings/SettingsPageHeader"
 import { HStack } from "@/components/layout/Stack"
-import { RavenDocumentNotification } from "@/types/RavenIntegrations/RavenDocumentNotification"
+import { ChatDocumentNotification } from "@/types/ChatIntegrations/ChatDocumentNotification"
 import { isEmpty } from "@/utils/validations"
 import { Button } from "@radix-ui/themes"
 import { useFrappeGetDoc, useFrappeUpdateDoc, SWRResponse } from "frappe-react-sdk"
@@ -21,7 +21,7 @@ const ViewDocumentNotification = (props: Props) => {
 
     const { ID } = useParams<{ ID: string }>()
 
-    const { data, isLoading, error, mutate } = useFrappeGetDoc<RavenDocumentNotification>("Raven Document Notification", ID)
+    const { data, isLoading, error, mutate } = useFrappeGetDoc<ChatDocumentNotification>("Chat Document Notification", ID)
 
     return (
         <PageContainer>
@@ -32,11 +32,11 @@ const ViewDocumentNotification = (props: Props) => {
     )
 }
 
-const ViewDocumentNotificationContent = ({ data, mutate }: { data: RavenDocumentNotification, mutate: SWRResponse['mutate'] }) => {
+const ViewDocumentNotificationContent = ({ data, mutate }: { data: ChatDocumentNotification, mutate: SWRResponse['mutate'] }) => {
 
-    const { updateDoc, loading, error } = useFrappeUpdateDoc<RavenDocumentNotification>()
+    const { updateDoc, loading, error } = useFrappeUpdateDoc<ChatDocumentNotification>()
 
-    const methods = useForm<RavenDocumentNotification>({
+    const methods = useForm<ChatDocumentNotification>({
         disabled: loading,
         defaultValues: data
     })
@@ -46,8 +46,8 @@ const ViewDocumentNotificationContent = ({ data, mutate }: { data: RavenDocument
     const isDirty = !isEmpty(dirtyFields)
 
 
-    const onSubmit = (data: RavenDocumentNotification) => {
-        updateDoc("Raven Document Notification", data.name, data)
+    const onSubmit = (data: ChatDocumentNotification) => {
+        updateDoc("Chat Document Notification", data.name, data)
             .then((doc) => {
                 toast.success("Saved")
                 methods.reset(doc)

@@ -29,7 +29,7 @@ export const UserMentionRenderer = ({ node }: NodeViewRendererProps) => {
 
     const onClick = () => {
         if (user) {
-            call.post('raven.api.raven_channel.create_direct_message_channel', {
+            call.post('chat.api.chat_channel.create_direct_message_channel', {
                 user_id: user?.name
             }).then((res) => {
                 navigate(`/${workspaceID}/${res?.message}`)

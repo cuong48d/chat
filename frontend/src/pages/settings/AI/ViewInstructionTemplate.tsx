@@ -5,7 +5,7 @@ import { FullPageLoader } from "@/components/layout/Loaders/FullPageLoader"
 import PageContainer from "@/components/layout/Settings/PageContainer"
 import SettingsContentContainer from "@/components/layout/Settings/SettingsContentContainer"
 import SettingsPageHeader from "@/components/layout/Settings/SettingsPageHeader"
-import { RavenBotInstructionTemplate } from "@/types/RavenAI/RavenBotInstructionTemplate"
+import { ChatBotInstructionTemplate } from "@/types/ChatAI/ChatBotInstructionTemplate"
 import { isEmpty } from "@/utils/validations"
 import { Button } from "@radix-ui/themes"
 import { SWRResponse, useFrappeGetDoc, useFrappeUpdateDoc } from "frappe-react-sdk"
@@ -18,7 +18,7 @@ const ViewInstructionTemplate = () => {
 
     const { ID } = useParams<{ ID: string }>()
 
-    const { data, isLoading, error, mutate } = useFrappeGetDoc<RavenBotInstructionTemplate>("Raven Bot Instruction Template", ID)
+    const { data, isLoading, error, mutate } = useFrappeGetDoc<ChatBotInstructionTemplate>("Chat Bot Instruction Template", ID)
 
     return (
         <PageContainer>
@@ -29,11 +29,11 @@ const ViewInstructionTemplate = () => {
     )
 }
 
-const ViewBotContent = ({ data, mutate }: { data: RavenBotInstructionTemplate, mutate: SWRResponse['mutate'] }) => {
+const ViewBotContent = ({ data, mutate }: { data: ChatBotInstructionTemplate, mutate: SWRResponse['mutate'] }) => {
 
-    const { updateDoc, loading, error } = useFrappeUpdateDoc<RavenBotInstructionTemplate>()
+    const { updateDoc, loading, error } = useFrappeUpdateDoc<ChatBotInstructionTemplate>()
 
-    const methods = useForm<RavenBotInstructionTemplate>({
+    const methods = useForm<ChatBotInstructionTemplate>({
         disabled: loading,
         defaultValues: data
     })
@@ -43,8 +43,8 @@ const ViewBotContent = ({ data, mutate }: { data: RavenBotInstructionTemplate, m
     const isDirty = !isEmpty(dirtyFields)
 
 
-    const onSubmit = (data: RavenBotInstructionTemplate) => {
-        updateDoc("Raven Bot Instruction Template", data.name, data)
+    const onSubmit = (data: ChatBotInstructionTemplate) => {
+        updateDoc("Chat Bot Instruction Template", data.name, data)
             .then((doc) => {
                 toast.success("Saved")
                 methods.reset(doc)

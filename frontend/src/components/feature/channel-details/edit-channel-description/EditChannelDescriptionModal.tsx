@@ -28,7 +28,7 @@ export const EditChannelDescriptionModalContent = ({ channelData, onClose }: Ren
     const { updateDoc, loading: updatingDoc, error } = useFrappeUpdateDoc()
 
     const onSubmit = (data: RenameChannelForm) => {
-        updateDoc("Raven Channel", channelData?.name ?? null, {
+        updateDoc("Chat Channel", channelData?.name ?? null, {
             channel_description: data.channel_description
         }).then(() => {
             toast.success(__("Channel description updated"))

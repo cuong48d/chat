@@ -16,7 +16,7 @@ type Props = {
     content?: string,
     /** Channel to filter by */
     channel?: string,
-    /** Endpoint to fetch threads from. Defaults to `raven.api.threads.get_all_threads` */
+    /** Endpoint to fetch threads from. Defaults to `chat.api.threads.get_all_threads` */
     endpoint?: string,
     /** Whether to only show unread threads */
     onlyShowUnread?: boolean
@@ -37,7 +37,7 @@ type GetThreadsSWRKey = [string, {
     onlyShowUnread: boolean
 }]
 
-const ThreadsList = ({ aiThreads, content, channel, endpoint = "raven.api.threads.get_all_threads", onlyShowUnread }: Props) => {
+const ThreadsList = ({ aiThreads, content, channel, endpoint = "chat.api.threads.get_all_threads", onlyShowUnread }: Props) => {
 
     const { workspaceID } = useParams()
 

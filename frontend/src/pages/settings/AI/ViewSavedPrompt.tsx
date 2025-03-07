@@ -5,7 +5,7 @@ import { FullPageLoader } from "@/components/layout/Loaders/FullPageLoader"
 import PageContainer from "@/components/layout/Settings/PageContainer"
 import SettingsContentContainer from "@/components/layout/Settings/SettingsContentContainer"
 import SettingsPageHeader from "@/components/layout/Settings/SettingsPageHeader"
-import { RavenBotAIPrompt } from "@/types/RavenAI/RavenBotAIPrompt"
+import { ChatBotAIPrompt } from "@/types/ChatAI/ChatBotAIPrompt"
 import { isEmpty } from "@/utils/validations"
 import { Button } from "@radix-ui/themes"
 import { SWRResponse, useFrappeGetDoc, useFrappeUpdateDoc } from "frappe-react-sdk"
@@ -20,7 +20,7 @@ const ViewSavedPrompt = (props: Props) => {
 
     const { ID } = useParams<{ ID: string }>()
 
-    const { data, isLoading, error, mutate } = useFrappeGetDoc<RavenBotAIPrompt>("Raven Bot AI Prompt", ID)
+    const { data, isLoading, error, mutate } = useFrappeGetDoc<ChatBotAIPrompt>("Chat Bot AI Prompt", ID)
 
     return (
         <PageContainer>
@@ -31,11 +31,11 @@ const ViewSavedPrompt = (props: Props) => {
     )
 }
 
-const ViewSavedPromptContent = ({ data, mutate }: { data: RavenBotAIPrompt, mutate: SWRResponse['mutate'] }) => {
+const ViewSavedPromptContent = ({ data, mutate }: { data: ChatBotAIPrompt, mutate: SWRResponse['mutate'] }) => {
 
-    const { updateDoc, loading, error } = useFrappeUpdateDoc<RavenBotAIPrompt>()
+    const { updateDoc, loading, error } = useFrappeUpdateDoc<ChatBotAIPrompt>()
 
-    const methods = useForm<RavenBotAIPrompt>({
+    const methods = useForm<ChatBotAIPrompt>({
         disabled: loading,
         defaultValues: data
     })
@@ -45,8 +45,8 @@ const ViewSavedPromptContent = ({ data, mutate }: { data: RavenBotAIPrompt, muta
     const isDirty = !isEmpty(dirtyFields)
 
 
-    const onSubmit = (data: RavenBotAIPrompt) => {
-        updateDoc("Raven Bot AI Prompt", data.name, data)
+    const onSubmit = (data: ChatBotAIPrompt) => {
+        updateDoc("Chat Bot AI Prompt", data.name, data)
             .then((doc) => {
                 toast.success("Saved")
                 methods.reset(doc)

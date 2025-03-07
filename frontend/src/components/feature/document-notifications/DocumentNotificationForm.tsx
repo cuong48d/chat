@@ -2,7 +2,7 @@ import { ErrorText, HelperText, Label } from '@/components/common/Form'
 import LinkFormField from '@/components/common/LinkField/LinkFormField'
 import { HStack, Stack } from '@/components/layout/Stack'
 import useDoctypeMeta from '@/hooks/useDoctypeMeta'
-import { RavenDocumentNotification } from '@/types/RavenIntegrations/RavenDocumentNotification'
+import { ChatDocumentNotification } from '@/types/ChatIntegrations/ChatDocumentNotification'
 import { Badge, Box, Button, Checkbox, Code, Flex, Grid, IconButton, Link, Select, Separator, Table, Text, TextArea, TextField, Tooltip, VisuallyHidden } from '@radix-ui/themes'
 import { Tabs } from '@radix-ui/themes'
 import { Controller, ControllerFieldState, useFieldArray, useFormContext, useWatch } from 'react-hook-form'
@@ -51,9 +51,9 @@ export default DocumentNotificationForm
 
 
 const GeneralTab = ({ isEdit }: { isEdit: boolean }) => {
-    const { register, control, formState: { errors } } = useFormContext<RavenDocumentNotification>()
+    const { register, control, formState: { errors } } = useFormContext<ChatDocumentNotification>()
 
-    const document_type = useWatch<RavenDocumentNotification>({
+    const document_type = useWatch<ChatDocumentNotification>({
         name: 'document_type',
         control
     })
@@ -127,7 +127,7 @@ const GeneralTab = ({ isEdit }: { isEdit: boolean }) => {
                     label='Sender'
                     required
                     placeholder='Select a bot'
-                    doctype='Raven Bot'
+                    doctype='Chat Bot'
                     rules={{
                         required: 'Sender is required'
                     }}
@@ -234,7 +234,7 @@ const DoctypeVariables = ({ doctype, withoutJinja }: { doctype: string, withoutJ
 
 const RecipientsTab = () => {
 
-    const { control } = useFormContext<RavenDocumentNotification>()
+    const { control } = useFormContext<ChatDocumentNotification>()
 
     const { fields, append, remove } = useFieldArray({
         control,
@@ -397,7 +397,7 @@ const RecipientsTab = () => {
 
 const RecipientValueField = ({ index, value, onChange, onBlur, fieldState }: { index: number, value: string, onChange: (v: string) => void, onBlur: () => void, fieldState?: ControllerFieldState }) => {
 
-    const { control } = useFormContext<RavenDocumentNotification>()
+    const { control } = useFormContext<ChatDocumentNotification>()
 
     const variable_type = useWatch({
         control,
@@ -424,7 +424,7 @@ const RecipientValueField = ({ index, value, onChange, onBlur, fieldState }: { i
                 filters={[['is_direct_message', '=', 0], ['is_archived', '=', 0], ['is_thread', '=', 0]]}
                 required
                 placeholder='Select a channel'
-                doctype='Raven Channel'
+                doctype='Chat Channel'
                 value={value}
                 aria-invalid={fieldState?.error ? 'true' : 'false'}
                 setValue={onChange}
@@ -436,7 +436,7 @@ const RecipientValueField = ({ index, value, onChange, onBlur, fieldState }: { i
                 filters={[['enabled', '=', 1], ['type', '=', 'User']]}
                 required
                 placeholder='Select a user'
-                doctype='Raven User'
+                doctype='Chat User'
                 value={value}
                 aria-invalid={fieldState?.error ? 'true' : 'false'}
                 setValue={onChange}
@@ -483,14 +483,14 @@ const DoctypeVariableField = ({ type, document_type, value, onChange, onBlur, fi
                 if (field.fieldtype === 'Link') {
                     if (field.options) {
                         if (type === 'Channel') {
-                            if (field.options.includes('Raven Channel')) {
+                            if (field.options.includes('Chat Channel')) {
                                 suggested.push(field)
                             } else {
                                 fields.push(field)
                             }
                         }
                         if (type === 'User') {
-                            if (field.options.includes('Raven User') || field.options.includes('User')) {
+                            if (field.options.includes('Chat User') || field.options.includes('User')) {
                                 suggested.push(field)
                             } else {
                                 fields.push(field)
@@ -552,9 +552,9 @@ const DoctypeVariableField = ({ type, document_type, value, onChange, onBlur, fi
 
 const ConditionTab = () => {
 
-    const { register, control, formState: { errors } } = useFormContext<RavenDocumentNotification>()
+    const { register, control, formState: { errors } } = useFormContext<ChatDocumentNotification>()
 
-    const document_type = useWatch<RavenDocumentNotification>({
+    const document_type = useWatch<ChatDocumentNotification>({
         name: 'document_type',
         control
     })

@@ -1,14 +1,14 @@
 import { BiInfoCircle } from "react-icons/bi"
 import { Link } from "react-router-dom"
 import { Link as RadixLink, Text } from "@radix-ui/themes"
-import useRavenSettings from "@/hooks/fetchers/useRavenSettings"
+import useChatSettings from "@/hooks/fetchers/useChatSettings"
 import { CustomCallout } from "@/components/common/Callouts/CustomCallout"
 
 const AINotEnabledCallout = () => {
 
-    const { ravenSettings } = useRavenSettings()
+    const { chatSettings } = useChatSettings()
 
-    if (ravenSettings?.enable_ai_integration === 1) {
+    if (chatSettings?.enable_ai_integration === 1) {
         return null
     }
 
@@ -16,7 +16,7 @@ const AINotEnabledCallout = () => {
         <CustomCallout
             iconChildren={<BiInfoCircle size='18' />}
             rootProps={{ color: 'blue', variant: 'surface' }}
-            textChildren={<Text>Raven AI is not enabled. Please enable it in <RadixLink asChild color='blue' underline='always'><Link to='/settings/openai-settings'>OpenAI Settings</Link></RadixLink></Text>}
+            textChildren={<Text>Chat AI is not enabled. Please enable it in <RadixLink asChild color='blue' underline='always'><Link to='/settings/openai-settings'>OpenAI Settings</Link></RadixLink></Text>}
         />
     )
 }

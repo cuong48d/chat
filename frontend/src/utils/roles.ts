@@ -1,15 +1,15 @@
-export const hasRavenUserRole = () => {
+export const hasChatUserRole = () => {
 
     if (import.meta.env.DEV) {
         return true
     }
     //@ts-expect-error
-    return (window?.frappe?.boot?.user?.roles ?? []).includes('Raven User');
+    return (window?.frappe?.boot?.user?.roles ?? []).includes('Chat User');
 }
 
-export const hasRavenAdminRole = () => {
+export const hasChatAdminRole = () => {
     //@ts-expect-error
-    return (window?.frappe?.boot?.user?.roles ?? []).includes('Raven Admin');
+    return (window?.frappe?.boot?.user?.roles ?? []).includes('Chat Admin');
 }
 
 export const isSystemManager = () => {

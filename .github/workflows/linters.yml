@@ -3,12 +3,12 @@ name: Linters
 on:
   pull_request:
     paths:
-      - raven/**
+      - chat/**
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - raven/**
+      - chat/**
 
 jobs:
   linters:

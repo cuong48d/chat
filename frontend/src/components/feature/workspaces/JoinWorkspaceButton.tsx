@@ -11,7 +11,7 @@ type Props = {
 
 const JoinWorkspaceButton = ({ workspace }: Props) => {
 
-    const { call } = useFrappePostCall('raven.api.workspaces.join_workspace')
+    const { call } = useFrappePostCall('chat.api.workspaces.join_workspace')
 
     const { mutate } = useSWRConfig()
 

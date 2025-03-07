@@ -1,7 +1,7 @@
 import { HStack, Stack } from '@/components/layout/Stack'
 import useDoctypeMeta from '@/hooks/useDoctypeMeta'
-import { RavenAIFunction } from '@/types/RavenAI/RavenAIFunction'
-import { RavenAIFunctionParams } from '@/types/RavenAI/RavenAIFunctionParams'
+import { ChatAIFunction } from '@/types/ChatAI/ChatAIFunction'
+import { ChatAIFunctionParams } from '@/types/ChatAI/ChatAIFunctionParams'
 import { in_list } from '@/utils/validations'
 import { Badge, Button, Card, Dialog, IconButton, Separator, Text, Tooltip, VisuallyHidden } from '@radix-ui/themes'
 import { useFieldArray, UseFieldArrayUpdate, useFormContext } from 'react-hook-form'
@@ -17,7 +17,7 @@ type Props = {}
 
 const DoctypeVariableBuilder = (props: Props) => {
 
-    const { control, getValues, setValue, watch } = useFormContext<RavenAIFunction>()
+    const { control, getValues, setValue, watch } = useFormContext<ChatAIFunction>()
 
     const type = watch('type')
     const doctype = watch('reference_doctype')
@@ -36,14 +36,14 @@ export default DoctypeVariableBuilder
 
 const VariableList = ({ doctype }: { doctype: string }) => {
 
-    const { control } = useFormContext<RavenAIFunction>()
+    const { control } = useFormContext<ChatAIFunction>()
 
     const { fields, append, remove, update } = useFieldArray({
         control,
         name: 'parameters'
     })
 
-    const addField = (data: Partial<RavenAIFunctionParams>) => {
+    const addField = (data: Partial<ChatAIFunctionParams>) => {
         // @ts-expect-error
         append(data)
     }
@@ -65,11 +65,11 @@ const VariableList = ({ doctype }: { doctype: string }) => {
 
 }
 
-const FieldRow = ({ field, index, remove, doctype, update }: { field: RavenAIFunctionParams, index: number, remove: (index: number) => void, doctype: string, update: UseFieldArrayUpdate<RavenAIFunction, "parameters"> }) => {
+const FieldRow = ({ field, index, remove, doctype, update }: { field: ChatAIFunctionParams, index: number, remove: (index: number) => void, doctype: string, update: UseFieldArrayUpdate<ChatAIFunction, "parameters"> }) => {
 
     const { doc: doctypeMeta } = useDoctypeMeta(doctype)
-    const onEdit = (data: Partial<RavenAIFunctionParams>) => {
-        update(index, data as RavenAIFunctionParams)
+    const onEdit = (data: Partial<ChatAIFunctionParams>) => {
+        update(index, data as ChatAIFunctionParams)
     }
 
 
@@ -143,11 +143,11 @@ const FieldRow = ({ field, index, remove, doctype, update }: { field: RavenAIFun
     </Card>
 }
 
-const AddDoctypeVariableDialog = ({ onAdd, doctype }: { onAdd: (data: Partial<RavenAIFunctionParams>) => void, doctype: string }) => {
+const AddDoctypeVariableDialog = ({ onAdd, doctype }: { onAdd: (data: Partial<ChatAIFunctionParams>) => void, doctype: string }) => {
 
     const [open, setOpen] = useState(false)
 
-    const onAddField = (data: Partial<RavenAIFunctionParams>) => {
+    const onAddField = (data: Partial<ChatAIFunctionParams>) => {
         onAdd(data)
         setOpen(false)
     }
@@ -167,11 +167,11 @@ const AddDoctypeVariableDialog = ({ onAdd, doctype }: { onAdd: (data: Partial<Ra
     </Dialog.Root>
 }
 
-const EditDoctypeVariableDialog = ({ onEdit, field, doctype }: { onEdit: (data: Partial<RavenAIFunctionParams>) => void, field: RavenAIFunctionParams, doctype: string }) => {
+const EditDoctypeVariableDialog = ({ onEdit, field, doctype }: { onEdit: (data: Partial<ChatAIFunctionParams>) => void, field: ChatAIFunctionParams, doctype: string }) => {
 
     const [open, setOpen] = useState(false)
 
-    const onEditField = (data: Partial<RavenAIFunctionParams>) => {
+    const onEditField = (data: Partial<ChatAIFunctionParams>) => {
         onEdit(data)
         setOpen(false)
     }
@@ -200,9 +200,9 @@ const EditDoctypeVariableDialog = ({ onEdit, field, doctype }: { onEdit: (data: 
 }
 
 
-const ImportDoctypeVariables = ({ doctype, append }: { doctype: string, append: (data: Partial<RavenAIFunctionParams>) => void }) => {
+const ImportDoctypeVariables = ({ doctype, append }: { doctype: string, append: (data: Partial<ChatAIFunctionParams>) => void }) => {
 
-    const { getValues, setValue } = useFormContext<RavenAIFunction>()
+    const { getValues, setValue } = useFormContext<ChatAIFunction>()
 
     const { doc: doctypeMeta, childDocs } = useDoctypeMeta(doctype)
 
@@ -210,7 +210,7 @@ const ImportDoctypeVariables = ({ doctype, append }: { doctype: string, append: 
         let description = field.label ?? field.fieldname ?? ''
 
         let options = ''
-        let type: RavenAIFunctionParams['type'] = 'string'
+        let type: ChatAIFunctionParams['type'] = 'string'
 
         if (field.fieldtype === 'Select') {
             // Need to set the options

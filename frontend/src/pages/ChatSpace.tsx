@@ -39,7 +39,7 @@ const ChatSpaceArea = ({ channelID }: { channelID: string }) => {
     useEffect(() => {
 
         // setting last visited channel in local storage
-        localStorage.setItem("ravenLastChannel", channelID)
+        localStorage.setItem("chatLastChannel", channelID)
 
         const unread_count = cache.get('unread_channel_count')
 

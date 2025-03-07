@@ -1,11 +1,11 @@
-import { RavenMessageAction } from "@/types/RavenIntegrations/RavenMessageAction"
+import { ChatMessageAction } from "@/types/ChatIntegrations/ChatMessageAction"
 import { DIALOG_CONTENT_CLASS } from "@/utils/layout/dialog"
 import { Box, Button, Checkbox, Dialog, Select, Text, TextArea, TextField } from "@radix-ui/themes"
 import clsx from "clsx"
 import { useFrappeGetCall, useFrappeGetDoc, useFrappePostCall } from "frappe-react-sdk"
 import { Controller, FormProvider, useForm, useFormContext } from "react-hook-form"
 import { HStack, Stack } from "@/components/layout/Stack"
-import { RavenMessageActionFields } from "@/types/RavenIntegrations/RavenMessageActionFields"
+import { ChatMessageActionFields } from "@/types/ChatIntegrations/ChatMessageActionFields"
 import { ErrorText, HelperText, Label } from "@/components/common/Form"
 import LinkFormField from "@/components/common/LinkField/LinkFormField"
 import { useEffect } from "react"
@@ -23,7 +23,7 @@ interface MessageActionModalProps {
 
 const MessageActionModal = ({ messageID, actionID, onClose }: MessageActionModalProps) => {
 
-    const { data: action } = useFrappeGetDoc<RavenMessageAction>("Raven Message Action", actionID, actionID ? undefined : null)
+    const { data: action } = useFrappeGetDoc<ChatMessageAction>("Chat Message Action", actionID, actionID ? undefined : null)
 
     return <Dialog.Root open={actionID !== ''} onOpenChange={onClose}>
         {action &&
@@ -43,10 +43,10 @@ const MessageActionModal = ({ messageID, actionID, onClose }: MessageActionModal
 
 export default MessageActionModal
 
-const MessageActionDialogContent = ({ action, messageID }: { action: RavenMessageAction, messageID: string }) => {
+const MessageActionDialogContent = ({ action, messageID }: { action: ChatMessageAction, messageID: string }) => {
 
     // Fetch the form default values for the action and message
-    const { data, error } = useFrappeGetCall('raven.api.message_actions.get_action_defaults', {
+    const { data, error } = useFrappeGetCall('chat.api.message_actions.get_action_defaults', {
         action_id: action.name,
         message_id: messageID
     }, undefined, {
@@ -59,7 +59,7 @@ const MessageActionDialogContent = ({ action, messageID }: { action: RavenMessag
     </Stack>
 }
 
-const MessageActionForm = ({ action, messageID, defaultValues }: { action: RavenMessageAction, messageID: string, defaultValues?: Record<string, any> }) => {
+const MessageActionForm = ({ action, messageID, defaultValues }: { action: ChatMessageAction, messageID: string, defaultValues?: Record<string, any> }) => {
 
     const setMessageAction = useSetAtom(messageActionAtom)
     const methods = useForm({
@@ -70,7 +70,7 @@ const MessageActionForm = ({ action, messageID, defaultValues }: { action: Raven
         methods.reset(defaultValues)
     }, [defaultValues])
 
-    const { call, error, loading } = useFrappePostCall('raven.api.message_actions.execute_action')
+    const { call, error, loading } = useFrappePostCall('chat.api.message_actions.execute_action')
 
     const onSubmit = (data: Record<string, any>) => {
         call({
@@ -111,7 +111,7 @@ const MessageActionForm = ({ action, messageID, defaultValues }: { action: Raven
 
 type DataFieldTypes = "number" | "search" | "time" | "text" | "hidden" | "tel" | "url" | "email" | "date" | "datetime-local" | "month" | "password" | "week"
 
-const FieldRenderer = ({ field, autoFocus }: { field: RavenMessageActionFields, autoFocus?: boolean }) => {
+const FieldRenderer = ({ field, autoFocus }: { field: ChatMessageActionFields, autoFocus?: boolean }) => {
 
     const { register, control, formState: { errors } } = useFormContext()
 

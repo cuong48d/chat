@@ -13,14 +13,14 @@ interface RetractVoteProps {
 export const RetractVote = ({ message }: RetractVoteProps) => {
 
     // fetch poll data using message_id
-    const { data } = useFrappeGetCall<{ message: Poll }>('raven.api.raven_poll.get_poll', {
+    const { data } = useFrappeGetCall<{ message: Poll }>('chat.api.chat_poll.get_poll', {
         'message_id': message?.name,
     }, `poll_data_${message?.poll_id}`, {
         revalidateOnFocus: false,
         revalidateOnReconnect: false
     })
 
-    const { call } = useFrappePostCall('raven.api.raven_poll.retract_vote')
+    const { call } = useFrappePostCall('chat.api.chat_poll.retract_vote')
     const onRetractVote = () => {
         return call({
             poll_id: message?.poll_id,

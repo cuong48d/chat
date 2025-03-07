@@ -18,7 +18,7 @@ const AddWorkspaceMembersModalContent = ({ workspaceID, onClose }: { workspaceID
 
     const { mutate } = useSWRConfig()
 
-    const { call, error, loading } = useFrappePostCall('raven.api.workspaces.add_workspace_members')
+    const { call, error, loading } = useFrappePostCall('chat.api.workspaces.add_workspace_members')
 
     const methods = useForm<AddWorkspaceMemberForm>({
         defaultValues: {

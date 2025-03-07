@@ -7,7 +7,7 @@ import { BiDotsVerticalRounded } from "react-icons/bi"
 import { useEffect, useState } from "react"
 import { DIALOG_CONTENT_CLASS } from "@/utils/layout/dialog"
 import { Loader } from "@/components/common/Loader"
-import { RavenWebhook } from "@/types/RavenIntegrations/RavenWebhook"
+import { ChatWebhook } from "@/types/ChatIntegrations/ChatWebhook"
 import { WebhookForm } from "./WebhookForm"
 import { toast } from "sonner"
 import { isEmpty } from "@/utils/validations"
@@ -15,9 +15,9 @@ import SettingsContentContainer from "@/components/layout/Settings/SettingsConte
 import SettingsPageHeader, { HeaderBadge } from "@/components/layout/Settings/SettingsPageHeader"
 import { HStack } from "@/components/layout/Stack"
 
-export const ViewWebhookPage = ({ data, mutate }: { data: FrappeDoc<RavenWebhook>, mutate: KeyedMutator<FrappeDoc<RavenWebhook>> }) => {
+export const ViewWebhookPage = ({ data, mutate }: { data: FrappeDoc<ChatWebhook>, mutate: KeyedMutator<FrappeDoc<ChatWebhook>> }) => {
 
-    const methods = useForm<RavenWebhook>({
+    const methods = useForm<ChatWebhook>({
         defaultValues: {
             ...data,
             docstatus: data.docstatus
@@ -31,7 +31,7 @@ export const ViewWebhookPage = ({ data, mutate }: { data: FrappeDoc<RavenWebhook
     const isDirty = !isEmpty(dirtyFields)
 
     const onSubmit = async (data: FieldValues) => {
-        return updateDoc('Raven Webhook', data.name, data)
+        return updateDoc('Chat Webhook', data.name, data)
             .then((doc) => {
                 toast.success("Webhook updated")
                 reset()
@@ -51,7 +51,7 @@ export const ViewWebhookPage = ({ data, mutate }: { data: FrappeDoc<RavenWebhook
     }
 
     const onUpdateEnabled = () => {
-        updateDoc('Raven Webhook', data.name, {
+        updateDoc('Chat Webhook', data.name, {
             enabled: !data.enabled
         }).then(() => {
             toast.success(`Webhook ${data.enabled ? 'disabled' : 'enabled'}`)

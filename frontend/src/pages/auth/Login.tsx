@@ -181,9 +181,9 @@ export const Component = () => {
 
 const useLoginContext = () => {
     // GET call for Login Context (settings for social logins, email link etc)
-    return useFrappeGetCall<LoginContext>('raven.api.login.get_context', {
-        "redirect-to": "/raven"
-    }, 'raven.api.login.get_context', {
+    return useFrappeGetCall<LoginContext>('chat.api.login.get_context', {
+        "redirect-to": "/chat"
+    }, 'chat.api.login.get_context', {
         revalidateOnMount: true,
         revalidateOnReconnect: false,
         revalidateOnFocus: false

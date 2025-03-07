@@ -8,7 +8,7 @@ import { useActiveState } from '../useActiveState'
  * SWRKey: active_users
  */
 const useFetchActiveUsers = () => {
-    const res = useFrappeGetCall<{ message: string[] }>('raven.api.user_availability.get_active_users',
+    const res = useFrappeGetCall<{ message: string[] }>('chat.api.user_availability.get_active_users',
         undefined,
         'active_users',
         {
@@ -31,7 +31,7 @@ export const useFetchActiveUsersRealtime = () => {
     useActiveState()
 
     /** Hook to listen to user_active_state */
-    useFrappeEventListener('raven:user_active_state_updated', (data) => {
+    useFrappeEventListener('chat:user_active_state_updated', (data) => {
         if (data.user !== currentUser) {
             // If the user is not the current user, update the active_users list
             // No need to revalidate the data as the websocket event has emitted the new data for that user

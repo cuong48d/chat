@@ -1,0 +1,138 @@
+.chat-container {
+    transition: height 0.3s ease-in-out;
+}
+
+.chat-container[data-open-state="false"] {
+    height: var(--chat-header-height);
+    overflow: hidden;
+}
+
+.chat-container[data-open-state="true"] {
+    height: var(--chat-expanded-height);
+    overflow: hidden;
+
+    .chat-header {
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+.chat-content-container {
+    position: relative;
+}
+
+.chat-content-container[data-channel-list-view="false"] {
+    .chat-channel-list {
+        width: 0;
+        position: absolute;
+        left: -100%;
+        opacity: 0;
+    }
+
+    .chat-chat-view {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        opacity: 1;
+    }
+}
+
+.chat-content-container[data-channel-list-view="true"] {
+    .chat-channel-list {
+        width: 100%;
+        opacity: 1;
+        position: absolute;
+        left: 0;
+    }
+
+    .chat-chat-view {
+        width: 0;
+        left: 100%;
+        position: absolute;
+        opacity: 0;
+    }
+}
+
+.chat-header {
+    height: var(--chat-header-height);
+    padding-inline: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 0.5rem;
+
+    .open-chat-button {
+        padding: 4px;
+        box-shadow: none;
+        border: none;
+
+        svg {
+            fill: var(--text-muted);
+        }
+
+        // padding-right: 4px;
+
+        &:hover {
+            background-color: var(--control-bg);
+        }
+    }
+
+    .back-button {
+        padding: 4px;
+
+        svg {
+            fill: var(--heading-color);
+        }
+
+        // padding-right: 4px;
+
+        &:hover {
+            background-color: var(--control-bg);
+        }
+    }
+}
+
+.chat-logo {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--heading-color);
+    padding-right: 4px;
+}
+
+.chat-unread-count {
+    background-color: var(--red-avatar-bg);
+    color: var(--red-avatar-color);
+    padding: 0.1rem 0.5rem;
+    margin-bottom: -0.3rem;
+    margin-right: 4px;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.chat-channel-header-name {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.chat-channel-header {
+    display: flex;
+    align-items: center;
+    color: var(--heading-color);
+    gap: 0.4rem;
+
+    svg {
+        fill: var(--heading-color);
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 0.1rem;
+    }
+
+    .chat-dm-channel-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}

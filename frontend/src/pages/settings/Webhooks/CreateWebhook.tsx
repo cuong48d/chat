@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@radix-ui/themes'
 import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import { WebhookForm } from '../../../components/feature/integrations/webhooks/WebhookForm'
-import { RavenWebhook } from '@/types/RavenIntegrations/RavenWebhook'
+import { ChatWebhook } from '@/types/ChatIntegrations/ChatWebhook'
 import { toast } from 'sonner'
 import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
@@ -16,7 +16,7 @@ const CreateWebhook = () => {
 
     const navigate = useNavigate()
 
-    const methods = useForm<RavenWebhook>({
+    const methods = useForm<ChatWebhook>({
         defaultValues: {
             enabled: 1,
             timeout: 5
@@ -24,8 +24,8 @@ const CreateWebhook = () => {
     })
     const { createDoc, loading, reset, error } = useFrappeCreateDoc()
 
-    const onSubmit = (data: RavenWebhook) => {
-        createDoc('Raven Webhook', data)
+    const onSubmit = (data: ChatWebhook) => {
+        createDoc('Chat Webhook', data)
             .then((doc) => {
                 reset()
                 methods.reset()

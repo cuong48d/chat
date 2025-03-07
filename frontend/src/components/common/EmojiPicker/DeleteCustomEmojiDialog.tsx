@@ -14,7 +14,7 @@ const DeleteCustomEmojiDialog = ({ emojiID, onDelete }: Props) => {
     const { deleteDoc, loading, error } = useFrappeDeleteDoc()
 
     const handleDelete = async () => {
-        await deleteDoc('Raven Custom Emoji', emojiID)
+        await deleteDoc('Chat Custom Emoji', emojiID)
         onDelete()
     }
 

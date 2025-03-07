@@ -21,7 +21,7 @@ export const EmptyStateForSearch = () => {
             <Flex direction='column' gap='1' className="text-center">
                 <Text weight="bold" size='5'>Nothing turned up</Text>
                 <Text as='span' size='2'>You may want to try using different keywords, checking for typos or adjusting your filters.</Text>
-                <Text as='span' size='2'>Not the results that you expected? File an issue on <Link href="https://github.com/The-Commit-Company/Raven" target="_blank" rel="noreferrer">
+                <Text as='span' size='2'>Not the results that you expected? File an issue on <Link href="https://github.com/The-Commit-Company/Chat" target="_blank" rel="noreferrer">
                     <Text color='blue' size='2'>GitHub</Text>
                 </Link>.
                 </Text>

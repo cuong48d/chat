@@ -21,21 +21,21 @@ import { init } from 'emoji-mart'
 //   "frappe.model.workflow.get_transitions",
 //   "frappe.desk.reportview.get_count",
 //   "frappe.core.doctype.server_script.server_script.enabled",
-//   "raven.api.message_actions.get_action_defaults",
-//   "raven.api.document_link.get_preview_data"
+//   "chat.api.message_actions.get_action_defaults",
+//   "chat.api.document_link.get_preview_data"
 // ]
 
 const CACHE_KEYS = [
-  "raven.api.login.get_context",
+  "chat.api.login.get_context",
   "workspaces_list",
-  "raven.api.raven_users.get_list",
+  "chat.api.chat_users.get_list",
   "channel_list",
 ]
 
 const isDesktop = window.innerWidth > 768
 
-const lastWorkspace = localStorage.getItem('ravenLastWorkspace') ?? ''
-const lastChannel = localStorage.getItem('ravenLastChannel') ?? ''
+const lastWorkspace = localStorage.getItem('chatLastWorkspace') ?? ''
+const lastChannel = localStorage.getItem('chatLastChannel') ?? ''
 
 
 // Initialize emoji-mart

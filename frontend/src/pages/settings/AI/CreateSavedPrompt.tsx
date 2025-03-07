@@ -4,7 +4,7 @@ import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
-import { RavenBotAIPrompt } from '@/types/RavenAI/RavenBotAIPrompt'
+import { ChatBotAIPrompt } from '@/types/ChatAI/ChatBotAIPrompt'
 import { Button } from '@radix-ui/themes'
 import { useFrappeCreateDoc } from 'frappe-react-sdk'
 import { useEffect } from 'react'
@@ -13,17 +13,17 @@ import { useNavigate } from 'react-router-dom'
 
 const CreateSavedPrompt = () => {
 
-    const { createDoc, loading, error } = useFrappeCreateDoc<RavenBotAIPrompt>()
+    const { createDoc, loading, error } = useFrappeCreateDoc<ChatBotAIPrompt>()
 
-    const methods = useForm<RavenBotAIPrompt>({
+    const methods = useForm<ChatBotAIPrompt>({
         disabled: loading
     })
 
     const navigate = useNavigate()
 
 
-    const onSubmit = (data: RavenBotAIPrompt) => {
-        createDoc("Raven Bot AI Prompt", data)
+    const onSubmit = (data: ChatBotAIPrompt) => {
+        createDoc("Chat Bot AI Prompt", data)
             .then((doc) => {
                 navigate(`../${doc.name}`)
             })

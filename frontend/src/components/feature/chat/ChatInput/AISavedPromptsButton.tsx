@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import { Command } from 'cmdk'
 import { useIsDesktop } from '@/hooks/useMediaQuery'
 import { useFrappeGetCall } from 'frappe-react-sdk'
-import { RavenBotAIPrompt } from '@/types/RavenAI/RavenBotAIPrompt'
+import { ChatBotAIPrompt } from '@/types/ChatAI/ChatBotAIPrompt'
 import { getKeyboardMetaKeyString } from '@/utils/layout/keyboardKey'
 import { Stack } from '@/components/layout/Stack'
 import { useNavigate } from 'react-router-dom'
@@ -59,14 +59,14 @@ const AISavedPromptsButton = () => {
     </Dialog.Root>
 }
 
-type SavedPrompt = Pick<RavenBotAIPrompt, 'name' | 'raven_bot' | 'prompt' | 'is_global'>
+type SavedPrompt = Pick<ChatBotAIPrompt, 'name' | 'chat_bot' | 'prompt' | 'is_global'>
 const SavedPrompts = ({ onClose }: { onClose: () => void }) => {
 
     const { editor } = useCurrentEditor()
 
     const isDesktop = useIsDesktop()
 
-    const { data, isLoading } = useFrappeGetCall<{ message: SavedPrompt[] }>('raven.api.ai_features.get_saved_prompts', {
+    const { data, isLoading } = useFrappeGetCall<{ message: SavedPrompt[] }>('chat.api.ai_features.get_saved_prompts', {
     })
 
     const navigate = useNavigate()

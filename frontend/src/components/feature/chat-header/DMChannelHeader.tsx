@@ -52,7 +52,7 @@ export const DMChannelHeader = ({ channelData }: DMChannelHeaderProps) => {
 
     const isDesktop = useIsDesktop()
 
-    const lastWorkspace = localStorage.getItem('ravenLastWorkspace')
+    const lastWorkspace = localStorage.getItem('chatLastWorkspace')
 
     return (
         <PageHeader>

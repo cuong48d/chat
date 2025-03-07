@@ -6,8 +6,8 @@ import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
 import { HStack } from '@/components/layout/Stack'
-import { RavenAIFunction } from '@/types/RavenAI/RavenAIFunction'
-import { hasRavenAdminRole, isSystemManager } from '@/utils/roles'
+import { ChatAIFunction } from '@/types/ChatAI/ChatAIFunction'
+import { hasChatAdminRole, isSystemManager } from '@/utils/roles'
 import { Badge, Button, Checkbox, Table, Text } from '@radix-ui/themes'
 import { useFrappeGetDocList } from 'frappe-react-sdk'
 import { LuSquareFunction } from 'react-icons/lu'
@@ -17,15 +17,15 @@ type Props = {}
 
 const FunctionList = (props: Props) => {
 
-    const isRavenAdmin = hasRavenAdminRole() || isSystemManager()
+    const isChatAdmin = hasChatAdminRole() || isSystemManager()
 
-    const { data, isLoading, error } = useFrappeGetDocList<RavenAIFunction>("Raven AI Function", {
+    const { data, isLoading, error } = useFrappeGetDocList<ChatAIFunction>("Chat AI Function", {
         fields: ["name", "description", "function_name", "type", "requires_write_permissions"],
         orderBy: {
             field: "modified",
             order: "desc"
         }
-    }, isRavenAdmin ? undefined : null, {
+    }, isChatAdmin ? undefined : null, {
         errorRetryCount: 2
     })
 
@@ -35,7 +35,7 @@ const FunctionList = (props: Props) => {
                 <SettingsPageHeader
                     title='Functions'
                     description='Declare functions to be used by your AI bots.'
-                    actions={<Button asChild disabled={!isRavenAdmin}>
+                    actions={<Button asChild disabled={!isChatAdmin}>
                         <Link to='create'>Create</Link>
                     </Button>}
                 />
@@ -43,7 +43,7 @@ const FunctionList = (props: Props) => {
                 <ErrorBanner error={error} />
                 <AINotEnabledCallout />
                 {data && data.length > 0 && <FunctionTable functions={data} />}
-                {(data?.length === 0 || !isRavenAdmin) && <EmptyState>
+                {(data?.length === 0 || !isChatAdmin) && <EmptyState>
                     <EmptyStateIcon>
                         <LuSquareFunction />
                     </EmptyStateIcon>
@@ -51,7 +51,7 @@ const FunctionList = (props: Props) => {
                     <EmptyStateDescription>
                         Use the no-code builder to create functions that allow AI bots to perform actions within the system when requested, like creating documents, or fetching reports to analyze.
                     </EmptyStateDescription>
-                    {isRavenAdmin && <EmptyStateLinkAction to='create'>
+                    {isChatAdmin && <EmptyStateLinkAction to='create'>
                         Create your first function
                     </EmptyStateLinkAction>}
                 </EmptyState>}
@@ -60,7 +60,7 @@ const FunctionList = (props: Props) => {
     )
 }
 
-const FunctionTable = ({ functions }: { functions: RavenAIFunction[] }) => {
+const FunctionTable = ({ functions }: { functions: ChatAIFunction[] }) => {
     return (
         <Table.Root variant="surface" className='rounded-sm animate-fadein'>
             <Table.Header>

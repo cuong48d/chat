@@ -6,7 +6,7 @@ import { FullPageLoader } from "@/components/layout/Loaders/FullPageLoader"
 import PageContainer from "@/components/layout/Settings/PageContainer"
 import SettingsContentContainer from "@/components/layout/Settings/SettingsContentContainer"
 import SettingsPageHeader from "@/components/layout/Settings/SettingsPageHeader"
-import { RavenWorkspace } from "@/types/Raven/RavenWorkspace"
+import { ChatWorkspace } from "@/types/Chat/ChatWorkspace"
 import { isEmpty } from "@/utils/validations"
 import { Box, Button, Tabs } from "@radix-ui/themes"
 import { useFrappeGetDoc, useFrappeUpdateDoc, SWRResponse, useSWRConfig } from "frappe-react-sdk"
@@ -24,7 +24,7 @@ const ViewWorkspace = () => {
 
     const { ID } = useParams<{ ID: string }>()
 
-    const { data, isLoading, error, mutate } = useFrappeGetDoc<RavenWorkspace>("Raven Workspace", ID)
+    const { data, isLoading, error, mutate } = useFrappeGetDoc<ChatWorkspace>("Chat Workspace", ID)
 
     return (
         <PageContainer>
@@ -35,11 +35,11 @@ const ViewWorkspace = () => {
     )
 }
 
-const ViewWorkspaceContent = ({ data, mutate }: { data: RavenWorkspace, mutate: SWRResponse['mutate'] }) => {
+const ViewWorkspaceContent = ({ data, mutate }: { data: ChatWorkspace, mutate: SWRResponse['mutate'] }) => {
 
-    const { updateDoc, loading, error } = useFrappeUpdateDoc<RavenWorkspace>()
+    const { updateDoc, loading, error } = useFrappeUpdateDoc<ChatWorkspace>()
 
-    const methods = useForm<RavenWorkspace>({
+    const methods = useForm<ChatWorkspace>({
         defaultValues: data
     })
 
@@ -50,8 +50,8 @@ const ViewWorkspaceContent = ({ data, mutate }: { data: RavenWorkspace, mutate: 
     const { mutate: globalMutate } = useSWRConfig()
 
 
-    const onSubmit = (data: RavenWorkspace) => {
-        updateDoc("Raven Workspace", data.name, data)
+    const onSubmit = (data: ChatWorkspace) => {
+        updateDoc("Chat Workspace", data.name, data)
             .then((doc) => {
                 toast.success("Saved")
                 methods.reset(doc)

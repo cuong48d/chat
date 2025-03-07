@@ -17,7 +17,7 @@ interface LeaveChannelModalProps {
 
 export const LeaveChannelModal = ({ onClose, channelData, isDrawer, closeDetailsModal }: LeaveChannelModalProps) => {
 
-    const { call, loading: deletingDoc, error } = useFrappePostCall('raven.api.raven_channel.leave_channel')
+    const { call, loading: deletingDoc, error } = useFrappePostCall('chat.api.chat_channel.leave_channel')
     const navigate = useNavigate()
 
     const { mutate } = useContext(ChannelListContext) as ChannelListContextType

@@ -7,7 +7,7 @@ const useUnreadThreadsCount = () => {
 
     const { workspaceID } = useParams()
 
-    return useFrappeGetCall<{ message: UnreadThread[] }>('raven.api.threads.get_unread_threads', {
+    return useFrappeGetCall<{ message: UnreadThread[] }>('chat.api.threads.get_unread_threads', {
         workspace: workspaceID
     }, ["unread_thread_count", workspaceID])
 
@@ -29,7 +29,7 @@ export const useUnreadThreadsCountEventListener = () => {
         // This endpoint will only return the count for that thread
         mutate(["unread_thread_count", workspaceID], async (data?: { message: UnreadThread[] }) => {
 
-            return call.get<{ message: UnreadThread[] }>('raven.api.threads.get_unread_threads', {
+            return call.get<{ message: UnreadThread[] }>('chat.api.threads.get_unread_threads', {
                 workspace: workspaceID,
                 thread_id: threadID
             }).then((res) => {

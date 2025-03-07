@@ -6,7 +6,7 @@ import PageContainer from "@/components/layout/Settings/PageContainer"
 import SettingsContentContainer from "@/components/layout/Settings/SettingsContentContainer"
 import SettingsPageHeader from "@/components/layout/Settings/SettingsPageHeader"
 import { HStack } from "@/components/layout/Stack"
-import { RavenBot } from "@/types/RavenBot/RavenBot"
+import { ChatBot } from "@/types/ChatBot/ChatBot"
 import { isEmpty } from "@/utils/validations"
 import { Button } from "@radix-ui/themes"
 import { useFrappeGetDoc, useFrappeUpdateDoc, SWRResponse, FrappeContext, FrappeConfig } from "frappe-react-sdk"
@@ -22,7 +22,7 @@ const ViewBot = (props: Props) => {
 
     const { ID } = useParams<{ ID: string }>()
 
-    const { data, isLoading, error, mutate } = useFrappeGetDoc<RavenBot>("Raven Bot", ID)
+    const { data, isLoading, error, mutate } = useFrappeGetDoc<ChatBot>("Chat Bot", ID)
 
     return (
         <PageContainer>
@@ -33,11 +33,11 @@ const ViewBot = (props: Props) => {
     )
 }
 
-const ViewBotContent = ({ data, mutate }: { data: RavenBot, mutate: SWRResponse['mutate'] }) => {
+const ViewBotContent = ({ data, mutate }: { data: ChatBot, mutate: SWRResponse['mutate'] }) => {
 
-    const { updateDoc, loading, error } = useFrappeUpdateDoc<RavenBot>()
+    const { updateDoc, loading, error } = useFrappeUpdateDoc<ChatBot>()
 
-    const methods = useForm<RavenBot>({
+    const methods = useForm<ChatBot>({
         disabled: loading,
         defaultValues: data
     })
@@ -47,8 +47,8 @@ const ViewBotContent = ({ data, mutate }: { data: RavenBot, mutate: SWRResponse[
     const isDirty = !isEmpty(dirtyFields)
 
 
-    const onSubmit = (data: RavenBot) => {
-        updateDoc("Raven Bot", data.name, data)
+    const onSubmit = (data: ChatBot) => {
+        updateDoc("Chat Bot", data.name, data)
             .then((doc) => {
                 toast.success("Saved")
                 methods.reset(doc)
@@ -94,17 +94,17 @@ const ViewBotContent = ({ data, mutate }: { data: RavenBot, mutate: SWRResponse[
 
 }
 
-const OpenChatButton = ({ bot }: { bot: RavenBot }) => {
+const OpenChatButton = ({ bot }: { bot: ChatBot }) => {
 
     const { call } = useContext(FrappeContext) as FrappeConfig
 
     const navigate = useNavigate()
 
-    const currentWorkspace = localStorage.getItem('ravenLastWorkspace')
+    const currentWorkspace = localStorage.getItem('chatLastWorkspace')
 
     const openChat = () => {
-        call.post("raven.api.raven_channel.create_direct_message_channel", {
-            user_id: bot.raven_user
+        call.post("chat.api.chat_channel.create_direct_message_channel", {
+            user_id: bot.chat_user
         }).then((res) => {
             if (currentWorkspace) {
                 navigate(`/${currentWorkspace}/${res.message}`)

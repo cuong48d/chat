@@ -52,10 +52,10 @@ const AddUsers = () => {
     })
 
     const users = useContext(UserListContext)
-    const ravenUsersArray = users.enabledUsers.map(user => user.name)
+    const chatUsersArray = users.enabledUsers.map(user => user.name)
 
     const [selected, setSelected] = useState<string[]>([])
-    const { loading, call, error: postError } = useFrappePostCall<{ message: AddUsersResponse }>('raven.api.raven_users.add_users_to_raven')
+    const { loading, call, error: postError } = useFrappePostCall<{ message: AddUsersResponse }>('chat.api.chat_users.add_users_to_chat')
 
     const [failedUsers, setFailedUsers] = useState<User[]>([])
 
@@ -67,10 +67,10 @@ const AddUsers = () => {
                 users: JSON.stringify(selected)
             }).then((res) => {
                 if (res.message.success_users.length !== 0) {
-                    toast.success(`You have added ${res.message.success_users.length} users to Raven`)
+                    toast.success(`You have added ${res.message.success_users.length} users to Chat`)
                 }
 
-                mutate('raven.api.raven_users.get_list')
+                mutate('chat.api.chat_users.get_list')
 
                 if (res.message.failed_users.length === 0) {
                     setSelected([])
@@ -82,7 +82,7 @@ const AddUsers = () => {
         }
     }
 
-    const canAddRavenUsers = isSystemManager()
+    const canAddChatUsers = isSystemManager()
 
     return (
         <PageContainer>
@@ -90,9 +90,9 @@ const AddUsers = () => {
 
             <SettingsContentContainer>
                 <SettingsPageHeader
-                    title="Add users to Raven"
-                    description={<>Only System managers have the ability to add users; users you add will be given the <Strong>"Raven User"</Strong> role.</>}
-                    actions={<Button type='button' disabled={loading || !canAddRavenUsers} onClick={handleAddUsers}>
+                    title="Add users to Chat"
+                    description={<>Only System managers have the ability to add users; users you add will be given the <Strong>"Chat User"</Strong> role.</>}
+                    actions={<Button type='button' disabled={loading || !canAddChatUsers} onClick={handleAddUsers}>
                         {loading && <Loader />}
                         {loading ? "Adding" : "Add"}
                     </Button>}
@@ -129,7 +129,7 @@ const AddUsers = () => {
                 <ErrorBanner error={error} />
                 <ErrorBanner error={postError} />
                 {failedUsers.length > 0 && <ErrorCallout>
-                    Could not add the following users to Raven since they have a <Strong>Role Profile</Strong> attached.<br />
+                    Could not add the following users to Chat since they have a <Strong>Role Profile</Strong> attached.<br />
                     Please remove the role profile and try again.<br /><br />
 
                     <ol className="pl-4">
@@ -144,7 +144,7 @@ const AddUsers = () => {
                         <Text size='2' align='center'>No results found</Text>
                     </Flex>}
 
-                {data && data.length !== 0 && <UsersTable data={data} defaultSelected={ravenUsersArray} selected={selected} setSelected={setSelected} />}
+                {data && data.length !== 0 && <UsersTable data={data} defaultSelected={chatUsersArray} selected={selected} setSelected={setSelected} />}
 
             </SettingsContentContainer>
         </PageContainer>

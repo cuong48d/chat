@@ -18,7 +18,7 @@ export type ChannelMembers = {
 
 const useFetchChannelMembers = (channelID: string) => {
 
-    const { data, error, isLoading, mutate } = useFrappeGetCall<{ message: ChannelMembers }>('raven.api.chat.get_channel_members', {
+    const { data, error, isLoading, mutate } = useFrappeGetCall<{ message: ChannelMembers }>('chat.api.chat.get_channel_members', {
         channel_id: channelID
     }, ["channel_members", channelID], {
         keepPreviousData: true,

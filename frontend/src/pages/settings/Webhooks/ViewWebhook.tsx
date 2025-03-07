@@ -2,14 +2,14 @@ import { ErrorBanner } from "@/components/layout/AlertBanner/ErrorBanner"
 import { FullPageLoader } from "@/components/layout/Loaders/FullPageLoader"
 import { useFrappeGetDoc } from "frappe-react-sdk"
 import { useParams } from "react-router-dom"
-import { RavenWebhook } from "@/types/RavenIntegrations/RavenWebhook"
+import { ChatWebhook } from "@/types/ChatIntegrations/ChatWebhook"
 import { ViewWebhookPage } from "@/components/feature/integrations/webhooks/ViewWebhookPage"
 import PageContainer from "@/components/layout/Settings/PageContainer"
 
 const ViewWebhook = () => {
 
     const { ID } = useParams<{ ID: string }>()
-    const { data, error, isLoading, mutate } = useFrappeGetDoc<RavenWebhook>('Raven Webhook', ID, undefined, {
+    const { data, error, isLoading, mutate } = useFrappeGetDoc<ChatWebhook>('Chat Webhook', ID, undefined, {
         shouldRetryOnError: false,
     })
 

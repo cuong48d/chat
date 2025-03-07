@@ -1,6 +1,6 @@
 import { Label, ErrorText, HelperText } from '@/components/common/Form'
 import { Stack, HStack } from '@/components/layout/Stack'
-import { RavenBot } from '@/types/RavenBot/RavenBot'
+import { ChatBot } from '@/types/ChatBot/ChatBot'
 import { Box, TextField, Checkbox, Text, Separator, Tooltip, Heading } from '@radix-ui/themes'
 import { useFormContext, Controller } from 'react-hook-form'
 import { BiInfoCircle } from 'react-icons/bi'
@@ -8,7 +8,7 @@ import { BiInfoCircle } from 'react-icons/bi'
 type Props = {}
 
 const AIFeaturesBotForm = (props: Props) => {
-    const { register, control, formState: { errors }, watch } = useFormContext<RavenBot>()
+    const { register, control, formState: { errors }, watch } = useFormContext<ChatBot>()
 
     const isAiBot = watch('is_ai_bot')
 

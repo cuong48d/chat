@@ -9,7 +9,7 @@ import { UploadImageModal } from "./UploadImageModal"
 import { FiCamera } from "react-icons/fi"
 import { BiSolidTrash } from "react-icons/bi"
 import { UserAvatar, getInitials } from "@/components/common/UserAvatar"
-import useCurrentRavenUser from "@/hooks/useCurrentRavenUser"
+import useCurrentChatUser from "@/hooks/useCurrentChatUser"
 import { __ } from "@/utils/translations"
 import { getErrorMessage } from "@/components/layout/AlertBanner/ErrorBanner"
 
@@ -23,8 +23,8 @@ interface ImageUploaderProps {
 
 export const ImageUploader = ({ icon, accept = { 'image/*': ['.jpeg', '.jpg', '.png'] }, maxFileSize, ...props }: ImageUploaderProps) => {
 
-    const { call } = useFrappePostCall('raven.api.raven_users.update_raven_user')
-    const { myProfile, mutate } = useCurrentRavenUser()
+    const { call } = useFrappePostCall('chat.api.chat_users.update_chat_user')
+    const { myProfile, mutate } = useCurrentChatUser()
 
     const [isUploadImageModalOpen, setUploadImageModalOpen] = useState(false)
     const [isDeleteImageModalOpen, setDeleteImageModalOpen] = useState(false)
@@ -72,7 +72,7 @@ export const UploadImage = ({ open, setOpen, uploadImage, userID }: { open: bool
                 </Dialog.Trigger>
             </Tooltip>
             <Dialog.Content className={DIALOG_CONTENT_CLASS}>
-                <UploadImageModal uploadImage={uploadImage} doctype={"Raven User"} docname={userID} fieldname={"user_image"} />
+                <UploadImageModal uploadImage={uploadImage} doctype={"Chat User"} docname={userID} fieldname={"user_image"} />
             </Dialog.Content>
         </Dialog.Root>
     )

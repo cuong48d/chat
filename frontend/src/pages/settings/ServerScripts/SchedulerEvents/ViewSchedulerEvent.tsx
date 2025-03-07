@@ -7,7 +7,7 @@ import PageContainer from "@/components/layout/Settings/PageContainer"
 import SettingsContentContainer from "@/components/layout/Settings/SettingsContentContainer"
 import SettingsPageHeader, { HeaderBadge } from "@/components/layout/Settings/SettingsPageHeader"
 import { HStack } from "@/components/layout/Stack"
-import { RavenSchedulerEvent } from "@/types/RavenIntegrations/RavenSchedulerEvent"
+import { ChatSchedulerEvent } from "@/types/ChatIntegrations/ChatSchedulerEvent"
 import { isEmpty } from "@/utils/validations"
 import { Button, DropdownMenu, IconButton } from "@radix-ui/themes"
 import { useFrappeGetDoc, useFrappeUpdateDoc } from "frappe-react-sdk"
@@ -21,7 +21,7 @@ const ViewSchedulerEvent = () => {
 
     const { ID } = useParams<{ ID: string }>()
 
-    const { data: eventData, error, mutate, isLoading } = useFrappeGetDoc<RavenSchedulerEvent>('Raven Scheduler Event', ID)
+    const { data: eventData, error, mutate, isLoading } = useFrappeGetDoc<ChatSchedulerEvent>('Chat Scheduler Event', ID)
 
     return (
         <PageContainer>
@@ -33,7 +33,7 @@ const ViewSchedulerEvent = () => {
 }
 
 
-const ViewSchedulerEventPage = ({ data, onUpdate }: { data: RavenSchedulerEvent, onUpdate: () => void }) => {
+const ViewSchedulerEventPage = ({ data, onUpdate }: { data: ChatSchedulerEvent, onUpdate: () => void }) => {
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -74,7 +74,7 @@ const ViewSchedulerEventPage = ({ data, onUpdate }: { data: RavenSchedulerEvent,
         if (data.event_frequency === 'Cron') {
             cron_expression = `${data.minute} ${data.hour} ${data.date} ${data.month} ${data.day}`
         }
-        updateDoc('Raven Scheduler Event', data.name, {
+        updateDoc('Chat Scheduler Event', data.name, {
             channel: data.channel,
             bot: data.bot,
             event_frequency: data.event_frequency,
@@ -88,7 +88,7 @@ const ViewSchedulerEventPage = ({ data, onUpdate }: { data: RavenSchedulerEvent,
     }
 
     const onStatusToggle = () => {
-        updateDoc('Raven Scheduler Event', data.name, {
+        updateDoc('Chat Scheduler Event', data.name, {
             disabled: !data.disabled
         })
             .then(() => {
@@ -150,7 +150,7 @@ const ViewSchedulerEventPage = ({ data, onUpdate }: { data: RavenSchedulerEvent,
                     <ErrorBanner error={error} />
                     <SchedulerEventsForm edit />
 
-                    <DeleteAlert doctype="Raven Scheduler Event" docname={data.name} isOpen={isOpen} onClose={onClose} path={'../../scheduled-messages'} />
+                    <DeleteAlert doctype="Chat Scheduler Event" docname={data.name} isOpen={isOpen} onClose={onClose} path={'../../scheduled-messages'} />
                 </SettingsContentContainer>
             </form>
         </FormProvider>

@@ -7,7 +7,7 @@ import { TableLoader } from "@/components/layout/Loaders/TableLoader"
 import { HStack, Stack } from "@/components/layout/Stack"
 import { useBoolean } from "@/hooks/useBoolean"
 import { useGetUserRecords } from "@/hooks/useGetUserRecords"
-import { RavenWorkspaceMember } from "@/types/Raven/RavenWorkspaceMember"
+import { ChatWorkspaceMember } from "@/types/Chat/ChatWorkspaceMember"
 import { UserContext } from "@/utils/auth/UserProvider"
 import { getDateObject } from "@/utils/dateConversions/utils"
 import { DIALOG_CONTENT_CLASS } from "@/utils/layout/dialog"
@@ -28,10 +28,10 @@ type Props = {
     workspaceID: string
 }
 
-type WorkspaceMemberFields = Pick<RavenWorkspaceMember, 'user' | 'is_admin' | 'creation' | 'name'>
+type WorkspaceMemberFields = Pick<ChatWorkspaceMember, 'user' | 'is_admin' | 'creation' | 'name'>
 
 export const useFetchWorkspaceMembers = (workspaceID: string) => {
-    return useFrappeGetCall<{ message: WorkspaceMemberFields[] }>('raven.api.workspaces.fetch_workspace_members', { workspace: workspaceID }, ["workspace_members", workspaceID], {
+    return useFrappeGetCall<{ message: WorkspaceMemberFields[] }>('chat.api.workspaces.fetch_workspace_members', { workspace: workspaceID }, ["workspace_members", workspaceID], {
         revalidateOnFocus: false,
         errorRetryCount: 2
     })
@@ -144,7 +144,7 @@ const RemoveMemberButton = ({ memberID, onUpdate }: { memberID: string, onUpdate
     const { deleteDoc } = useFrappeDeleteDoc()
 
     const removeMember = () => {
-        deleteDoc('Raven Workspace Member', memberID)
+        deleteDoc('Chat Workspace Member', memberID)
             .then(() => {
                 onUpdate()
                 toast.success('Member removed')
@@ -168,7 +168,7 @@ const MakeAdminButton = ({ memberID, onUpdate }: { memberID: string, onUpdate: (
     const { updateDoc } = useFrappeUpdateDoc()
 
     const makeAdmin = () => {
-        updateDoc('Raven Workspace Member', memberID, { is_admin: true })
+        updateDoc('Chat Workspace Member', memberID, { is_admin: true })
             .then(() => {
                 onUpdate()
                 toast.success('Success')
@@ -192,7 +192,7 @@ const RemoveAdminButton = ({ memberID, onUpdate }: { memberID: string, onUpdate:
     const { updateDoc } = useFrappeUpdateDoc()
 
     const removeAdmin = () => {
-        updateDoc('Raven Workspace Member', memberID, { is_admin: false })
+        updateDoc('Chat Workspace Member', memberID, { is_admin: false })
             .then(() => {
                 onUpdate()
                 toast.success('Success')
@@ -250,7 +250,7 @@ const ManageMembersDialogContent = ({ workspaceID, onClose, members }: { workspa
 
     const [errors, setErrors] = useState<string[]>([])
 
-    const { call, loading, error } = useFrappePostCall('raven.api.workspaces.update_workspace_members')
+    const { call, loading, error } = useFrappePostCall('chat.api.workspaces.update_workspace_members')
 
     const saveMembers = () => {
         call({

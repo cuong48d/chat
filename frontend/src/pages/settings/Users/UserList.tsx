@@ -11,15 +11,15 @@ import { useContext } from 'react'
 import { TableVirtuoso } from 'react-virtuoso'
 
 const UserList = () => {
-    const canAddRavenUsers = isSystemManager()
+    const canAddChatUsers = isSystemManager()
 
     return (
         <PageContainer>
             <SettingsContentContainer>
                 <SettingsPageHeader
                     title='Users'
-                    description='Manage users added to Raven.'
-                    actions={canAddRavenUsers ? <AddUserDialog /> : null}
+                    description='Manage users added to Chat.'
+                    actions={canAddChatUsers ? <AddUserDialog /> : null}
                 />
                 <UserTable />
             </SettingsContentContainer>

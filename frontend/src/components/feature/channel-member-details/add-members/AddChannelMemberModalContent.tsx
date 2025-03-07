@@ -19,7 +19,7 @@ interface AddChannelMemberForm {
 interface AddChannelMemberModalContentProps {
   // channelID: string,
   // channel_name: string,
-  // type: RavenChannel['type'],
+  // type: ChatChannel['type'],
   onClose: () => void,
   // updateMembers: () => void,
   // channelMembers?: ChannelMembers
@@ -33,7 +33,7 @@ export const AddChannelMembersModalContent = ({ onClose }: AddChannelMemberModal
 
   const { mutate } = useSWRConfig()
 
-  const { call, error, loading } = useFrappePostCall('raven.api.raven_channel_member.add_channel_members')
+  const { call, error, loading } = useFrappePostCall('chat.api.chat_channel_member.add_channel_members')
 
   const methods = useForm<AddChannelMemberForm>({
     defaultValues: {

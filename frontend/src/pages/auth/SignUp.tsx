@@ -45,7 +45,7 @@ export const Component = () => {
             .post("frappe.core.doctype.user.user.sign_up", {
                 email: values.email,
                 full_name: values.full_name,
-                redirect_to: "/raven"
+                redirect_to: "/chat"
             })
             .then((result) => {
                 setCallout({

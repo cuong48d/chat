@@ -25,7 +25,7 @@ export const useActiveState = () => {
      * @returns Promise that resolves when the API call is complete
      */
     const updateUserActiveState = async (deactivate = false) => {
-        return call.get('raven.api.user_availability.refresh_user_active_state', {
+        return call.get('chat.api.user_availability.refresh_user_active_state', {
             deactivate
         })
             .catch(() => {
@@ -61,7 +61,7 @@ export const useActiveState = () => {
 
     useEffect(() => {
         // Update user availability when the app is opened
-        call.get('raven.api.user_availability.refresh_user_active_state', {
+        call.get('chat.api.user_availability.refresh_user_active_state', {
             deactivate: false
         })
 
@@ -76,7 +76,7 @@ export const useActiveState = () => {
 
         return () => {
             // Update user availability when the app is closed
-            call.get('raven.api.user_availability.refresh_user_active_state', {
+            call.get('chat.api.user_availability.refresh_user_active_state', {
                 deactivate: true
             })
         }

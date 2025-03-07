@@ -11,8 +11,8 @@ import { Outlet } from "react-router-dom"
 const Settings = () => {
     const isDesktop = useIsDesktop()
 
-    const lastWorkspace = localStorage.getItem('ravenLastWorkspace')
-    const lastChannel = localStorage.getItem('ravenLastChannel')
+    const lastWorkspace = localStorage.getItem('chatLastWorkspace')
+    const lastChannel = localStorage.getItem('chatLastChannel')
 
     let path = '../'
 

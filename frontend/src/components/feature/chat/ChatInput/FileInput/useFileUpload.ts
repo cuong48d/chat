@@ -2,7 +2,7 @@ import { CustomFile } from '@/components/feature/file-upload/FileDrop'
 import { useContext, useRef, useState } from 'react'
 import { Message } from '../../../../../../../types/Messaging/Message'
 import { FrappeConfig, FrappeContext } from 'frappe-react-sdk'
-import { RavenMessage } from '@/types/RavenMessaging/RavenMessage'
+import { ChatMessage } from '@/types/ChatMessaging/ChatMessage'
 import { toast } from 'sonner'
 import { getErrorMessage } from '@/components/layout/AlertBanner/ErrorBanner'
 
@@ -46,14 +46,14 @@ export default function useFileUpload(channelID: string) {
     })
   }
 
-  const uploadFiles = async (selectedMessage?: Message | null): Promise<RavenMessage[]> => {
+  const uploadFiles = async (selectedMessage?: Message | null): Promise<ChatMessage[]> => {
     const newFiles = [...filesStateRef.current]
     if (newFiles.length > 0) {
-      const promises: Promise<RavenMessage | null>[] = newFiles.map(async (f: CustomFile, index: number) => {
+      const promises: Promise<ChatMessage | null>[] = newFiles.map(async (f: CustomFile, index: number) => {
         return file.uploadFile(f,
           {
             isPrivate: true,
-            doctype: 'Raven Message',
+            doctype: 'Chat Message',
             otherData: {
               channelID: channelID,
               compressImages: compressImages,
@@ -73,8 +73,8 @@ export default function useFileUpload(channelID: string) {
               },
             }))
           },
-          'raven.api.upload_file.upload_file_with_message')
-          .then((res: { data: { message: RavenMessage } }) => {
+          'chat.api.upload_file.upload_file_with_message')
+          .then((res: { data: { message: ChatMessage } }) => {
             setFiles(files => files.filter(file => file.fileID !== f.fileID))
             setFileUploadProgress(p => ({
               ...p,

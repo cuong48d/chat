@@ -245,7 +245,7 @@ class FrappePushNotification {
     async registerTokenHandler(token) {
         try {
             let response = await fetch(
-                "/api/method/raven.api.notification.subscribe",
+                "/api/method/chat.api.notification.subscribe",
                 {
                     method: "POST",
                     body: JSON.stringify({
@@ -275,7 +275,7 @@ class FrappePushNotification {
     async unregisterTokenHandler(token) {
         try {
             let response = await fetch(
-                "/api/method/raven.api.notification.unsubscribe",
+                "/api/method/chat.api.notification.unsubscribe",
                 {
                     method: "POST",
                     body: JSON.stringify({

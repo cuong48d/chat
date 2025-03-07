@@ -1,0 +1,68 @@
+@font-face {
+    font-family: "Cal Sans";
+    src: url("/assets/chat/fonts/CalSans.woff2") format("woff2");
+}
+
+:root {
+    --chat-header-height: 42px; // Equal to the height of the email widget
+    --chat-expanded-height: 84vh;
+    --chat-content-height: calc(var(--chat-expanded-height) - var(--chat-header-height));
+    --chat-content-width: 400px;
+}
+
+.cal-sans {
+    font-family: "Cal Sans", "Inter", sans-serif;
+}
+
+.chat-chat {
+    position: fixed;
+    width: var(--chat-content-width);
+    background-color: var(--bg-color);
+    box-shadow: var(--shadow-md);
+    border-top: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    overflow-x: hidden;
+    z-index: 1000;
+    bottom: 0;
+    border-top-right-radius: var(--border-radius-md);
+    border-top-left-radius: var(--border-radius-md);
+    left: 60px;
+}
+
+.skeleton {
+    background-color: var(--skeleton-bg);
+    animation: 2s breathe infinite;
+}
+
+@keyframes breathe {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.break-all {
+    word-break: break-all;
+}
+
+.line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+@import './header.scss';
+@import './channels.scss';
+@import './avatar.scss';
+@import './chat.scss';
+@import './dateSeparator.scss';
+@import './message.scss';

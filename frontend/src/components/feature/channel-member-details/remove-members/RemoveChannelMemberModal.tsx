@@ -25,7 +25,7 @@ export const RemoveChannelMemberModal = ({ onClose, member }: RemoveChannelMembe
     const channelData = channel?.channelData
 
     const { data: memberInfo, error: errorFetchingChannelMember } = useFrappeGetCall<{ message: { name: string } }>('frappe.client.get_value', {
-        doctype: "Raven Channel Member",
+        doctype: "Chat Channel Member",
         filters: JSON.stringify({ channel_id: channelID, user_id: member?.name }),
         fieldname: JSON.stringify(["name"])
     }, undefined, {
@@ -33,7 +33,7 @@ export const RemoveChannelMemberModal = ({ onClose, member }: RemoveChannelMembe
     })
 
     const onSubmit = async () => {
-        return deleteDoc('Raven Channel Member', memberInfo?.message.name).then(() => {
+        return deleteDoc('Chat Channel Member', memberInfo?.message.name).then(() => {
             toast.success(`Removed`)
             onClose()
             mutate(["channel_members", channelID])

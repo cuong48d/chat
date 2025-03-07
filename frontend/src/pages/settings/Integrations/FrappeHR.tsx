@@ -7,9 +7,9 @@ import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
 import { Stack } from '@/components/layout/Stack'
-import useRavenSettings from '@/hooks/fetchers/useRavenSettings'
-import { RavenSettings } from '@/types/Raven/RavenSettings'
-import { hasRavenAdminRole, isSystemManager } from '@/utils/roles'
+import useChatSettings from '@/hooks/fetchers/useChatSettings'
+import { ChatSettings } from '@/types/Chat/ChatSettings'
+import { hasChatAdminRole, isSystemManager } from '@/utils/roles'
 import { __ } from '@/utils/translations'
 import { Button, Checkbox, Flex, Select, Separator, Text } from '@radix-ui/themes'
 import { useFrappeUpdateDoc } from 'frappe-react-sdk'
@@ -20,30 +20,30 @@ import { toast } from 'sonner'
 
 const FrappeHR = () => {
 
-    const isRavenAdmin = hasRavenAdminRole() || isSystemManager()
+    const isChatAdmin = hasChatAdminRole() || isSystemManager()
 
-    const { ravenSettings, mutate } = useRavenSettings()
+    const { chatSettings, mutate } = useChatSettings()
 
-    const methods = useForm<RavenSettings>({
-        disabled: !isRavenAdmin
+    const methods = useForm<ChatSettings>({
+        disabled: !isChatAdmin
     })
 
     const { handleSubmit, control, watch, reset } = methods
 
     useEffect(() => {
-        if (ravenSettings) {
-            reset(ravenSettings)
+        if (chatSettings) {
+            reset(chatSettings)
         }
-    }, [ravenSettings])
+    }, [chatSettings])
 
-    const { updateDoc, loading: updatingDoc, error } = useFrappeUpdateDoc<RavenSettings>()
+    const { updateDoc, loading: updatingDoc, error } = useFrappeUpdateDoc<ChatSettings>()
 
     //@ts-expect-error
     const isHRInstalled = window?.frappe?.boot?.versions?.hrms !== undefined
 
-    const onSubmit = (data: RavenSettings) => {
-        toast.promise(updateDoc('Raven Settings', null, {
-            ...(ravenSettings ?? {}),
+    const onSubmit = (data: ChatSettings) => {
+        toast.promise(updateDoc('Chat Settings', null, {
+            ...(chatSettings ?? {}),
             ...data
         }).then(res => {
             mutate(res, {
@@ -81,8 +81,8 @@ const FrappeHR = () => {
                     <SettingsContentContainer>
                         <SettingsPageHeader
                             title={__('HR')}
-                            description={__("Connect your HR system to Raven to sync employee data and send notifications.")}
-                            actions={<Button type='submit' disabled={updatingDoc || !isRavenAdmin}>
+                            description={__("Connect your HR system to Chat to sync employee data and send notifications.")}
+                            actions={<Button type='submit' disabled={updatingDoc || !isChatAdmin}>
                                 {updatingDoc && <Loader className="text-white" />}
                                 {updatingDoc ? __("Saving") : __("Save")}
                             </Button>}
@@ -100,7 +100,7 @@ const FrappeHR = () => {
                                 <Flex gap="2">
                                     <Controller
                                         control={control}
-                                        defaultValue={ravenSettings?.auto_create_department_channel}
+                                        defaultValue={chatSettings?.auto_create_department_channel}
                                         name='auto_create_department_channel'
                                         render={({ field }) => (
                                             <Checkbox
@@ -124,7 +124,7 @@ const FrappeHR = () => {
                                     <Label isRequired htmlFor='department_channel_type'>{__("Department Channel Type")}</Label>
                                     <Controller
                                         control={control}
-                                        defaultValue={ravenSettings?.department_channel_type}
+                                        defaultValue={chatSettings?.department_channel_type}
                                         name='department_channel_type'
                                         render={({ field }) => (
                                             <Select.Root
@@ -156,7 +156,7 @@ const FrappeHR = () => {
                                 <Flex gap="2">
                                     <Controller
                                         control={control}
-                                        defaultValue={ravenSettings?.show_if_a_user_is_on_leave}
+                                        defaultValue={chatSettings?.show_if_a_user_is_on_leave}
                                         name='show_if_a_user_is_on_leave'
                                         render={({ field }) => (
                                             <Checkbox
@@ -171,7 +171,7 @@ const FrappeHR = () => {
                                 </Flex>
                             </Text>
                             <HelperText>
-                                {__("If checked, users on Raven are notified if another user is on leave.")}
+                                {__("If checked, users on Chat are notified if another user is on leave.")}
                             </HelperText>
                         </Flex>
                     </SettingsContentContainer>

@@ -65,7 +65,7 @@ const CreateMeetingForm = ({ onClose, channelData }: CreateMeetingFormProps) => 
         }
     })
 
-    const { call, loading, error } = useFrappePostCall('raven.api.events.create_event')
+    const { call, loading, error } = useFrappePostCall('chat.api.events.create_event')
 
     const onSubmit = async (data: CreateMeetingFormFields) => {
 

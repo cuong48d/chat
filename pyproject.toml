@@ -1,5 +1,5 @@
 [project]
-name = "raven"
+name = "chat"
 authors = [
     { name = "The Commit Company", email = "support@thecommit.company"}
 ]

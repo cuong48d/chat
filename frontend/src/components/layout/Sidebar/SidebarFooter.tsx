@@ -4,7 +4,7 @@ import { useUserData } from '@/hooks/useUserData'
 import { Box, DropdownMenu, IconButton, Separator, Tooltip } from '@radix-ui/themes'
 import { UserAvatar } from '@/components/common/UserAvatar'
 import { BsEmojiSmile } from 'react-icons/bs'
-import useCurrentRavenUser from '@/hooks/useCurrentRavenUser'
+import useCurrentChatUser from '@/hooks/useCurrentChatUser'
 import { useIsUserActive } from '@/hooks/useIsUserActive'
 import { MdOutlineExitToApp } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
@@ -22,7 +22,7 @@ export const SidebarFooter = () => {
 
     const [isUserStatusModalOpen, setUserStatusModalOpen] = useState(false)
 
-    const { myProfile } = useCurrentRavenUser()
+    const { myProfile } = useCurrentChatUser()
     const isActive = useIsUserActive(userData.name)
 
     const navigate = useNavigate()

@@ -4,7 +4,7 @@ import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
-import { RavenBotInstructionTemplate } from '@/types/RavenAI/RavenBotInstructionTemplate'
+import { ChatBotInstructionTemplate } from '@/types/ChatAI/ChatBotInstructionTemplate'
 import { Button } from '@radix-ui/themes'
 import { useFrappeCreateDoc } from 'frappe-react-sdk'
 import { useEffect } from 'react'
@@ -13,16 +13,16 @@ import { useNavigate } from 'react-router-dom'
 
 const CreateInstructionTemplate = () => {
 
-    const { createDoc, loading, error } = useFrappeCreateDoc<RavenBotInstructionTemplate>()
+    const { createDoc, loading, error } = useFrappeCreateDoc<ChatBotInstructionTemplate>()
 
-    const methods = useForm<RavenBotInstructionTemplate>({
+    const methods = useForm<ChatBotInstructionTemplate>({
         disabled: loading
     })
 
     const navigate = useNavigate()
 
-    const onSubmit = (data: RavenBotInstructionTemplate) => {
-        createDoc("Raven Bot Instruction Template", data)
+    const onSubmit = (data: ChatBotInstructionTemplate) => {
+        createDoc("Chat Bot Instruction Template", data)
             .then((doc) => {
                 navigate(`../${doc.name}`)
             })

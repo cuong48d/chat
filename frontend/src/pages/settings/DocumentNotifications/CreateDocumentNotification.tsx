@@ -4,7 +4,7 @@ import { ErrorBanner } from '@/components/layout/AlertBanner/ErrorBanner'
 import PageContainer from '@/components/layout/Settings/PageContainer'
 import SettingsContentContainer from '@/components/layout/Settings/SettingsContentContainer'
 import SettingsPageHeader from '@/components/layout/Settings/SettingsPageHeader'
-import { RavenDocumentNotification } from '@/types/RavenIntegrations/RavenDocumentNotification'
+import { ChatDocumentNotification } from '@/types/ChatIntegrations/ChatDocumentNotification'
 import { Button } from '@radix-ui/themes'
 import { useFrappeCreateDoc } from 'frappe-react-sdk'
 import { useEffect } from 'react'
@@ -13,9 +13,9 @@ import { useNavigate } from 'react-router-dom'
 
 const CreateDocumentNotification = () => {
 
-    const { createDoc, loading, error } = useFrappeCreateDoc<RavenDocumentNotification>()
+    const { createDoc, loading, error } = useFrappeCreateDoc<ChatDocumentNotification>()
 
-    const methods = useForm<RavenDocumentNotification>({
+    const methods = useForm<ChatDocumentNotification>({
         disabled: loading,
         defaultValues: {
             enabled: 1,
@@ -25,8 +25,8 @@ const CreateDocumentNotification = () => {
     const navigate = useNavigate()
 
 
-    const onSubmit = (data: RavenDocumentNotification) => {
-        createDoc("Raven Document Notification", data)
+    const onSubmit = (data: ChatDocumentNotification) => {
+        createDoc("Chat Document Notification", data)
             .then((doc) => {
                 navigate(`../${doc.name}`)
             })

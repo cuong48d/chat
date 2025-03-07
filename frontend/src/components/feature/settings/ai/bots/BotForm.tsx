@@ -6,7 +6,7 @@ import GeneralBotForm from './GeneralBotForm'
 import AIFeaturesBotForm from './AIFeaturesBotForm'
 import BotFunctionsForm from './BotFunctionsForm'
 import { useFormContext } from 'react-hook-form'
-import { RavenBot } from '@/types/RavenBot/RavenBot'
+import { ChatBot } from '@/types/ChatBot/ChatBot'
 import BotDocs from './BotDocs'
 
 const ICON_PROPS = {
@@ -16,7 +16,7 @@ const ICON_PROPS = {
 
 const BotForm = ({ isEdit }: { isEdit: boolean }) => {
 
-    const { watch } = useFormContext<RavenBot>()
+    const { watch } = useFormContext<ChatBot>()
     const isAiBot = watch('is_ai_bot') ? true : false
     return (
         <Tabs.Root defaultValue='general'>

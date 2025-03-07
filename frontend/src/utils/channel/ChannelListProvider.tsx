@@ -4,14 +4,14 @@ import { KeyedMutator } from 'swr'
 import { useSWRConfig } from 'frappe-react-sdk'
 import { toast } from 'sonner'
 import { getErrorMessage } from '@/components/layout/AlertBanner/ErrorBanner'
-import { RavenChannel } from '@/types/RavenChannelManagement/RavenChannel'
+import { ChatChannel } from '@/types/ChatChannelManagement/ChatChannel'
 import { useIsMobile } from '@/hooks/useMediaQuery'
 
 export type UnreadChannelCountItem = { name: string, user_id?: string, unread_count: number, is_direct_message: 0 | 1 }
 
 export type UnreadCountData = UnreadChannelCountItem[]
 
-export type ChannelListItem = Pick<RavenChannel, 'name' | 'channel_name' | 'type' |
+export type ChannelListItem = Pick<ChatChannel, 'name' | 'channel_name' | 'type' |
     'channel_description' | 'is_direct_message' | 'is_self_message' |
     'is_archived' | 'creation' | 'owner' | 'last_message_details' | 'last_message_timestamp' | 'workspace' | 'pinned_messages_string'> & { member_id: string }
 
@@ -65,7 +65,7 @@ const useFetchChannelList = (): ChannelListContextType => {
     const isMobile = useIsMobile()
 
     const { mutate: globalMutate } = useSWRConfig()
-    const { data, mutate, ...rest } = useFrappeGetCall<{ message: ChannelList }>("raven.api.raven_channel.get_all_channels", {
+    const { data, mutate, ...rest } = useFrappeGetCall<{ message: ChannelList }>("chat.api.chat_channel.get_all_channels", {
         hide_archived: false
     }, `channel_list`, {
         revalidateOnFocus: isMobile ? true : false,
